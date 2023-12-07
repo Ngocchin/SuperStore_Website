@@ -1,0 +1,7 @@
+﻿@model IEnumerable<SuperStore_WebSite.Models.LOAI>
+@foreach (var item in Model)
+{
+    <li>
+        @Html.ActionLink(item.TENLOAI, "Category", "Product", new { @MaLoai = item.MALOAI }, null)
+    </li>
+}

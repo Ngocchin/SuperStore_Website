@@ -1,0 +1,107 @@
+﻿@model SuperStore_WebSite.Models.SANPHAM
+
+@{
+    ViewBag.Title = "Delete";
+       Layout = "~/Areas/Admin/Views/Shared/_AdminPage.cshtml";
+<center>
+    <h2>Xóa sản phẩm</h2>
+    <h3>Thông tin sản phẩm xóa!!!</h3>
+
+</center>
+
+
+
+
+<div>
+
+    <hr />
+
+    <table class="table">
+        <tr>
+            <th>
+                Tên sản phẩm
+            </th>
+            <td>
+                @Html.DisplayFor(model => model.TENSP)
+            </td>
+        </tr>
+
+        <tr>
+            <th>
+                Giá
+            </th>
+            <td>
+                @Html.DisplayFor(model => model.GIABAN)
+            </td>
+        </tr>
+
+        <tr>
+            <th>
+                Số lượng tồn
+            </th>
+            <td>
+                @Html.DisplayFor(model => model.SOLUONGTON)
+            </td>
+        </tr>
+
+        <tr>
+            <th>
+                Ghi chú
+            </th>
+            <td>
+                @Html.DisplayFor(model => model.GHICHU)
+            </td>
+        </tr>
+
+
+        <tr>
+            <th>
+                Hình
+            </th>
+            <td>
+                <img style="height:50px;width:50px" src="~/img/@Html.DisplayFor(model => model.HINHANH)" />
+            </td>
+        </tr>
+
+        <tr>
+            <th>
+                Hình liên quan
+            </th>
+            <td>
+                <img style="height:50px;width:50px" src="~/img/@Html.DisplayFor(model => model.HINHLIENQUAN)" />
+            </td>
+        </tr>
+
+        <tr>
+            <th>
+                Loại sản phẩm
+            </th>
+            <td>
+                @Html.DisplayFor(model => model.LOAI.TENLOAI)
+            </td>
+        </tr>
+
+        <tr>
+            <th>
+                Tên nhà cung cấp
+            </th>
+            <td>
+                @Html.DisplayFor(model => model.NHACUNGCAP.TENNCC)
+                
+            </td>
+        </tr>
+    </table>
+
+    <center>
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-actions no-color">
+                <input style="height:50px; width:100px" type="submit" value="Xóa" class="btn btn-danger" /> 
+
+            </div>
+        }
+    </center>
+    @Html.ActionLink("Quay lại", "Index")
+</div>

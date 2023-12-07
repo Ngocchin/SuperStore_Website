@@ -1,0 +1,85 @@
+﻿@*@{
+        Layout = null;
+    }
+
+    <!DOCTYPE html>
+
+    <html>
+    <head>
+        <link href="~/Content/login.css" rel="stylesheet" />
+        <meta name="viewport" content="width=device-width" />
+        <title>SIGN UP</title>
+    </head>
+    <body>
+        <div class="login">
+            <h2 class="active"> sign up </h2>
+            <form action="/Account/SignUp" method="post" enctype="multipart/form-data">
+                <input type="text" class="text" name="TENKH">
+                <span>username</span>
+                <br>
+                <input type="text" class="text" name="EMAIL">
+                <span>EMAIL</span>
+                <br>
+                <input type="text" class="text" name="SDT">
+                <span>Phone number</span>
+                <br>
+                <input type="password" class="text" name="PASSWORD">
+                <span>Password</span>
+                <br>
+                <input type="password" class="text" name="repass">
+                <span>Enter the password</span>
+                <br>
+                <button class="signin" value="SignUp">
+                    Sign Up
+                </button>
+                <hr>
+                <a href="/Account/Login">Sign in</a>
+            </form>
+        </div>
+    </body>
+    </html>*@
+@model SuperStore_WebSite.Models.KHACHHANG
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Login/SignUp</title>
+    <link href="~/Content/acoount.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="form-structor">
+        @using (Html.BeginForm("SignUp", "Account", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+        {
+
+            @Html.AntiForgeryToken()
+            <div class="signup">
+                <h2 class="form-title" id="signup"><span>or</span>Sign up</h2>
+                <div class="form-holder">
+                    <input type="text" class="input" placeholder="Name"/>                   
+                    @Html.TextBoxFor(temp => temp.EMAIL, new { Type = "text", Name = "EMAIL", @class = "input", placeholder = "Email" })
+                    @Html.TextBoxFor(temp => temp.PASSWORD, new { Type = "password", Name = "PASSWORD", @class = "input", placeholder = "Password" })
+                    <input type="password" class="input" name="repass" placeholder="Enter the password" />
+                    <button class="submit-btn">Sign up</button>
+                </div>
+            </div>
+        }
+        @using (Html.BeginForm("Login", "Account", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+        {
+            @Html.AntiForgeryToken()
+            <div class="login slide-up">
+                <div class="center">
+                    <h2 class="form-title" id="login"><span>or</span>Log in</h2>
+                    <div class="form-holder">
+                        @Html.TextBoxFor(temp => temp.EMAIL, new { Type = "text", Name = "EMAIL", @class = "input", placeholder = "Email" })
+                        @Html.TextBoxFor(temp => temp.PASSWORD, new { Type = "password", Name = "PASSWORD", @class = "input", placeholder = "Password" })
+                    </div>
+                    <button class="submit-btn">Log in</button>
+                </div>
+            </div>
+        }
+    </div>
+    <script src="~/Content/Account.js"></script>
+</body>
+</html>
+

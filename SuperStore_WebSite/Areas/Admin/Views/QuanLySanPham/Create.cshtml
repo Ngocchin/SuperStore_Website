@@ -1,0 +1,146 @@
+﻿@model SuperStore_WebSite.Models.SANPHAM
+
+@{
+    ViewBag.Title = "Create";
+       Layout = "~/Areas/Admin/Views/Shared/_AdminPage.cshtml";
+}
+<center>
+    <h2>Thêm mới sản phẩm</h2>
+</center>
+
+
+@using (Html.BeginForm("Create", "QuanLySanPham", FormMethod.Post, new { @enctype = "multipart/form-data" })) 
+{
+    @Html.AntiForgeryToken()
+    
+<div class="form-horizontal">
+
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group">
+        Mã sản phẩm
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.MASP, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.MASP, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        Tên sản phẩm
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.TENSP, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.TENSP, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        Mã loại
+        <div class="col-md-10">
+            @Html.DropDownList("MaLoai", null, htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.MALOAI, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        Mã nhà cung cấp
+        <div class="col-md-10">
+            @Html.DropDownList("MaNCC", null, htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.MANCC, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    @*<div class="form-group">
+        Mã khuyến mãi
+        <div class="col-md-10">
+            @Html.DropDownList("MaKM", null, htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.MAKM, "", new { @class = "text-danger" })
+        </div>
+    </div>*@
+
+    <div class="form-group">
+        Giá
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.GIABAN, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.GIABAN, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        Số lượng tồn
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.SOLUONGTON, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.SOLUONGTON, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        Ghi chú
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.GHICHU, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.GHICHU, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        Hình
+        @*<div class="col-md-10">
+            @Html.EditorFor(model => model.HINHANH)
+            <input type="file" name="fileupload" />
+        </div>*@
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.HINHANH)
+            <input type="file" name="fileupload" id="fileInput" />
+            <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+            <script>
+        $(document).ready(function () {
+            // Lắng nghe sự kiện khi người dùng chọn tệp
+            $('#fileInput').change(function () {
+                // Lấy tên tệp từ đường dẫn tệp
+                var fileName = $(this).val().split("\\").pop();
+
+                // Hiển thị tên tệp trong EditorFor
+                $('#HINHANH').val(fileName);
+            });
+        });
+            </script>
+        </div>
+    </div>
+
+    <div class="form-group">
+        Hình liên quan
+        @*<div class="col-md-10">
+            @Html.EditorFor(model => model.HINHLIENQUAN, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.HINHLIENQUAN, "", new { @class = "text-danger" })
+        </div>*@
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.HINHLIENQUAN)
+            <input type="file" name="fileupload1" id="fileInput1" />
+            <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+            <script>
+                $(document).ready(function () {
+                    // Lắng nghe sự kiện khi người dùng chọn tệp
+                    $('#fileInput1').change(function () {
+                        // Lấy tên tệp từ đường dẫn tệp
+                        var fileName1 = $(this).val().split("\\").pop();
+
+                        // Hiển thị tên tệp trong EditorFor
+                        $('#HINHLIENQUAN').val(fileName1);
+                    });
+                });
+            </script>
+        </div>
+    </div>
+    <center>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Thêm" class="btn btn-default" />
+            </div>
+        </div>
+    </center>
+
+</div>
+}
+
+<div>
+    @Html.ActionLink("Quay lại", "Index")
+</div>

@@ -1,0 +1,34 @@
+﻿@model IEnumerable<SuperStore_WebSite.Models.LOAI>
+
+@{
+    ViewBag.Title = "Index";
+       Layout = "~/Areas/Admin/Views/Shared/_AdminPage.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.TENLOAI)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.TENLOAI)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.MALOAI }) |
+            @Html.ActionLink("Details", "Details", new { id=item.MALOAI }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.MALOAI })
+        </td>
+    </tr>
+}
+
+</table>

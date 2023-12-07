@@ -1,0 +1,141 @@
+﻿@model IEnumerable<SuperStore_WebSite.Models.HOADON>
+
+@{
+    ViewBag.Title = "Index";
+       Layout = "~/Areas/Admin/Views/Shared/_AdminPage.cshtml";
+    <style>
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+    </style>
+}
+
+
+
+<h2>Thống kê đơn hàng</h2>
+
+<div class="row m-3 w-100 " style="">
+    <div class="col-2 w-75">
+        @Html.ActionLink("Thêm sản phẩm mới", "Create", null, new { @class = "btn btn-primary" })
+    </div>
+    <div class="col-5">
+
+    </div>
+    <div class="col-5">
+
+        <a><i>Tìm tên sản phẩm</i></a>
+        @using (Html.BeginForm("TimKiem", "QuanLySanPham"))
+        {
+            <input name="TuKhoa" style="width: 400px; height: 40px; border-bottom-left-radius: 10px; border-radius: 10px; padding-left: 10px" class="" type="search" id="search" placeholder="Search...    " />
+            <button type="submit" value="tìm kiếm" class="mt-1 bg-info" style="height: 40px; border-radius: 10px;border:none; border-top-right-radius: 10px;">Tìm</button>
+
+        }
+
+
+        @*<form>
+                <a><i>Tìm tên sản phẩm</i></a>
+                <input name="searchkey" style="width: 350px; height: 40px; border-bottom-left-radius: 10px; border-radius: 10px; padding-left: 10px" class="" type="search" id="search" placeholder="Search...    " />
+                <button type="submit" name="submit" value="tìm kiếm" class="mt-1 bg-info" style="height: 40px; border-radius: 10px;border:none; border-top-right-radius: 10px;">Tìm</button>
+            </form>*@
+
+
+    </div>
+
+</div>
+
+<p style="font-size: larger;">
+    <b><u>Sắp xếp theo</u></b>
+</p>
+<div class="col-11">
+    <div class="row m-3 w-100 " style="">
+        <div class="col-3">
+            @*<a href="/QuanLySanPham/AdenZ" class="btn btn-primary w-75">A-Z</a>*@
+            @Html.ActionLink("Đơn hàng ", "AdenZ", null, new { }, new { @class = "btn btn-primary w-75" })
+        </div>
+        <div class="col-3 w-100">
+            @Html.ActionLink("Z-A", "ZdenA", null, new { @class = "btn btn-primary w-75" })
+        </div>
+        <div class="col-3">
+            @Html.ActionLink("Giá tăng dần", "GiaTang", null, new { @class = "btn btn-primary w-75" })
+        </div>
+        <div class="col-3 w-100">
+            @Html.ActionLink("Giá giảm dần", "GiaGiam", null, new { @class = "btn btn-primary w-75" })
+        </div>
+    </div>
+</div>
+<div class="col-1">
+</div>
+
+
+@{
+    double tong = 0;
+}
+
+<div class="col-11">
+    <table class="table table-hover">
+        <tr class="bg-info  border-left-0" style="font-size:x-large">
+            <th>
+                Ngày lập
+            </th>
+            <th>
+                Tình trạng
+            </th>
+            <th>
+                Thành tiền
+            </th>
+            <th>
+                Tên khách hàng
+            </th>
+
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NGAYLAP)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TINHTRANG)
+
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TONGTIEN)
+
+                </td>
+                <td>
+                    
+
+
+                    @Html.DisplayFor(modelItem => item.KHACHHANG.TENKH)
+                </td>
+
+
+            </tr>
+        }
+
+    </table>
+</div>
+<div class="col-1">
+
+</div>
+<p>
+    <a>Tổng số tiền:  </a>
+    <a>@ViewData["TongTienHD"]</a>
+</p>
+<p>
+    <a>Số đơn hàng chưa xác nhận:  </a>
+    <a>@ViewData["Tongcxn"]</a>
+    
+</p>
+<p>
+    <a>Số đơn hàng đã giao:  </a>
+    <a>@ViewData["Tongdxn"]</a>
+</p>
+<p>
+    <a>Số đơn hàng đã hủy:  </a>
+</p>
+
+
+

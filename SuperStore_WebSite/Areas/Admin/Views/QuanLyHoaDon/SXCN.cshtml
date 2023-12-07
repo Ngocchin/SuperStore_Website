@@ -1,0 +1,176 @@
+﻿@model IEnumerable<SuperStore_WebSite.Models.HOADON>
+
+@{
+    ViewBag.Title = "SXCN";
+       Layout = "~/Areas/Admin/Views/Shared/_AdminPage.cshtml";
+    <style>
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+    </style>
+
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function () {
+        $('#redirectButton').on('click', function () {
+            var selectedFruit = $('#fruitDropdown').val();
+
+            // Perform the redirection based on the selected option
+            switch (selectedFruit) {
+                case "SXMN":
+                    window.location.href = '@Url.Action("SXMN", "QuanLyHoaDon", new { selectedFruit = "SXMN" })';
+                    break;
+                case "SXCN":
+                    window.location.href = '@Url.Action("SXCN", "QuanLyHoaDon", new { selectedFruit = "banana" })';
+                    break;
+                // Add more cases for other options as needed
+                default:
+                    // Handle the default case if needed
+                    break;
+            }
+        });
+    });
+    </script>
+
+
+
+}
+
+@{ int dem = 0;}
+<h2>Quản lý hóa đơn</h2>
+<div class="row m-3 w-100 " style="">
+    <div class="col-2 w-75">
+
+    </div>
+    <div class="col-5">
+
+    </div>
+    <div class="col-5">
+
+        <a><i>Tìm tên sản phẩm</i></a>
+        @using (Html.BeginForm("TimKiem", "QuanLySanPham"))
+        {
+            <input name="TuKhoa" style="width: 400px; height: 40px; border-bottom-left-radius: 10px; border-radius: 10px; padding-left: 10px" class="" type="search" id="search" placeholder="Search...    " />
+            <button type="submit" value="tìm kiếm" class="mt-1 bg-info" style="height: 40px; border-radius: 10px;border:none; border-top-right-radius: 10px;">Tìm</button>
+
+        }
+
+
+        @*<form>
+                <a><i>Tìm tên sản phẩm</i></a>
+                <input name="searchkey" style="width: 350px; height: 40px; border-bottom-left-radius: 10px; border-radius: 10px; padding-left: 10px" class="" type="search" id="search" placeholder="Search...    " />
+                <button type="submit" name="submit" value="tìm kiếm" class="mt-1 bg-info" style="height: 40px; border-radius: 10px;border:none; border-top-right-radius: 10px;">Tìm</button>
+            </form>*@
+
+
+    </div>
+
+</div>
+
+<p style="font-size: larger;">
+    <b><u>Sắp xếp theo</u></b>
+</p>
+<div class="col-11">
+    <div class="row m-3 w-100 " style="">
+        <div class="col-2">
+            @*<a href="/QuanLySanPham/AdenZ" class="btn btn-primary w-75">A-Z</a>*@
+            @Html.ActionLink("Đơn chưa xác nhận", "DonCXN", null, new { }, new { @class = "btn btn-primary w-75" })
+        </div>
+        <div class="col-2 w-100">
+            @Html.ActionLink("Đơn đã xác nhận", "DonDXN", null, new { @class = "btn btn-primary w-75" })
+        </div>
+        <div class="col-2">
+            @Html.ActionLink("Đơn quá hạn trả", "DonQH", null, new { @class = "btn btn-primary w-75" })
+        </div>
+        <div class="col-2 w-100">
+            @Html.ActionLink("Giá giảm dần", "GiaGiam", null, new { @class = "btn btn-primary w-75" })
+        </div>
+        <div class="col-2">
+            @Html.ActionLink("Đơn mới nhất", "SXMN", null, new { @class = "btn btn-primary w-75" })
+        </div>
+        <div class="col-2 w-100">
+            @Html.ActionLink("Đơn cũ nhất", "SXCN", null, new { @class = "btn btn-primary w-75" })
+        </div>
+    </div>
+</div>
+<div class="col-1">
+</div>
+
+<p>
+    @*@Html.ActionLink("Create New", "Create")*@
+</p>
+<div class="col-11">
+    <table class="table">
+        <tr class="bg-info  border-left-0" style="font-size:x-large">
+            <th>
+                Ngày lập
+            </th>
+            <th>
+                Tình trạng
+            </th>
+            <th>
+                Thành tiền
+            </th>
+            <th>
+                Tên khách hàng
+            </th>
+            <th>
+                Nhân viên xác nhận
+            </th>
+            @*<th>
+                    Chỉnh sửa
+                </th>*@
+            <th>
+                Xác nhận
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            dem++;
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NGAYLAP)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TINHTRANG)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TONGTIEN)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.KHACHHANG.TENKH)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NHANVIEN.TENNV)
+                </td>
+                @*<td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.MaHoaDon }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.MaHoaDon }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.MaHoaDon })
+                    </td>*@
+                <td>
+                    @if (item.TINHTRANG == "Chưa xác nhận")
+                    
+                    {
+                        <center>
+                            @Html.ActionLink("Xác nhận đơn hàng", "CapnhatHD", new { id = item.MAHD }, new { @class = "btn btn-info" })
+                        </center>
+
+
+
+                    }
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>
+<div class="col-1">
+
+</div>
+
+
+<b>Tổng số đơn hàng: @dem </b>

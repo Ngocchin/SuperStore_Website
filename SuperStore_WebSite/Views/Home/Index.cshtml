@@ -1,0 +1,46 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_HomePage.cshtml";
+}
+
+<section class="bg-light">
+    <div class="container py-5">
+        <div class="row text-center py-3">
+            <div class="col-lg-6 m-auto">
+                <h1 class="h1">Khuyến mãi hot</h1>
+                <p>
+                    Your Passion is our Satisfaction - Đam mê của bạn là sự hài lòng của chúng tôi.
+                </p>
+            </div>
+        </div>
+        <div class="row">
+            @foreach (var p in ViewBag.Tasks)
+            {
+                <div class="col-12 col-md-4 mb-4">
+                    <div class="card h-100">
+                        <a href="@Url.Action("Details","Product", new {@MaSP = p.MASP}, null)">
+                            <img src="~/Resources/img/@p.HINHANH" class="card-img-top" alt="...">
+                        </a>
+                        <div class="card-body">
+                            <ul class="list-unstyled d-flex justify-content-between">
+                                <li>
+                                    <i class="text-warning fa fa-star"></i>
+                                    <i class="text-warning fa fa-star"></i>
+                                    <i class="text-warning fa fa-star"></i>
+                                    <i class="text-muted fa fa-star"></i>
+                                    <i class="text-muted fa fa-star"></i>
+                                </li>
+                                <li class="text-muted text-right">@String.Format("{0:0,0 VNĐ}", p.GIABAN)</li>
+                            </ul>
+                            <a href="@Url.Action("Details", "Product", new { @MaSP = p.MASP }, null)" class="h2 text-decoration-none text-dark">@p.TENSP</a>
+                            <p class="card-text">
+                                @p.GHICHU
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            }
+            </div>
+        </div>
+</section>

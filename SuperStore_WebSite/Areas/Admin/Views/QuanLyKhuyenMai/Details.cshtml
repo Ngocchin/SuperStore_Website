@@ -1,0 +1,43 @@
+﻿@model SuperStore_WebSite.Models.KHUYENMAI
+
+@{
+    ViewBag.Title = "Details";
+       Layout = "~/Areas/Admin/Views/Shared/_AdminPage.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>KHUYENMAI</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.NGAYBD)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NGAYBD)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NGAYKT)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NGAYKT)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GIAGIAM)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GIAGIAM)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.MAKM }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

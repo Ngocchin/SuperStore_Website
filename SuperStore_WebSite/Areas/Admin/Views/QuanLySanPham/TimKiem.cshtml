@@ -1,0 +1,158 @@
+﻿@model IEnumerable<SuperStore_WebSite.Models.SANPHAM>
+
+@{
+    ViewBag.Title = "Quản lý sản phẩm";
+       Layout = "~/Areas/Admin/Views/Shared/_AdminPage.cshtml";
+    <style>
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+    </style>
+}
+
+<h2>Quản lý sản phẩm</h2>
+
+
+<div class="row m-3 w-100 " style="">
+    <div class="col-2 w-75">
+        @Html.ActionLink("Thêm sản phẩm mới", "Create", null, new { @class = "btn btn-primary" })
+    </div>
+    <div class="col-5">
+
+    </div>
+    <div class="col-5">
+
+        <a><i>Tìm tên sản phẩm</i></a>
+        @using (Html.BeginForm("TimKiem", "QuanLySanPham"))
+        {
+            <input name="TuKhoa" style="width: 400px; height: 40px; border-bottom-left-radius: 10px; border-radius: 10px; padding-left: 10px" class="" type="search" id="search" placeholder="Search...    " />
+            <button type="submit" value="tìm kiếm" class="mt-1" style="height: 40px;width:60px; border-radius: 10px;border:none; border-top-right-radius: 10px;background-color: #5D7B6F ">Tìm</button>
+
+        }
+
+
+
+
+    </div>
+
+</div>
+
+<p style="font-size: larger;">
+    <b><u>Sắp xếp theo</u></b>
+</p>
+<div class="col-11">
+    <div class="row m-3 w-100 " style="">
+        <div class="col-2 w-100">
+
+            @Html.ActionLink("A-Z", "AdenZ", null, new { }, new { @class = "btn btn-primary w-75 ", style = "background-color: #5D7B6F; color: white;" })
+        </div>
+        <div class="col-2 w-100">
+            @Html.ActionLink("Z-A", "ZdenA", null, new { @class = "btn btn-primary w-75", style = "background-color: #5D7B6F; color: white;" })
+        </div>
+        <div class="col-2 w-100">
+            @Html.ActionLink("Giá tăng dần", "GiaTang", null, new { @class = "btn btn-primary w-75", style = "background-color: #5D7B6F; color: white;" })
+        </div>
+        <div class="col-2 w-100">
+            @Html.ActionLink("Giá giảm dần", "GiaGiam", null, new { @class = "btn btn-primary w-75", style = "background-color: #5D7B6F; color: white;" })
+        </div>
+        <div class="col-2 w-100">
+            @Html.ActionLink("Có khuyến mãi", "KM", null, new { @class = "btn btn-primary w-75", style = "background-color: #5D7B6F; color: white;" })
+        </div>
+        <div class="col-2 w-100">
+            @Html.ActionLink("Không khuyến mãi", "NonKM", null, new { @class = "btn btn-primary w-75", style = "background-color: #5D7B6F; color: white;" })
+        </div>
+    </div>
+
+</div>
+<div class="col-1">
+
+</div>
+<div class="col-11">
+    <table class="table">
+        <tr class="border-left-0" style="font-size: x-large; background-color: #5D7B6F">
+            <th>
+                Tên sản phẩm
+            </th>
+            <th>
+                Loại
+            </th>
+            <th>
+                Nhà cung cấp
+            </th>
+            <th>
+                Mã khuyến mãi
+            </th>
+            <th>
+                Giá
+            </th>
+            <th>
+                Số lượng tồn
+            </th>
+            <th>
+                Ghi chú
+            </th>
+            <th>
+                Hình ảnh
+            </th>
+            <th>
+                Hình ảnh liên quan
+            </th>
+
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TENSP)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LOAI.TENLOAI)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NHACUNGCAP.TENNCC)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MAKM)
+                </td>
+                <td>
+
+                    <a style="">@String.Format("{0:0,0}", item.GIABAN) VND</a>
+
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SOLUONGTON)
+                </td>
+                <td>
+                    @*@Html.DisplayFor(modelItem => item.GHICHU)*@
+                    @{
+                        var truncatedGHICHU = item.GHICHU?.Substring(0, Math.Min(item.GHICHU.Length, 15));
+                    }
+                    @truncatedGHICHU ...
+                </td>
+                <td>
+                    <img class="" style="height:50px;width:50px" src="~/Resources/img/@item.HINHANH" />
+                </td>
+                <td>
+
+                    <img style="height:50px;width:50px" src="~/Resources/img/@item.HINHLIENQUAN" />
+                </td>
+
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.MASP }, new { @class = "btn btn-warning" }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.MASP }, new { @class = "btn btn-danger" })
+
+
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>
+<div class="col-1">
+
+</div>
+
+

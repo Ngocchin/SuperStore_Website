@@ -1,0 +1,503 @@
+﻿<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" />
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{1459B856-9123-4B61-BCC9-C61D6F4CB588}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>SuperStore_WebSite</RootNamespace>
+    <AssemblyName>SuperStore_WebSite</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <Use64BitIISExpress />
+    <IISExpressSSLPort>44390</IISExpressSSLPort>
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System.Web.Razor">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.9\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Webpages">
+      <HintPath>..\packages\Microsoft.AspNet.Webpages.3.2.9\lib\net45\System.Web.Webpages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Webpages.Deployment">
+      <HintPath>..\packages\Microsoft.AspNet.Webpages.3.2.9\lib\net45\System.Web.Webpages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Webpages.Razor">
+      <HintPath>..\packages\Microsoft.AspNet.Webpages.3.2.9\lib\net45\System.Web.Webpages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Helpers">
+      <HintPath>..\packages\Microsoft.AspNet.Webpages.3.2.9\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure">
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.2.0.1\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.9\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="bootstrap\css\bootstrap-grid.css" />
+    <Content Include="bootstrap\css\bootstrap-grid.min.css" />
+    <Content Include="bootstrap\css\bootstrap-reboot.css" />
+    <Content Include="bootstrap\css\bootstrap-reboot.min.css" />
+    <Content Include="bootstrap\css\bootstrap.css" />
+    <Content Include="bootstrap\css\bootstrap.min.css" />
+    <Content Include="bootstrap\js\bootstrap.bundle.js" />
+    <Content Include="bootstrap\js\bootstrap.bundle.min.js" />
+    <Content Include="bootstrap\js\bootstrap.js" />
+    <Content Include="bootstrap\js\bootstrap.min.js" />
+    <Content Include="bootstrap\js\jquery-3.3.1.min.js" />
+    <Content Include="Content\Account.js" />
+    <Content Include="Content\assets\css\bootstrap.min.css" />
+    <Content Include="Content\assets\css\custom.css" />
+    <Content Include="Content\assets\css\fontawesome.css" />
+    <Content Include="Content\assets\css\fontawesome.min.css" />
+    <Content Include="Content\assets\css\slick-theme.css" />
+    <Content Include="Content\assets\css\slick-theme.min.css" />
+    <Content Include="Content\assets\css\slick.min.css" />
+    <Content Include="Content\assets\css\templatemo.css" />
+    <Content Include="Content\assets\css\templatemo.min.css" />
+    <Content Include="Content\assets\js\bootstrap.bundle.min.js" />
+    <Content Include="Content\assets\js\custom.js" />
+    <Content Include="Content\assets\js\jquery-1.11.0.min.js" />
+    <Content Include="Content\assets\js\jquery-migrate-1.2.1.min.js" />
+    <Content Include="Content\assets\js\slick.min.js" />
+    <Content Include="Content\assets\js\templatemo.js" />
+    <Content Include="Content\assets\js\templatemo.min.js" />
+    <Content Include="Content\assets\webfonts\fa-brands-400.svg" />
+    <Content Include="Content\assets\webfonts\fa-regular-400.svg" />
+    <Content Include="Content\assets\webfonts\fa-solid-900.svg" />
+    <Content Include="Content\assets\webfonts\slick.svg" />
+    <Content Include="Content\bootstrap-grid.css" />
+    <Content Include="Content\bootstrap-grid.min.css" />
+    <Content Include="Content\bootstrap-grid.rtl.css" />
+    <Content Include="Content\bootstrap-grid.rtl.min.css" />
+    <Content Include="Content\bootstrap-reboot.css" />
+    <Content Include="Content\bootstrap-reboot.min.css" />
+    <Content Include="Content\bootstrap-reboot.rtl.css" />
+    <Content Include="Content\bootstrap-reboot.rtl.min.css" />
+    <Content Include="Content\bootstrap-utilities.css" />
+    <Content Include="Content\bootstrap-utilities.min.css" />
+    <Content Include="Content\bootstrap-utilities.rtl.css" />
+    <Content Include="Content\bootstrap-utilities.rtl.min.css" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\bootstrap.rtl.css" />
+    <Content Include="Content\bootstrap.rtl.min.css" />
+    <Content Include="Content\acoount.css" />
+    <Content Include="Content\css\main.css" />
+    <Content Include="Content\css\style.css" />
+    <Content Include="Content\css\util.css" />
+    <Content Include="Content\login.css" />
+    <Content Include="Content\Site.css" />
+    <Content Include="Global.asax" />
+    <Content Include="Models\QLBH.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>QLBH.edmx</DependentUpon>
+      <LastGenOutput>QLBH.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\QLBH.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>QLBH.edmx</DependentUpon>
+      <LastGenOutput>QLBH.cs</LastGenOutput>
+    </Content>
+    <Content Include="Resources\brand1.png" />
+    <Content Include="Resources\brand2.png" />
+    <Content Include="Resources\brand3.png" />
+    <Content Include="Resources\brand4.png" />
+    <Content Include="Resources\brand5.png" />
+    <Content Include="Resources\brand6.png" />
+    <Content Include="Resources\icon\shopping-cart.png" />
+    <Content Include="Resources\img\bepdien1.jpg" />
+    <Content Include="Resources\img\bepdien11.jpg" />
+    <Content Include="Resources\img\bepdien2.jpg" />
+    <Content Include="Resources\img\bepdien22.jpg" />
+    <Content Include="Resources\brand7.png" />
+    <Content Include="Resources\brand8.jpg" />
+    <Content Include="Resources\img\brand10.png" />
+    <Content Include="Resources\img\brand9.png" />
+    <Content Include="Resources\img\dt1.jpg" />
+    <Content Include="Resources\img\dt11.jpg" />
+    <Content Include="Resources\img\dt2.jpg" />
+    <Content Include="Resources\img\dt22.jpg" />
+    <Content Include="Resources\img\dt3.jpg" />
+    <Content Include="Resources\img\dt33.jpg" />
+    <Content Include="Resources\img\laptop1.jpg" />
+    <Content Include="Resources\img\laptop11.jpg" />
+    <Content Include="Resources\img\laptop2.jpg" />
+    <Content Include="Resources\img\laptop22.jpg" />
+    <Content Include="Resources\img\laptop3.jpg" />
+    <Content Include="Resources\img\laptop33.jpg" />
+    <Content Include="Resources\img\laptop4.jpg" />
+    <Content Include="Resources\img\laptop44.jpg" />
+    <Content Include="Resources\img\mayin1.jpg" />
+    <Content Include="Resources\img\mayin11.jpg" />
+    <Content Include="Resources\img\mayin2.jpg" />
+    <Content Include="Resources\img\mayin22.jpg" />
+    <Content Include="Resources\img\maylanh1.jpg" />
+    <Content Include="Resources\img\maylanh11.jpg" />
+    <Content Include="Resources\img\maylanh2.jpg" />
+    <Content Include="Resources\img\maylanh22.jpg" />
+    <Content Include="Resources\img\mayloc1.jpg" />
+    <Content Include="Resources\img\mayloc11.jpg" />
+    <Content Include="Resources\img\pc1.jpg" />
+    <Content Include="Resources\img\pc11.jpg" />
+    <Content Include="Resources\img\pc2.jpg" />
+    <Content Include="Resources\img\pc22.jpg" />
+    <Content Include="Resources\img\quat1.jpg" />
+    <Content Include="Resources\img\quat11.jpg" />
+    <Content Include="Resources\img\slide1.jpg" />
+    <Content Include="Resources\img\slide2.jpg" />
+    <Content Include="Resources\img\slide3.jpg" />
+    <Content Include="Resources\img\slide4.jpg" />
+    <Content Include="Resources\img\tivi1.jpg" />
+    <Content Include="Resources\img\tivi11.jpg" />
+    <Content Include="Resources\img\tivi2.jpg" />
+    <Content Include="Resources\img\tivi22.jpg" />
+    <Content Include="Resources\img\tivi3.jpg" />
+    <Content Include="Resources\img\tivi33.jpg" />
+    <Content Include="Resources\img\tivi4.jpg" />
+    <Content Include="Resources\img\tivi44.jpg" />
+    <Content Include="Resources\img\tulanh1.jpg" />
+    <Content Include="Resources\img\tulanh11.jpg" />
+    <Content Include="Resources\img\tulanh2.jpg" />
+    <Content Include="Resources\img\tulanh22.jpg" />
+    <Content Include="Resources\img\tulanh3.jpg" />
+    <Content Include="Resources\img\tulanh33.jpg" />
+    <Content Include="Resources\img\tulanh4.jpg" />
+    <Content Include="Resources\img\tulanh44.jpg" />
+    <Content Include="Resources\logo.jpg" />
+    <Content Include="Resources\slide1.jpg" />
+    <Content Include="Resources\slide2.jpg" />
+    <Content Include="Resources\slide3.jpg" />
+    <Content Include="Resources\slide4.jpg" />
+    <Content Include="Scripts\bootstrap.bundle.js" />
+    <Content Include="Scripts\bootstrap.bundle.min.js" />
+    <Content Include="Scripts\bootstrap.esm.js" />
+    <Content Include="Scripts\bootstrap.esm.min.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\HomeAdminController.cs" />
+    <Compile Include="Areas\Admin\Controllers\QuanLyHoaDonController.cs" />
+    <Compile Include="Areas\Admin\Controllers\QuanLyKhachHangController.cs" />
+    <Compile Include="Areas\Admin\Controllers\QuanLyKhuyenMaiController.cs" />
+    <Compile Include="Areas\Admin\Controllers\QuanLyLoaiSanPhamController.cs" />
+    <Compile Include="Areas\Admin\Controllers\QuanLyNhaCungCapController.cs" />
+    <Compile Include="Areas\Admin\Controllers\QuanLyNhanVienController.cs" />
+    <Compile Include="Areas\Admin\Controllers\QuanLySanPhamController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ThongKeDonHangController.cs" />
+    <Compile Include="Controllers\AboutController.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\CartController.cs" />
+    <Compile Include="Controllers\ContactController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ProductController.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CTHD.cs">
+      <DependentUpon>QLBH.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CTPHIEUNHAP.cs">
+      <DependentUpon>QLBH.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Giohang.cs" />
+    <Compile Include="Models\HOADON.cs">
+      <DependentUpon>QLBH.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\KHACHHANG.cs">
+      <DependentUpon>QLBH.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\KHUYENMAI.cs">
+      <DependentUpon>QLBH.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\LOAI.cs">
+      <DependentUpon>QLBH.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\NHACUNGCAP.cs">
+      <DependentUpon>QLBH.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\NHANVIEN.cs">
+      <DependentUpon>QLBH.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PHIEUNHAP.cs">
+      <DependentUpon>QLBH.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\QLBH.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>QLBH.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\QLBH.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>QLBH.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\QLBH.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>QLBH.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SANPHAM.cs">
+      <DependentUpon>QLBH.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\web.config" />
+    <Content Include="Content\bootstrap.rtl.min.css.map" />
+    <Content Include="Content\bootstrap.rtl.css.map" />
+    <Content Include="Content\bootstrap.min.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Content\bootstrap-utilities.rtl.min.css.map" />
+    <Content Include="Content\bootstrap-utilities.rtl.css.map" />
+    <Content Include="Content\bootstrap-utilities.min.css.map" />
+    <Content Include="Content\bootstrap-utilities.css.map" />
+    <Content Include="Content\bootstrap-reboot.rtl.min.css.map" />
+    <Content Include="Content\bootstrap-reboot.rtl.css.map" />
+    <Content Include="Content\bootstrap-reboot.min.css.map" />
+    <Content Include="Content\bootstrap-reboot.css.map" />
+    <Content Include="Content\bootstrap-grid.rtl.min.css.map" />
+    <Content Include="Content\bootstrap-grid.rtl.css.map" />
+    <Content Include="Content\bootstrap-grid.min.css.map" />
+    <Content Include="Content\bootstrap-grid.css.map" />
+    <Content Include="Content\assets\webfonts\fa-brands-400.eot" />
+    <Content Include="Content\assets\webfonts\fa-brands-400.ttf" />
+    <Content Include="Content\assets\webfonts\fa-brands-400.woff" />
+    <Content Include="Content\assets\webfonts\fa-brands-400.woff2" />
+    <Content Include="Content\assets\webfonts\fa-regular-400.eot" />
+    <Content Include="Content\assets\webfonts\fa-regular-400.ttf" />
+    <Content Include="Content\assets\webfonts\fa-regular-400.woff" />
+    <Content Include="Content\assets\webfonts\fa-regular-400.woff2" />
+    <Content Include="Content\assets\webfonts\fa-solid-900.eot" />
+    <Content Include="Content\assets\webfonts\fa-solid-900.ttf" />
+    <Content Include="Content\assets\webfonts\fa-solid-900.woff" />
+    <Content Include="Content\assets\webfonts\fa-solid-900.woff2" />
+    <Content Include="Content\assets\webfonts\slick.eot" />
+    <Content Include="Content\assets\webfonts\slick.ttf" />
+    <Content Include="Content\assets\webfonts\slick.woff" />
+    <EntityDeploy Include="Models\QLBH.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>QLBH.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\QLBH.edmx.diagram">
+      <DependentUpon>QLBH.edmx</DependentUpon>
+    </Content>
+    <Content Include="bootstrap\css\bootstrap-grid.css.map" />
+    <Content Include="bootstrap\css\bootstrap-grid.min.css.map" />
+    <Content Include="bootstrap\css\bootstrap-reboot.css.map" />
+    <Content Include="bootstrap\css\bootstrap-reboot.min.css.map" />
+    <Content Include="bootstrap\css\bootstrap.css.map" />
+    <Content Include="bootstrap\css\bootstrap.min.css.map" />
+    <Content Include="bootstrap\js\bootstrap.bundle.js.map" />
+    <Content Include="bootstrap\js\bootstrap.bundle.min.js.map" />
+    <Content Include="bootstrap\js\bootstrap.js.map" />
+    <Content Include="bootstrap\js\bootstrap.min.js.map" />
+    <Content Include="Areas\Admin\Views\web.config" />
+    <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_LayoutQuanLy.cshtml" />
+    <Content Include="Areas\Admin\Views\QuanLyHoaDon\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\QuanLyHoaDon\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\QuanLyHoaDon\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\QuanLyHoaDon\DonCXN.cshtml" />
+    <Content Include="Areas\Admin\Views\QuanLyHoaDon\DonDXN.cshtml" />
+    <Content Include="Areas\Admin\Views\QuanLyHoaDon\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\QuanLyHoaDon\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\QuanLyHoaDon\SXCN.cshtml" />
+    <Content Include="Areas\Admin\Views\QuanLyHoaDon\SXMN.cshtml" />
+    <Content Include="Areas\Admin\Views\QuanLyKhachHang\AdenZ.cshtml" />
+    <Content Include="Areas\Admin\Views\QuanLyKhachHang\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\QuanLyKhachHang\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\QuanLyKhachHang\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\QuanLyKhachHang\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\QuanLyKhachHang\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\QuanLyKhachHang\TimKiem.cshtml" />
+    <Content Include="Areas\Admin\Views\QuanLyKhachHang\ZdenA.cshtml" />
+    <Content Include="Areas\Admin\Views\QuanLyKhuyenMai\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\QuanLyKhuyenMai\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\QuanLyKhuyenMai\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\QuanLyKhuyenMai\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\QuanLyKhuyenMai\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\QuanLyLoaiSanPham\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\QuanLyLoaiSanPham\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\QuanLyLoaiSanPham\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\QuanLyLoaiSanPham\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\QuanLyLoaiSanPham\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\QuanLyNhaCungCap\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\QuanLyNhaCungCap\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\QuanLyNhaCungCap\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\QuanLyNhaCungCap\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\QuanLyNhaCungCap\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\QuanLyNhanVien\AdenZ.cshtml" />
+    <Content Include="Areas\Admin\Views\QuanLyNhanVien\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\QuanLyNhanVien\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\QuanLyNhanVien\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\QuanLyNhanVien\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\QuanLyNhanVien\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\QuanLyNhanVien\TimKiem.cshtml" />
+    <Content Include="Areas\Admin\Views\QuanLyNhanVien\ZdenA.cshtml" />
+    <Content Include="Areas\Admin\Views\QuanLySanPham\AdenZ.cshtml" />
+    <Content Include="Areas\Admin\Views\QuanLySanPham\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\QuanLySanPham\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\QuanLySanPham\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\QuanLySanPham\GiaGiam.cshtml" />
+    <Content Include="Areas\Admin\Views\QuanLySanPham\GiaTang.cshtml" />
+    <Content Include="Areas\Admin\Views\QuanLySanPham\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\QuanLySanPham\KM.cshtml" />
+    <Content Include="Areas\Admin\Views\QuanLySanPham\NonKM.cshtml" />
+    <Content Include="Areas\Admin\Views\QuanLySanPham\TimKiem.cshtml" />
+    <Content Include="Areas\Admin\Views\QuanLySanPham\ZdenA.cshtml" />
+    <Content Include="Areas\Admin\Views\ThongKeDonHang\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\ThongKeDonHang\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\ThongKeDonHang\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\ThongKeDonHang\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\ThongKeDonHang\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_AdminPage.cshtml" />
+    <Content Include="Areas\Admin\Views\HomeAdmin\Index.cshtml" />
+    <None Include="packages.config" />
+    <Content Include="Scripts\bootstrap.min.js.map" />
+    <Content Include="Scripts\bootstrap.js.map" />
+    <Content Include="Scripts\bootstrap.esm.min.js.map" />
+    <Content Include="Scripts\bootstrap.esm.js.map" />
+    <Content Include="Scripts\bootstrap.bundle.min.js.map" />
+    <Content Include="Scripts\bootstrap.bundle.js.map" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Shared\_HomePage.cshtml" />
+    <Content Include="Views\Home\Category.cshtml" />
+    <Content Include="Views\Shared\_ProductPage.cshtml" />
+    <Content Include="Views\Product\ShowAll.cshtml" />
+    <Content Include="Views\Product\Category.cshtml" />
+    <Content Include="Views\Product\Details.cshtml" />
+    <Content Include="Views\Shared\_Search.cshtml" />
+    <Content Include="Views\Product\Search.cshtml" />
+    <Content Include="Views\Cart\GioHangPartial.cshtml" />
+    <Content Include="Views\Cart\Index.cshtml" />
+    <Content Include="Views\About\Index.cshtml" />
+    <Content Include="Views\Contact\Index.cshtml" />
+    <Content Include="Views\Account\Logout.cshtml" />
+    <Content Include="Views\Cart\Order.cshtml" />
+    <Content Include="Views\Cart\XacNhanThongTin.cshtml" />
+    <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Account\SignUp.cshtml" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="Areas\Admin\Data\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>50703</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>https://localhost:44390/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.props'))" />
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.targets'))" />
+  </Target>
+  <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

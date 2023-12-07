@@ -1,0 +1,90 @@
+﻿@model SuperStore_WebSite.Models.NHANVIEN
+
+@{
+    ViewBag.Title = "Delete";
+       Layout = "~/Areas/Admin/Views/Shared/_AdminPage.cshtml";
+}
+<center class="mt-5">
+    <h2>Xóa nhân viên</h2>
+</center>
+
+
+<h3>Thông tin nhân viên xóa!!!</h3>
+<div>
+
+    <div>
+
+        <hr />
+
+        <table class="table">
+            <tr>
+                <th>
+                    Tên nhân viên
+                </th>
+                <td>
+                    @Html.DisplayFor(model => model.TENNV)
+                </td>
+            </tr>
+
+            <tr>
+                <th>
+                    Số điện thoại
+                </th>
+                <td>
+                    @Html.DisplayFor(model => model.SDT)
+                </td>
+            </tr>
+
+            <tr>
+                <th>
+                    Email
+                </th>
+                <td>
+                    @Html.DisplayFor(model => model.EMAIL)
+                </td>
+            </tr>
+
+            <tr>
+                <th>
+                    Địa chỉ
+                </th>
+                <td>
+                    @Html.DisplayFor(model => model.DIACHI)
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    Chức vụ
+                </th>
+                <td>
+                    @Html.DisplayFor(model => model.CHUCVU)
+                </td>
+            </tr>
+
+            <tr>
+                <th>
+                    Mật khẩu
+                </th>
+                <td>
+                    @Html.DisplayFor(model => model.PASSWORD)
+                   
+                </td>
+            </tr>
+        </table>
+
+        <center>
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="form-actions no-color">
+                    <input style="height:50px; width:100px" type="submit" value="Xóa" class="btn btn-danger" />
+
+                </div>
+            }
+        </center>
+        @Html.ActionLink("Quay lại", "Index")
+    </div>
+
+    
+</div>

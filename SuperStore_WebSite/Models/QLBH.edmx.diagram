@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="9c51e9123138478491e7ae99c4a3f175" Name="Diagram1">
+        <EntityTypeShape EntityType="QL_BANHANGDIENTUModel.CTHD" Width="1.5" PointX="11.25" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="QL_BANHANGDIENTUModel.CTPHIEUNHAP" Width="1.5" PointX="8.25" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="QL_BANHANGDIENTUModel.HOADON" Width="1.5" PointX="9" PointY="11" IsExpanded="true" />
+        <EntityTypeShape EntityType="QL_BANHANGDIENTUModel.KHACHHANG" Width="1.5" PointX="6.75" PointY="11" IsExpanded="true" />
+        <EntityTypeShape EntityType="QL_BANHANGDIENTUModel.KHUYENMAI" Width="1.5" PointX="3.75" PointY="2.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="QL_BANHANGDIENTUModel.LOAI" Width="1.5" PointX="3.75" PointY="8.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="QL_BANHANGDIENTUModel.NHACUNGCAP" Width="1.5" PointX="0.75" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="QL_BANHANGDIENTUModel.NHANVIEN" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="QL_BANHANGDIENTUModel.PHIEUNHAP" Width="1.5" PointX="3" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="QL_BANHANGDIENTUModel.SANPHAM" Width="1.5" PointX="6" PointY="4.375" IsExpanded="true" />
+        <AssociationConnector Association="QL_BANHANGDIENTUModel.FK_HD_CTHD" ManuallyRouted="false" />
+        <AssociationConnector Association="QL_BANHANGDIENTUModel.FK_SP_CTHD" ManuallyRouted="false" />
+        <AssociationConnector Association="QL_BANHANGDIENTUModel.FK_CTPH_PN" ManuallyRouted="false" />
+        <AssociationConnector Association="QL_BANHANGDIENTUModel.FK_CTPH_SP" ManuallyRouted="false" />
+        <AssociationConnector Association="QL_BANHANGDIENTUModel.FK_HD_KH" ManuallyRouted="false" />
+        <AssociationConnector Association="QL_BANHANGDIENTUModel.FK_HD_NV" ManuallyRouted="false" />
+        <AssociationConnector Association="QL_BANHANGDIENTUModel.FK_KM_SP" ManuallyRouted="false" />
+        <AssociationConnector Association="QL_BANHANGDIENTUModel.FK_LOAI_SP" ManuallyRouted="false" />
+        <AssociationConnector Association="QL_BANHANGDIENTUModel.FK_NCC_PN" ManuallyRouted="false" />
+        <AssociationConnector Association="QL_BANHANGDIENTUModel.FK_NCC_SP" ManuallyRouted="false" />
+        <AssociationConnector Association="QL_BANHANGDIENTUModel.FK_NCC_NV" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
