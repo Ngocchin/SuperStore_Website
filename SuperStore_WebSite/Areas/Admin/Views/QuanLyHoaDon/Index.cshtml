@@ -2,7 +2,7 @@
 
 @{
     ViewBag.Title = "Index";
-       Layout = "~/Areas/Admin/Views/Shared/_AdminPage.cshtml";
+       Layout = "~/Areas/Admin/Views/Shared/_AdminPage2.cshtml";
     <style>
         table, th, td {
             border: 1px solid black;
@@ -94,14 +94,14 @@
                     @Html.DisplayFor(modelItem => item.TINHTRANG)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.TONGTIEN)
+                    @String.Format("{0:0,0 VNĐ}", @item.TONGTIEN)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.KHACHHANG.TENKH)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.NHANVIEN.TENNV)
-                </td>
+                </td>                
             <td>
 
                 @if (item.TINHTRANG != "Đã giao")

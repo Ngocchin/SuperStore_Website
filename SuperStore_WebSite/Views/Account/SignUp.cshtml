@@ -1,44 +1,4 @@
-﻿@*@{
-        Layout = null;
-    }
-
-    <!DOCTYPE html>
-
-    <html>
-    <head>
-        <link href="~/Content/login.css" rel="stylesheet" />
-        <meta name="viewport" content="width=device-width" />
-        <title>SIGN UP</title>
-    </head>
-    <body>
-        <div class="login">
-            <h2 class="active"> sign up </h2>
-            <form action="/Account/SignUp" method="post" enctype="multipart/form-data">
-                <input type="text" class="text" name="TENKH">
-                <span>username</span>
-                <br>
-                <input type="text" class="text" name="EMAIL">
-                <span>EMAIL</span>
-                <br>
-                <input type="text" class="text" name="SDT">
-                <span>Phone number</span>
-                <br>
-                <input type="password" class="text" name="PASSWORD">
-                <span>Password</span>
-                <br>
-                <input type="password" class="text" name="repass">
-                <span>Enter the password</span>
-                <br>
-                <button class="signin" value="SignUp">
-                    Sign Up
-                </button>
-                <hr>
-                <a href="/Account/Login">Sign in</a>
-            </form>
-        </div>
-    </body>
-    </html>*@
-@model SuperStore_WebSite.Models.KHACHHANG
+﻿@model SuperStore_WebSite.Models.KHACHHANG
 <!DOCTYPE html>
 
 <html>
@@ -56,7 +16,7 @@
             <div class="signup">
                 <h2 class="form-title" id="signup"><span>or</span>Sign up</h2>
                 <div class="form-holder">
-                    <input type="text" class="input" placeholder="Name"/>                   
+                    <input type="text" class="input" name="Name" placeholder="Name"/>                   
                     @Html.TextBoxFor(temp => temp.EMAIL, new { Type = "text", Name = "EMAIL", @class = "input", placeholder = "Email" })
                     @Html.TextBoxFor(temp => temp.PASSWORD, new { Type = "password", Name = "PASSWORD", @class = "input", placeholder = "Password" })
                     <input type="password" class="input" name="repass" placeholder="Enter the password" />

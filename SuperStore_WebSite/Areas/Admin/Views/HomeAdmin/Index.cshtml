@@ -1,10 +1,131 @@
-﻿
+﻿@model IEnumerable<SuperStore_WebSite.Models.HOADON>
 @{
     ViewBag.Title = "Index";
-    Layout = "~/Areas/Admin/Views/Shared/_AdminPage.cshtml";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminPage2.cshtml";
 }
+<!DOCTYPE html>
+<html>
+<head>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+        google.charts.load('current', { 'packages': ['corechart'] });
+        google.charts.setOnLoadCallback(drawChart);
+
+        function drawChart() {
+
+            var data = google.visualization.arrayToDataTable([
+                ['Tình trạng đơn hàng', 'Số lượng'],
+                ['Đơn đã giao', @ViewData["Tongdxn"]],
+                ['Đơn chưa xác nhận', @ViewData["Tongcxn"]],
+            ]);
+
+            var options = {
+                title: 'Hóa đơn'
+            };
+
+            var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+            chart.draw(data, options);
+        }
+    </script>
+</head>
 <body>
+    @{ int dem = 0;}
+    <h2>Thông tin chung</h2>
     <script>
         swal("Xin Chào Admin", "Chúc Bạn 1 Ngày Tốt Lành Nhé", "");
     </script>
+    <div class="row m-t-25">
+        <div class="col-sm-6 col-lg-3">
+                <div class="overview-item overview-item--c1">
+                    <div class="overview__inner">
+                        <div class="overview-box clearfix">
+                            <div class="icon">
+                                <i class="zmdi zmdi-account-o"></i>
+                            </div>
+                            <div class="text">
+                                <h2></h2>
+                                <span>members online</span>
+                            </div>
+                        </div>
+                        <div class="overview-chart">
+                            <canvas id="widgetChart1"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <div class="col-sm-6 col-lg-3">
+            <div class="overview-item overview-item--c2">
+                <div class="overview__inner">
+                    <div class="overview-box clearfix">
+                        <div class="icon">
+                            <i class="zmdi zmdi-shopping-cart"></i>
+                        </div>
+                        <div class="text">
+                            <h2>@dem</h2>
+                            <span>Tổng số đơn hàng</span>
+                        </div>
+                    </div>
+                    <div class="overview-chart">
+                        <canvas id="widgetChart2"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-lg-3">
+                <div class="overview-item overview-item--c3">
+                    <div class="overview__inner">
+                        <div class="overview-box clearfix">
+                            <div class="icon">
+                                <i class="zmdi zmdi-calendar-note"></i>
+                            </div>
+                            <div class="text">
+                                <h2>1,086</h2>
+                                <span>this week</span>
+                            </div>
+                        </div>
+                        <div class="overview-chart">
+                            <canvas id="widgetChart3"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <div class="col-sm-6 col-lg-3">
+                <div class="overview-item overview-item--c4">
+                    <div class="overview__inner">
+                        <div class="overview-box clearfix">
+                            <div class="icon">
+                                <i class="zmdi zmdi-money"></i>
+                            </div>
+                            <div class="text">
+                                <h2>$1,060,386</h2>
+                                <span>total earnings</span>
+                            </div>
+                        </div>
+                        <div class="overview-chart">
+                            <canvas id="widgetChart4"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+    <div class="col-lg-6">
+            <div class="au-card m-b-30">
+                <div class="au-card-inner">
+                    <h3 class="title-2 m-b-40">Bar chart</h3>
+                    <canvas id="barChart"></canvas>
+                </div>
+            </div>
+        </div>
+    <div class="col-lg-6">
+        <div class="au-card m-b-30">
+            <div class="au-card-inner">
+                <div id="piechart" style="width: 500px; height: 300px;"></div>
+            </div>
+        </div>
+    </div>
+    @*<div id="piechart" style="width: 900px; height: 500px;"></div>*@
 </body>
+</html>
+
+

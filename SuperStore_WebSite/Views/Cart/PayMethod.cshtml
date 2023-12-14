@@ -1,0 +1,27 @@
+﻿@using SuperStore_WebSite.Models;
+@model CTHD
+@{
+    ViewBag.Title = "PayMethod";
+    Layout = "~/Views/Shared/_ProductPage.cshtml";
+}
+
+<h2>Phương thức thanh toán</h2>
+@using (Html.BeginForm("Order", "Cart", FormMethod.Post, new {enctype ="multipart/form-data"}))
+{
+    <div class="col-md-8 order-md-1">
+        <h4 class="mb-3">Hình thức thanh toán</h4>
+        <div class="d-block my-3">
+            <div class="custom-control custom-radio">
+                @Html.RadioButtonFor(model => model.HINHTHUCTT, "Tiền Mặt", new { @class = "custom-control-input" })
+                <label class="custom-control-label" for="radioChuyenKhoan">Tiền mặt</label>
+            </div>
+            <div class="custom-control custom-radio">
+                @Html.RadioButtonFor(model => model.HINHTHUCTT, "Chuyển Khoản", new { @class = "custom-control-input" })
+                <label class="custom-control-label" for="radioChuyenKhoan">Chuyển khoản</label>
+            </div>
+        </div>
+        <hr class="mb-4">
+        <button class="btn btn-primary btn-lg btn-block" type="submit" name="btnDatHang">Xác nhận thanh toán</button>
+    </div>
+}
+

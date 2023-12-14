@@ -24,6 +24,7 @@ namespace SuperStore_WebSite.Areas.Admin.Controllers
             ViewData["Tongdxn"] = daxn();
             return View(tbl_HoaDon.ToList());
         }
+        
         public double tong()
         {
             int tthd = 0;
@@ -51,7 +52,7 @@ namespace SuperStore_WebSite.Areas.Admin.Controllers
 
         }
             public int daxn()
-        {
+         {
             int dg = 0;
             List<HOADON> lsHD = db.HOADONs.ToList();
             if (lsHD != null)

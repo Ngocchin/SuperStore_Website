@@ -29,7 +29,7 @@ namespace SuperStore_WebSite.Controllers
         {
             return View();
         }
-        [HttpPost]
+        [HttpPost]        
         public ActionResult Login(FormCollection c)
         {
             string email = c["email"].ToString();
@@ -60,8 +60,7 @@ namespace SuperStore_WebSite.Controllers
         {
             return View();
         }
-        [HttpPost]
-        //[ValidateAntiForgeryToken]
+        [HttpPost]       
         public ActionResult SignUp(KHACHHANG kh, FormCollection c)
         {
             if (kh.PASSWORD == c["repass"])

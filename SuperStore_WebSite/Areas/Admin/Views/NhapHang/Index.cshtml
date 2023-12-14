@@ -1,0 +1,44 @@
+﻿@model IEnumerable<SuperStore_WebSite.Models.PHIEUNHAP>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminPage2.cshtml";
+}
+
+<p>
+    @Html.ActionLink("Create New", "Create") 
+</p>
+
+@using (Html.BeginForm("Index", "NhapHang", FormMethod.Get))
+{
+    <p>
+        <label for="NhaCungCapId">Chọn Nhà Cung Cấp:</label>
+        @Html.DropDownList("MANCC", ViewBag.NhaCungCapList as SelectList, "Chọn nhà cung cấp", new { @class = "form-control" })
+        <div class="col-2 w-100">
+            @Html.ActionLink("Lọc", "Index", null, new { @class = "btn btn-primary w-75", style = "background-color: #5D7B6F; color: white;", name = "MANCC" })
+        </div>
+        @*<input type="submit" value="Lọc" class="btn btn-primary" />*@
+    </p>
+}
+
+<table class="table">
+    <tr>
+        <th>Mã Phiếu Nhập</th>
+        <th>Tên Nhà Cung Cấp</th> 
+        <th>Tên Nhân viên</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.MAPHNHAP</td>
+            <td>@item.NHACUNGCAP.TENNCC</td>
+            <td>@item.NHANVIEN.TENNV</td>   
+            <td>
+                @Html.ActionLink("Details", "Details", new { id = item.MAPHNHAP }) |
+            </td>
+            <td>
+                @Html.ActionLink("Thêm chi tiết phiếu nhập", "CreateCTPN", new { id = item.MAPHNHAP })
+            </td>
+        </tr>
+    }
+</table>

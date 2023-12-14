@@ -37,18 +37,34 @@ namespace SuperStore_WebSite.Areas.Admin.Controllers
         {
             var HOADONs = db.HOADONs.Include(t => t.KHACHHANG).Include(t => t.NHANVIEN);
             return View(HOADONs.OrderBy(t => t.NGAYLAP).ToList());
-        }
-        // GET: QuanLyHoaDon/Details/5
-        public ActionResult CapnhatHD(string id , string manv )
+        }        
+
+        public ActionResult CapnhatHD(string id, string manv)
         {
             // Find the invoice with the specified 'ma'
             HOADON hd = db.HOADONs.Find(id);
-            NHANVIEN nv = (NHANVIEN)Session["Login"];
-            if (hd != null )
+            NHANVIEN nv = (NHANVIEN)Session["Account"];
+
+            if (hd != null)
             {
-                // Update
+                // Update the status of the invoice             
                 hd.TINHTRANG = "Đã giao";
                 hd.MANV = nv.MANV;
+
+                foreach (var chiTietHD in hd.CTHDs)
+                {                   
+                    SANPHAM sp = db.SANPHAMs.Find(chiTietHD.MASP);
+
+                    if (sp != null)
+                    {                       
+                        sp.SOLUONGTON -= chiTietHD.SOLUONG;
+                    }
+                    else
+                    {                        
+                        return View();
+                    }
+                }
+
                 // Save the changes to the database
                 db.SaveChanges();
 
@@ -61,8 +77,7 @@ namespace SuperStore_WebSite.Areas.Admin.Controllers
                 // You can return a view or perform other actions as needed
                 return View("InvoiceNotFound");
             }
-        }
-
+        }           
 
         public ActionResult Details(string id)
         {

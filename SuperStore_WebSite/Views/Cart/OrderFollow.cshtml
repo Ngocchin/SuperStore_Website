@@ -1,0 +1,59 @@
+﻿@model IEnumerable<SuperStore_WebSite.Models.HOADON>
+@{
+    ViewBag.Title = "OrderFollow";
+    Layout = "~/Views/Shared/_ProductPage.cshtml";
+}
+@ViewBag.tb
+
+<main role="main">
+    <div class="container mt-4">
+        <form action="/Cart/Xacnhanthanhtoan" enctype="multipart/form-data" method="post">
+            <div class="py-5 text-center">
+                <i class='fas fa-truck' style='font-size:36px'></i>
+                <h2>Đơn hàng của bạn</h2>
+                <p class="lead">Vui lòng theo dõi đơn hàng của bạn.</p>
+                <div class="position-relative m-4">
+                    <div class="progress" role="progressbar" aria-label="Progress" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="height: 1px;">
+                        <div class="progress-bar" style="width: 50%"></div>
+                    </div>
+                    <button type="button" class="position-absolute top-0 start-0 translate-middle btn btn-sm btn-primary rounded-pill" style="width: 2rem; height:2rem;">1</button>
+                    <button type="button" class="position-absolute top-0 start-50 translate-middle btn btn-sm btn-primary rounded-pill" style="width: 2rem; height:2rem;">2</button>
+                    <button type="button" class="position-absolute top-0 start-100 translate-middle btn btn-sm btn-secondary rounded-pill" style="width: 2rem; height:2rem;">3</button>
+                </div>
+            </div>
+            <table class="table">
+                <tr>
+                    <th>Đơn Hàng</th>
+                    <th>Ngày Đặt Hàng</th>
+                    <th>Tổng tiền</th>
+                    <th>Trạng Thái</th>
+                    <th>
+                        Xác nhận
+                    </th>
+                </tr>
+                @foreach (var order in Model)
+                {
+                    <tr>
+                        <td>@order.MAHD</td>
+                        <td>@order.NGAYLAP.Value.ToString("dd/MM/yyyy")</td>
+                        <td> @String.Format("{0:0,0 VNĐ}", order.TONGTIEN)</td>
+                        <td>@order.TINHTRANG</td>
+                        <td>
+                            @if (order.TINHTRANG == "Đã giao" && order.TINHTRANG != "Đã thanh toán")
+                            {
+                                @Html.ActionLink("Thanh toán", "PayMethod", new { MAHD = order.MAHD }, new { @class = "btn btn-outline-success" })                                
+                              
+                            }
+                            else if (order.TINHTRANG == "Đã thanh toán")
+                            {
+                                @Html.ActionLink("Đổi trả", "PayMethod", new { @MAHD = order.MAHD }, new { @class = "btn btn-outline-danger" })
+                            }
+                        </td>
+                    </tr>
+                }
+            </table>
+        </form>
+    </div>
+</main>
+
+
