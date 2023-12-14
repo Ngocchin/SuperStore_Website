@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Principal;
 using System.Web;
 using System.Web.Mvc;
 using SuperStore_WebSite.Models;
@@ -12,15 +11,10 @@ namespace SuperStore_WebSite.Controllers
     {
         // GET: Account
         QL_BANHANGDIENTUEntities1 db = new QL_BANHANGDIENTUEntities1();
-        //public ActionResult Inf(string MaKH)
-        //{
-        //    var kh = db.KHACHHANGs.SingleOrDefault(t => t.MAKH == MaKH);
-        //    if (kh == null)
-        //    {
-        //        return HttpNotFound();
-        //    }
-        //    return View(kh);
-        //}
+        public ActionResult Inf()
+        {           
+            return View();
+        }
         //public ActionResult LoginSignUp()
         //{
         //    return View();
