@@ -14,6 +14,8 @@
     <link href="~/Content/assets/css/fontawesome.min.css" rel="stylesheet" />
     <link href="~/Content/vendor/animsition/animsition.min.css" rel="stylesheet" />
     <link href="~/Content/css1/theme.css" rel="stylesheet" />
+
+  
 </head>
 <body class="animsition">
     <div class="page-wrapper">
@@ -25,19 +27,7 @@
                         <i class="fa fa-envelope mx-2"></i>
                         <a class="navbar-sm-brand text-light text-decoration-none" href="#">ngoctrinh.huit.work@gmail.com</a>
                         <i class="fa fa-phone mx-2"></i>
-                        <a class="navbar-sm-brand text-light text-decoration-none" href="#">038-5252-362</a>
-                        @if (Session["Account"] != null)
-                        {
-                            var kh = Session["Account"] as SuperStore_WebSite.Models.KHACHHANG;
-                            <a style="color:white">Xin chào : @kh.TENKH</a>
-                            <li><a href="/Account/Inf"><i class="fa fa-user"></i>My Account</a></li>
-                            <li><a href="/Account/Logout"><i class="fa fa-user"></i>LogOut</a></li>
-                        }
-                        else
-                        {
-                            <li><a href="/Account/Login"><i class="fa fa-user"></i>Login</a></li>
-                            <li><a href="/Account/SignUp"><i class="fa fa-user"></i>SignUp</a></li>
-                        }
+                        <a class="navbar-sm-brand text-light text-decoration-none" href="#">038-5252-362</a>                        
                     </div>
                     <div>
                         <a class="text-light" href="#" target="_blank" rel="sponsored"><i class="fab fa-facebook-f fa-sm fa-fw me-2"></i></a>
@@ -97,9 +87,21 @@
                         <a class="nav-icon d-none d-lg-inline" href="#" data-bs-toggle="modal" data-bs-target="#templatemo_search">
                             <i class="fa fa-fw fa-search text-dark mr-2"></i>
                         </a>
-                        <a href="@Url.Action("Index", "Cart")">
+                        <a href="/Cart/Index">
                             @Html.Action("GiohangPartial", "Cart", null)
                         </a>
+                        &ensp;
+                        @if (Session["Account"] != null)
+                        {
+                            var kh = Session["Account"] as SuperStore_WebSite.Models.KHACHHANG;
+                            <a style="color:white">Xin chào : @kh.TENKH</a>
+                            <a href="/Account/Inf"><i class="fa fa-user mr-2"></i>My Account</a>
+                            <a href="/Account/Logout"><i class="fa fa-user mr-2"></i>LogOut</a>
+                        }
+                        else
+                        {
+                            <a href="/Account/Login"><i class="fa fa-user mr-l"></i></a>
+                        }
                     </div>
                 </div>
 
@@ -177,21 +179,69 @@
                     </p>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-12 col-md-4 p-5 mt-3">
-                    <a href="#"><img src="./assets/img/category_img_01.jpg" class="rounded-circle img-fluid border"></a>
-                    <h5 class="text-center mt-3 mb-3">Watches</h5>
-                    <p class="text-center"><a class="btn btn-success">Go Shop</a></p>
-                </div>
-                <div class="col-12 col-md-4 p-5 mt-3">
-                    <a href="#"><img src="./assets/img/category_img_02.jpg" class="rounded-circle img-fluid border"></a>
-                    <h2 class="h5 text-center mt-3 mb-3">Shoes</h2>
-                    <p class="text-center"><a class="btn btn-success">Go Shop</a></p>
-                </div>
-                <div class="col-12 col-md-4 p-5 mt-3">
-                    <a href="#"><img src="./assets/img/category_img_03.jpg" class="rounded-circle img-fluid border"></a>
-                    <h2 class="h5 text-center mt-3 mb-3">Accessories</h2>
-                    <p class="text-center"><a class="btn btn-success">Go Shop</a></p>
+            <div class="col-lg-9 m-auto tempaltemo-carousel">
+                <div class="row d-flex flex-row">
+                    <!--Controls-->
+                    <div class="col-1 align-self-center">
+                        <a class="h1" href="#multi-item-example" role="button" data-bs-slide="prev">
+                            <i class="text-light fas fa-chevron-left"></i>
+                        </a>
+                    </div>
+                    <!--End Controls-->
+                    <!--Carousel Wrapper-->
+                    <div class="col">
+                        <div class="carousel slide carousel-multi-item pt-2 pt-md-0" id="multi-item-example" data-bs-ride="carousel">
+                            <!--Slides-->
+                            <div class="carousel-inner product-links-wap" role="listbox">
+
+                                <!--First slide-->
+                                <div class="carousel-item active">
+                                    <div class="row">
+                                        <div class="col-3 p-md-10">
+                                            <a href="#"><img class="img-fluid brand-img" src="~/Resources/brand1.png" alt="Brand Logo"></a>
+                                        </div>
+                                        <div class="col-3 p-md-10">
+                                            <a href="#"><img class="img-fluid brand-img" src="~/Resources/brand2.png" alt="Brand Logo"></a>
+                                        </div>
+                                        <div class="col-3 p-md-10">
+                                            <a href="#"><img class="img-fluid brand-img" src="~/Resources/brand3.png" alt="Brand Logo"></a>
+                                        </div>
+                                        <div class="col-3 p-md-10">
+                                            <a href="#"><img class="img-fluid brand-img" src="~/Resources/brand6.png" alt="Brand Logo"></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--End First slide-->
+                                <!--Second slide-->
+                                <div class="carousel-item">
+                                    <div class="row">
+                                        <div class="col-3 p-md-10">
+                                            <a href="#"><img class="img-fluid brand-img" src="~/Resources/brand4.png" alt="Brand Logo"></a>
+                                        </div>
+                                        <div class="col-3 p-md-10">
+                                            <a href="#"><img class="img-fluid brand-img" src="~/Resources/brand5.png" alt="Brand Logo"></a>
+                                        </div>
+                                        <div class="col-3 p-md-10">
+                                            <a href="#"><img class="img-fluid brand-img" src="~/Resources/brand6.png" alt="Brand Logo"></a>
+                                        </div>
+                                        <div class="col-3 p-md-10">
+                                            <a href="#"><img class="img-fluid brand-img" src="~/Resources/brand1.png" alt="Brand Logo"></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--End Second slide-->
+                            </div>
+                            <!--End Slides-->
+                        </div>
+                    </div>
+                    <!--End Carousel Wrapper-->
+                    <!--Controls-->
+                    <div class="col-1 align-self-center">
+                        <a class="h1" href="#multi-item-example" role="button" data-bs-slide="next">
+                            <i class="text-light fas fa-chevron-right"></i>
+                        </a>
+                    </div>
+                    <!--End Controls-->
                 </div>
             </div>
         </section>

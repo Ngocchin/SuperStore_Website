@@ -1,78 +1,176 @@
-﻿@*@{
-        Layout = null;
-    }
-    <!DOCTYPE html>
-    <html>
-    <head>
-        <link href="~/Content/login.css" rel="stylesheet" />
-        <meta name="viewport" content="width=device-width" />
-        <title>LOGIN</title>
-    </head>
-    <body>
-        <div class="login">
-            <h2 class="active"> sign in </h2>
-            <form action="/Account/Login" method="post" enctype="multipart/form-data">
-                <input type="text" class="text" name="username">
-                <span>username</span>
-                <br>
-                <input type="password" class="text" name="password">
-                <span>password</span>
-                <br>
-                <input type="checkbox" id="checkbox-1-1" class="custom-checkbox" />
-                <label for="checkbox-1-1">Keep me Signed in</label>
-                <button class="signin">
-                    Sign In
-                </button>
-                <hr>
-                <a href="#">Forgot Password?</a>
-                <br />
-                <a href="/Account/SignUp">Create new account?</a>
-            </form>
-        </div>
-    </body>
-    </html>*@
-@model SuperStore_WebSite.Models.KHACHHANG
+﻿@model SuperStore_WebSite.Models.KHACHHANG
 <!DOCTYPE html>
 
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>Login/SignUp</title>
-    <link href="~/Content/acoount.css" rel="stylesheet" />
+    @*<link href="~/Content/acoount.css" rel="stylesheet" />*@
+    <link href="~/Content/login.css" rel="stylesheet" />
+
 </head>
 <body>
-    <div class="form-structor">
-        @using (Html.BeginForm("SignUp", "Account", FormMethod.Post, new { @enctype = "multipart/form-data" }))
-        {
 
-            @Html.AntiForgeryToken()
-            <div class="signup">
-                <h2 class="form-title" id="signup"><span>or</span>Sign up</h2>
-                <div class="form-holder">
-                    <input type="text" class="input" placeholder="Name" />
-                    @Html.TextBoxFor(temp => temp.EMAIL, new { Type = "text", Name = "EMAIL", @class = "input", placeholder = "Email" })
-                    @Html.TextBoxFor(temp => temp.PASSWORD, new { Type = "password", Name = "PASSWORD", @class = "input", placeholder = "Password" })
-                    <input type="password" class="input" name="repass" placeholder="Enter the password" />
-                    <button class="submit-btn">Sign up</button>
-                </div>
+    <div class="container">
+        <div class="forms-container">
+            <div class="signin-signup">
+                <form action="/Account/Login" enctype="multipart/form-data" method="post" class="sign-in-form">
+                    @Html.AntiForgeryToken()
+                    <h2 class="title">Sign in</h2>
+                    <div class="input-field">
+                        <i class="fas fa-user"></i>
+                        @Html.TextBoxFor(temp => temp.EMAIL, new { Type = "text", Name = "EMAIL", required = "true", @class = "input", placeholder = "Email" })
+                    </div>
+                    <div class="input-field">
+                        <i class="fas fa-lock"></i>
+                        @Html.TextBoxFor(temp => temp.PASSWORD, new { Type = "password", Name = "PASSWORD", required = "true", @class = "input", placeholder = "Password" })
+                    </div>
+                    <input type="submit" value="Login" class="btn solid" />
+                    <p class="social-text">Or Sign in with social platforms</p>
+                    <div class="social-media">
+                        <a href="#" class="social-icon">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="social-icon">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="social-icon">
+                            <i class="fab fa-google"></i>
+                        </a>
+                        <a href="#" class="social-icon">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                    </div>
+                </form>
+                <form action="/Account/SignUp" enctype="multipart/form-data" method="post" class="sign-up-form">
+                    @Html.AntiForgeryToken()
+                    <h2 class="title">Sign up</h2>
+                    <div class="input-field">
+                        <i class="fas fa-user"></i>
+                        <input type="text" required="true" placeholder="Username" />
+                    </div>
+                    <div class="input-field">
+                        <i class="fas fa-envelope"></i>
+                        @Html.TextBoxFor(temp => temp.EMAIL, new { Type = "text", required = "true", Name = "EMAIL", @class = "input", placeholder = "Email" })
+                    </div>
+                    <div class="input-field">
+                        <i class="fas fa-lock"></i>
+                        @Html.TextBoxFor(temp => temp.PASSWORD, new { Type = "password", required = "true", Name = "PASSWORD", @class = "input", placeholder = "Password" })
+                    </div>
+                    <div class="input-field">
+                        <i class="fas fa-user"></i>
+                        <input type="password" class="input", required = "true", name="repass" placeholder="Enter the password" />
+                    </div>
+                    <input type="submit" class="btn" value="Sign up" />
+                    <p class="social-text">Or Sign up with social platforms</p>
+                    <div class="social-media">
+                        <a href="#" class="social-icon">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="social-icon">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="social-icon">
+                            <i class="fab fa-google"></i>
+                        </a>
+                        <a href="#" class="social-icon">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                    </div>
+                </form>
             </div>
-        }
-        @using (Html.BeginForm("Login", "Account", FormMethod.Post, new { @enctype = "multipart/form-data" }))
-        {
-            @Html.AntiForgeryToken()
-            <div class="login slide-up">
-                <div class="center">
-                    <h2 class="form-title" id="login"><span>or</span>Log in</h2>
+        </div>
+        <div class="panels-container">
+        <div class="panel left-panel">
+            <div class="content">
+                <h3>New here ?</h3>
+                <p>
+                    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Debitis,
+                    ex ratione. Aliquid!
+                </p>
+                <button class="btn transparent" id="sign-up-btn">
+                    Sign up
+                </button>
+            </div>
+            <img src="img/log.svg" class="image" alt="" />
+        </div>
+        <div class="panel right-panel">
+            <div class="content">
+                <h3>One of us ?</h3>
+                <p>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum
+                    laboriosam ad deleniti.
+                </p>
+                <button class="btn transparent" id="sign-in-btn">
+                    Sign in
+                </button>
+            </div>
+            <img src="img/register.svg" class="image" alt="" />
+        </div>
+    </div>
+    </div>
+
+    <script>
+        const sign_in_btn = document.querySelector("#sign-in-btn");
+        const sign_up_btn = document.querySelector("#sign-up-btn");
+        const container = document.querySelector(".container");
+
+        sign_up_btn.addEventListener("click", () => {
+            container.classList.add("sign-up-mode");
+        });
+
+        sign_in_btn.addEventListener("click", () => {
+            container.classList.remove("sign-up-mode");
+        });
+    </script>
+
+    <!--<-->@*div class="form-structor">
+            @using (Html.BeginForm("SignUp", "Account", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+            {
+
+                @Html.AntiForgeryToken()
+                <div class="signup">
+                    <h2 class="form-title" id="signup"><span>or</span>Sign up</h2>
                     <div class="form-holder">
+                        <input type="text" class="input" placeholder="Name" />
                         @Html.TextBoxFor(temp => temp.EMAIL, new { Type = "text", Name = "EMAIL", @class = "input", placeholder = "Email" })
                         @Html.TextBoxFor(temp => temp.PASSWORD, new { Type = "password", Name = "PASSWORD", @class = "input", placeholder = "Password" })
+                        <input type="password" class="input" name="repass" placeholder="Enter the password" />
+                        <button class="submit-btn">Sign up</button>
                     </div>
-                    <button class="submit-btn">Log in</button>
                 </div>
-            </div>
-        }
-    </div>
-    <script src="~/Content/Account.js"></script>
+            }
+            @using (Html.BeginForm("Login", "Account", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+            {
+                @Html.AntiForgeryToken()
+                <div class="login slide-up">
+                    <div class="center">
+                        <h2 class="form-title" id="login"><span>or</span>Log in</h2>
+                        <div class="form-holder">
+                            @Html.TextBoxFor(temp => temp.EMAIL, new { Type = "text", required = "true", Name = "EMAIL", @class = "input", placeholder = "Email" })
+                            @Html.TextBoxFor(temp => temp.PASSWORD, new { Type = "password", required = "true", Name = "PASSWORD", @class = "input", placeholder = "Password" })
+                        </div>
+                        <button class="submit-btn">Log in</button>
+                    </div>
+                </div>
+            }
+        </div>*@ 
+    @*<form class="login-form">
+            <p class="login-text">
+                <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-lock fa-stack-1x"></i>
+                </span>
+            </p>
+            <input type="email" class="login-username" autofocus="true" required="true" placeholder="Email" />
+            <input type="password" class="login-password" required="true" placeholder="Password" />
+            <input type="submit" name="Login" value="Login" class="login-submit" />
+        </form>
+        <a href="#" class="login-forgot-pass">forgot password?</a>
+        <div class="underlay-photo"></div>
+        <div class="underlay-black"></div>*@
+
+    @*<script src="~/Content/Account.js"></script>*@
 </body>
 </html>
 

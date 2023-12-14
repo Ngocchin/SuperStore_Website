@@ -29,17 +29,6 @@
                         <a class="navbar-sm-brand text-light text-decoration-none" href="#">ngoctrinh.huit.work@gmail.com</a>
                         <i class="fa fa-phone mx-2"></i>
                         <a class="navbar-sm-brand text-light text-decoration-none" href="#">038-5252-362</a>
-                        @if (Session["Account"] != null)
-                        {
-                            var kh = Session["Account"] as SuperStore_WebSite.Models.KHACHHANG;
-                            <a style="color:white">Xin chào : @kh.TENKH</a>
-                            <li><a href="/Account/Inf"><i class="fa fa-user"></i> My Account</a></li>
-                            <li><a href="/Account/Logout"><i class="fa fa-user"></i> LogOut</a></li>
-                        }
-                        else
-                        {
-                            <li><a href="/Account/LoginSignUp"><i class="fa fa-user"></i>Login/SignUp</a></li>
-                        }
                     </div>
                     <div>
                         <a class="text-light" href="#" target="_blank" rel="sponsored"><i class="fab fa-facebook-f fa-sm fa-fw me-2"></i></a>
@@ -101,9 +90,21 @@
                         <a class="nav-icon d-none d-lg-inline" href="#" data-bs-toggle="modal" data-bs-target="#templatemo_search">
                             <i class="fa fa-fw fa-search text-dark mr-2"></i>
                         </a>
-                        <a href="@Url.Action("Index", "Cart")">
+                        <a href="/Cart/Index">
                             @Html.Action("GiohangPartial", "Cart", null)
                         </a>
+                        &emsp;
+                        @if (Session["Account"] != null)
+                        {
+                            var kh = Session["Account"] as SuperStore_WebSite.Models.KHACHHANG;
+                            <a style="color:white">Xin chào : @kh.TENKH</a>
+                            <a href="/Account/Inf"><i class="fa fa-user mr-2"></i>My Account</a>
+                            <a href="/Account/Logout"><i class="fa fa-user mr-2"></i>LogOut</a>
+                        }
+                        else
+                        {
+                            <a href="/Account/Login"><i class="fa fa-user mr-l"></i></a>
+                        }
                     </div>
                 </div>
 
@@ -315,7 +316,22 @@
     <script src="~/Content/assets/js/slick.min.js"></script>
     <script src="~/Content/vendor/animsition/animsition.min.js"></script>
     <script src="~/Content/js/main.js"></script>
-        
+
+    <script>
+        window.onscroll = function () { myFunction() };
+
+        var navbar = document.getElementById("navbar");
+        var sticky = navbar.offsetTop;
+
+        function myFunction() {
+            if (window.pageYOffset >= sticky) {
+                navbar.classList.add("fixed");
+            } else {
+                navbar.classList.remove("fixed");
+            }
+        }
+    </script>
+
     <!-- End Slider Script -->
 
 </body>

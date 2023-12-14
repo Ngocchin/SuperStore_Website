@@ -656,6 +656,7 @@
     <Content Include="Views\Cart\OrderFollow.cshtml" />
     <Content Include="Views\Cart\PayMethod.cshtml" />
     <Content Include="Views\Cart\Xacnhanthanhtoan.cshtml" />
+    <Content Include="Views\Account\Inf.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
