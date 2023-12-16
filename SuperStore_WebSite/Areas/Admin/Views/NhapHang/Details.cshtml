@@ -10,7 +10,7 @@
             <div class="col-md-12 mx-auto">
                 <!-- DATA TABLE-->
                 <div class="table-responsive m-b-40">
-                    <table class="table table-borderless table-data3 mx-auto">
+                    <table class="table table-bordered table-striped table-hover">
                         <thead>
                             <tr>
                                 <th>Mã Phiếu nhập</th>
@@ -25,10 +25,10 @@
                             {
                                 <tr>
                                     <td>@item.MAPHNHAP</td>
-                                    <td class="desc">@item.MASP</td>
+                                    <td>@item.MASP</td>
                                     <td>@item.SOLUONG</td>
                                     <td>@item.GIANHAP</td>
-                                    <td class="desc">@item.TONGTIEN</td>
+                                    <td>@item.TONGTIEN</td>
                                 </tr>
                             }
                         </tbody>
@@ -38,5 +38,8 @@
             </div>
         </div>
     </div>
+    <hr />
+    <div class="text-center mt-3">
+        @Html.ActionLink("Quay lại", "Index", null, new { @class = "btn btn-secondary" })
+    </div>
 </div>
-

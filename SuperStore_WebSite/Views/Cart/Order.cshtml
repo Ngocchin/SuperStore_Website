@@ -1,2 +1,37 @@
-﻿@Html.Action("Xacnhanthongtin", "Cart")
-@ViewBag.tb;
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>    
+</head>
+<body>
+    @Html.Action("Xacnhanthongtin", "Cart")
+    <p>Giá trị của ViewBag.tb: @ViewBag.tb</p>
+    <script>
+        $(document).ready(function () {
+            var tbValue = '@ViewBag.tb';
+            if (tbValue === 'Đặt hàng không thành công') {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Đặt hàng thất bại!',
+                    showConfirmButton: false,
+                    timer: 1500                   
+                });
+            }
+            else {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Đặt hàng thành công!',
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+            }
+        });
+    </script>
+</body>
+</html>
+    

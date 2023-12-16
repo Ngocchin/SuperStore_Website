@@ -22,78 +22,149 @@
     <link href="~/Content/vendor/perfect-scrollbar/perfect-scrollbar.css" rel="stylesheet" />
     <!-- Main CSS-->
     <link href="~/Content/css1/theme.css" rel="stylesheet" />
-      
+    <style>
+        .pagination-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .pagination-link {
+            margin: 0 5px;
+            padding: 8px 12px;
+            cursor: pointer;
+            border: 1px solid #ddd;
+            border-radius: 3px;
+            color: #333;
+            background-color: #fff;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+            .pagination-link:hover {
+                background-color: #007bff;
+                color: #fff;
+            }
+
+            .pagination-link.active {
+                background-color: #007bff;
+                color: #fff;
+                border: 1px solid #007bff;
+            }
+
+        .pagination-arrow {
+            margin: 0 5px;
+            padding: 8px 12px;
+            cursor: pointer;
+            border: 1px solid #ddd;
+            border-radius: 3px;
+            color: #333;
+            background-color: #fff;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+            .pagination-arrow:hover {
+                background-color: #007bff;
+                color: #fff;
+            }
+    </style>
 
     <script type="text/javascript">
-        //Phân Trang Cho Table
-        function Pager(tableName, itemsPerPage) {
-            this.tableName = tableName;
-            this.itemsPerPage = itemsPerPage;
-            this.currentPage = 1;
-            this.pages = 0;
-            this.inited = false;
+        class Pager {
+            constructor(tableName, itemsPerPage) {
+                this.tableName = tableName;
+                this.itemsPerPage = itemsPerPage;
+                this.currentPage = 1;
+                this.pages = 0;
+                this.inited = false;
+            }
 
-            this.showRecords = function (from, to) {
-                var rows = document.getElementById(tableName).rows;
-                for (var i = 1; i < rows.length; i++) {
-                    if (i < from || i > to)
-                        rows[i].style.display = 'none';
-                    else
-                        rows[i].style.display = '';
+            showRecords(from, to) {
+                const rows = document.getElementById(this.tableName).rows;
+                for (let i = 1; i < rows.length; i++) {
+                    rows[i].style.display = i < from || i > to ? 'none' : '';
                 }
             }
 
-            this.showPage = function (pageNumber) {
+            showPage(pageNumber) {
                 if (!this.inited) {
                     alert("not inited");
                     return;
                 }
-                var oldPageAnchor = document.getElementById('pg' + this.currentPage);
-                oldPageAnchor.className = 'pg-normal';
+
+                const oldPageAnchor = document.getElementById(`pg${this.currentPage}`);
+                oldPageAnchor.classList.remove('active');
 
                 this.currentPage = pageNumber;
-                var newPageAnchor = document.getElementById('pg' + this.currentPage);
-                newPageAnchor.className = 'pg-selected';
 
-                var from = (pageNumber - 1) * itemsPerPage + 1;
-                var to = from + itemsPerPage - 1;
+                const newPageAnchor = document.getElementById(`pg${this.currentPage}`);
+                newPageAnchor.classList.add('active');
+
+                const from = (pageNumber - 1) * this.itemsPerPage + 1;
+                const to = from + this.itemsPerPage - 1;
                 this.showRecords(from, to);
             }
 
-            this.prev = function () {
-                if (this.currentPage > 1)
+            prev() {
+                if (this.currentPage > 1) {
                     this.showPage(this.currentPage - 1);
+                }
             }
 
-            this.next = function () {
+            next() {
                 if (this.currentPage < this.pages) {
                     this.showPage(this.currentPage + 1);
                 }
             }
 
-            this.init = function () {
-                var rows = document.getElementById(tableName).rows;
-                var records = (rows.length - 1);
-                this.pages = Math.ceil(records / itemsPerPage);
+            init() {
+                const rows = document.getElementById(this.tableName).rows;
+                const records = rows.length - 1;
+                this.pages = Math.ceil(records / this.itemsPerPage);
                 this.inited = true;
             }
-            this.showPageNav = function (pagerName, positionId) {
+
+            showPageNav(pagerName, positionId) {
                 if (!this.inited) {
                     alert("not inited");
                     return;
                 }
-                var element = document.getElementById(positionId);
 
-                var pagerHtml = '<span onclick="' + pagerName +
-                    '.prev();" class="pg-normal">&#171</span> | ';
-                for (var page = 1; page <= this.pages; page++)
-                    pagerHtml += '<span id="pg' + page + '" class="pg-normal" onclick="' + pagerName +
-                        '.showPage(' + page + ');">' + page + '</span> | ';
-                pagerHtml += '<span onclick="' + pagerName + '.next();" class="pg-normal">&#187;</span>';
+                const element = document.getElementById(positionId);
 
-                element.innerHTML = pagerHtml;
+                let pagerHtml = `<span class="pagination-arrow" onclick="${pagerName}.prev();">&#171; Prev</span>`;
+
+                for (let page = 1; page <= this.pages; page++) {
+                    pagerHtml += `<span id="pg${page}" class="pagination-link" onclick="${pagerName}.showPage(${page});">${page}</span>`;
+                }
+
+                pagerHtml += `<span class="pagination-arrow" onclick="${pagerName}.next();">Next &#187;</span>`;
+
+                element.innerHTML = `<div class="pagination-container">${pagerHtml}</div>`;
             }
         }
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const Toast = Swal.mixin({
+                toast: true,
+                position: "top-end",
+                showConfirmButton: false,
+                timer: 2000,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                    toast.onmouseenter = Swal.stopTimer;
+                    toast.onmouseleave = Swal.resumeTimer;
+                }
+            });
+            Toast.fire({
+                icon: "success",
+                title: "Finished downloading"
+            });
+        });
     </script>
 </head>
 
@@ -103,9 +174,10 @@
         <aside class="menu-sidebar d-none d-lg-block">
             <div class="logo">
                 <a href="~/Admin/HomeAdmin">
-                    <img src="~/Resources/logo.jpg" style="width: 130px" alt="" />
+                    <img src="~/Resources/logo.jpg" style="width: 110px" alt="" />
                 </a>
             </div>
+
             <div class="menu-sidebar__content js-scrollbar1">
                 <nav class="navbar-sidebar">
                     <ul class="list-unstyled navbar__list">
@@ -175,12 +247,12 @@
                 <div class="section__content section__content--p30">
                     <div class="container-fluid">
                         <div class="header-wrap">
-                            @*<form class="form-header" action="" method="POST">
-                                    <input class="au-input au-input--xl" type="text" name="search" placeholder="Search for datas &amp; reports..." />
-                                    <button class="au-btn--submit" type="submit">
-                                        <i class="zmdi zmdi-search"></i>
-                                    </button>
-                                </form>*@
+                            <div class="logo">
+                                <a class="navbar-brand text-success logo h-100 align-self-center">
+                                    Super Store
+                                </a>
+                            </div>
+
                             <div class="header-button">
                                 <div class="account-wrap">
                                     <div class="account-item clearfix js-item-menu">
@@ -231,22 +303,6 @@
                             @RenderBody()
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="container-fluid end">
-                            <div class="row text-center">
-                                <div class="col-lg-12 link">
-                                    <i class="fab fa-facebook-f"></i>
-                                    <i class="fab fa-instagram"></i>
-                                    <i class="fab fa-youtube"></i>
-                                    <i class="fab fa-google"></i>
-                                </div>
-                                <div class="col-lg-12">
-                                    &copy; 2023 Công ty TNHH Super
-                                    | Designed by <a rel="sponsored" href="#" target="_blank">CHIN</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
@@ -280,7 +336,8 @@
     <script src="~/Content/vendor/select2/select2.min.js"></script>
 
     <!-- Main JS-->
-    <script src="~/Content/js/main.js"></script>    
+    <script src="~/Content/js/main.js"></script>
+
 
 </body>
 </html>

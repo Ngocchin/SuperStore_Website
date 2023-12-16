@@ -13,9 +13,8 @@ namespace SuperStore_WebSite.Controllers
         QL_BANHANGDIENTUEntities1 db = new QL_BANHANGDIENTUEntities1();
         public ActionResult ShowAll()
         {
-            List<SANPHAM> sanPhams = db.SANPHAMs.ToList();
-
-            return View(sanPhams);
+            var products = db.SANPHAMs.ToList();
+            return View(products);
         }
         public ActionResult Category(string Maloai)
         {
@@ -43,8 +42,8 @@ namespace SuperStore_WebSite.Controllers
         }
         public ActionResult Search(String search)
         {
-            var model = db.SANPHAMs.Where(p => p.TENSP.Contains(search));
-            return View(model.OrderBy(n => n.TENSP).ToList());
+            var tbl_SanPham = db.SANPHAMs.Where(t => t.TENSP.Contains(search));        
+            return View(tbl_SanPham.OrderBy(n => n.TENSP).ToList());
         }
     }
 }

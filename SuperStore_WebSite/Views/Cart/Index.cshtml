@@ -4,77 +4,72 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_ProductPage.cshtml";
 }
-<h2>Vui lòng kiểm tra giỏ hàng trước khi xác nhận đặt hàng</h2>
+
 <br />
-<table class="table">
-    <tr>
-        <th>
-            Ảnh
-        </th>
-        <th>
-            Mã sản phẩm
-        </th>
-        <th>
-            Tên sản phẩm
-        </th>
-        <th>
-            Số lượng
-        </th>
-        <th>
-            Đơn giá
-        </th>
-        <th>
-            Thành tiền
-        </th>
-
-        <th></th>
-    </tr>
-    @if (Model != null)
-    {
-        foreach (var item in Model)
+<h2 class="container">Vui lòng kiểm tra giỏ hàng trước khi xác nhận đặt hàng</h2>
+<br />
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th scope="col">Ảnh</th>
+            <th scope="col">Tên sản phẩm</th>
+            <th scope="col">Số lượng</th>
+            <th scope="col">Đơn giá</th>
+            <th scope="col">Thành tiền</th>
+            <th scope="col">@Html.ActionLink("Xóa sạch hết", "XoaAllGioHang", "Cart")</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null)
         {
-            <tr>
-                <td width="50px">
-                    <img src="~/Resources/img/@item.thongtinSP.HINHANH" alt="AnhBia" style="width: 80px" />
-                </td>
-                <td width="12%">
-                    @Html.DisplayFor(modelItem => item.thongtinSP.MASP)
-                </td>
-                <td width="26%">
-                    @Html.DisplayFor(modelItem => item.thongtinSP.TENSP)
-                </td>
+            foreach (var item in Model)
+            {
+                <tr>
+                    <td style="width: 80px;">
+                        <img src="~/Resources/img/@item.thongtinSP.HINHANH" alt="AnhBia" class="img-fluid" />
+                    </td>
+                    <td>@Html.DisplayFor(modelItem => item.thongtinSP.TENSP)</td>
 
-                @using (Html.BeginForm("CapNhatGioHang", "Cart", new { id = item.thongtinSP.MASP, sl = item.SL }))
-                {
-                    @Html.AntiForgeryToken()
-                    <td width="2%">
-                        <input type="number" name="sl" min="1" value="@item.SL" size="2" style="width: 100%" />
-                    </td>
-                    <td>
-                        @string.Format("{0:0,0}", item.thongtinSP.GIABAN)
-                    </td>
-                    <td>
-                        @string.Format("{0:0,0}", item.ThanhTien)
-                    </td>                   
-                    <td width="10%">
-                        <input type="submit" name="submit" value="Cập nhật" />
-                    </td>
-                }
-            </tr>
+                    @using (Html.BeginForm("CapNhatGioHang", "Cart", new { id = item.thongtinSP.MASP, sl = item.SL }))
+                    {
+                        <td>
+                            @Html.AntiForgeryToken()
+                            <input type="number" name="sl" min="1" value="@item.SL" size="2" style="width: 100%" />
+
+                        </td>
+                        <td>@string.Format("{0:0,0}", item.thongtinSP.GIABAN)</td>
+                        <td>@string.Format("{0:0,0}", item.ThanhTien) VNĐ</td>
+                        <td>
+                            <input type="submit" name="submit" value="Cập nhật" class="btn btn-primary btn-sm" />
+                        </td>
+                        <td>
+                            @Html.ActionLink("Xóa", "XoaGioHang", "Cart", new { id = item.thongtinSP.MASP }, new { @class = "btn btn-danger btn-sm" })
+                        </td>
+                        <td>
+                            @Html.ActionLink("Chi tiết", "Details", "Product", new { @MASP = item.thongtinSP.MASP }, new { @class = "btn btn-info btn-sm" })
+                        </td>
+                    }
+                </tr>
+            }
         }
-    }
+    </tbody>
 </table>
+
 <br />
 <div class="row" style="justify-content: flex-end;">
     <div class="col-3">
         <span>Tổng cộng: @string.Format("{0:0,0}", ViewBag.TongCong)</span>
     </div>
     <div class="col-3">
-        <span>Tổng tiền: @string.Format("{0:0,0}", ViewBag.TongTien)</span>
+        <span>Tổng tiền: @string.Format("{0:0,0}", ViewBag.TongTien) VNĐ</span>
     </div>
-    <div class="col-3">
-        @Html.ActionLink("Đặt hàng", "XacNhanThongTin", "Order", new { @class = "btn btn-success" })
-    </div>
+    @if (Model != null && Model.Count > 0)
+    {
+        <div class="col-3">
+            <a href="@Url.Action("XacNhanThongTin", "Cart")" class="btn btn-success">Đặt hàng</a>
+        </div>
+    }
 </div>
-
+<br />
+<br />
 

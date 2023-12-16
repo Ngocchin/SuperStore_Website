@@ -19,7 +19,20 @@ namespace SuperStore_WebSite.Areas.Admin.Controllers
         {
             return View(db.NHANVIENs.ToList());
         }
+        public ActionResult Sort(string sortOrder)
+        {
+            var tbl_nv = db.NHANVIENs.ToList();
 
+            switch (sortOrder)
+            {
+                case "AdenZ":
+                    return View("Index", tbl_nv.OrderBy(t => t.TENNV).ToList());
+                case "ZdenA":
+                    return View("Index", tbl_nv.OrderByDescending(t => t.TENNV).ToList());
+                default:
+                    return View("Index", tbl_nv.ToList());
+            }
+        }
         public ActionResult AdenZ()
         {
             return View(db.NHANVIENs.OrderBy(t=>t.TENNV).ToList());

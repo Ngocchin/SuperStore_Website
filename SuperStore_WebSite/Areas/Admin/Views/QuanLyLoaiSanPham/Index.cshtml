@@ -2,33 +2,64 @@
 
 @{
     ViewBag.Title = "Index";
-       Layout = "~/Areas/Admin/Views/Shared/_AdminPage2.cshtml";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminPage2.cshtml";
 }
 
-<h2>Index</h2>
+<style>
+    body {
+        font-family: 'Arial', sans-serif;
+        margin: 20px;
+    }
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.TENLOAI)
-        </th>
-        <th></th>
-    </tr>
+    h2 {
+        text-align: center;
+        margin-bottom: 20px;
+    }
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.TENLOAI)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.MALOAI }) |
-            @Html.ActionLink("Details", "Details", new { id=item.MALOAI }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.MALOAI })
-        </td>
-    </tr>
-}
+    .table-container {
+        margin-top: 20px;
+    }
 
-</table>
+    .action-links {
+        margin-top: 10px;
+        text-align: right;
+    }
+
+    .btn {
+        margin-right: 10px;
+    }
+</style>
+<div class="container-fluid al">
+    <h2>Quản lý loại sản phẩm</h2>
+    <div class="row m-3">
+        <div class="col-12 col-md-2">
+            @Html.ActionLink(" Thêm loại sản phẩm mới", "Create", null, new { @class = "btn btn-outline-success fa fa-lightbulb-o", style = "font-size: 16px; padding: 10px;" })
+        </div>
+    </div>
+    <div class="table-container">
+        <table class="table table-bordered table-hover">
+            <thead class="thead-dark">
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.TENLOAI)
+                    </th>
+                    <th>Chức năng</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TENLOAI)
+                        </td>
+                        <td class="action-links">
+                            @Html.ActionLink("Edit", "Edit", new { id = item.MALOAI }, new { @class = "btn btn-warning" }) |                           
+                            @Html.ActionLink("Delete", "Delete", new { id = item.MALOAI }, new { @class = "btn btn-danger delete-link" })
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

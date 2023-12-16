@@ -19,7 +19,24 @@ namespace SuperStore_WebSite.Areas.Admin.Controllers
         {
             return View(db.HOADONs.ToList());
         }
+        public ActionResult Sort(string sortOrder)
+        {
+            var tbl_hd = db.HOADONs.ToList();
 
+            switch (sortOrder)
+            {
+                case "DonCXN":
+                    return View("Index", tbl_hd.Where(t => t.TINHTRANG == "Chưa xác nhận").ToList());
+                case "DonDXN":
+                    return View("Index", tbl_hd.Where(t => t.TINHTRANG == "Đã giao").ToList());
+                case "SXMN":
+                    return View("Index", tbl_hd.OrderByDescending(t => t.NGAYLAP).ToList());
+                case "SXCN":
+                    return View("Index", tbl_hd.OrderBy(t => t.NGAYLAP).ToList());               
+                default:
+                    return View("Index", tbl_hd.ToList());
+            }
+        }
         public ActionResult DonCXN()
         {
             return View(db.HOADONs.Where(t => t.TINHTRANG == "Chưa xác nhận").ToList());

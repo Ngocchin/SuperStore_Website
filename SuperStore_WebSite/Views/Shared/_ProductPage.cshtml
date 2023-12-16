@@ -13,10 +13,29 @@
     <!-- Load fonts style after rendering the layout styles -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;200;300;400;500;700;900&display=swap">
     <link href="~/Content/assets/css/fontawesome.min.css" rel="stylesheet" />
-
     <link href="~/Content/vendor/animsition/animsition.min.css" rel="stylesheet" />
-    <link href="~/Content/css1/theme.css" rel="stylesheet" />
+    <link href="~/Content/assets/css/load.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const Toast = Swal.mixin({
+                toast: true,
+                position: "top-end",
+                showConfirmButton: false,
+                timer: 2000,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                    toast.onmouseenter = Swal.stopTimer;
+                    toast.onmouseleave = Swal.resumeTimer;
+                }
+            });
+            Toast.fire({
+                icon: "success",
+                title: "Finished downloading"
+            });
+        });
+    </script>
 </head>
 <body class="animsition">
     <div class="page-wrapper">
@@ -79,36 +98,43 @@
                     <div class="navbar align-self-center d-flex">
                         <div class="d-lg-none flex-sm-fill mt-3 mb-4 col-7 col-sm-auto pr-3">
                             <div class="input-group">
-                                @*<input type="text" class="form-control" id="inputMobileSearch" placeholder="Search ...">
-
-                                    <div class="input-group-text">
-                                        <i class="fa fa-fw fa-search"></i>
-                                    </div>*@
-                                @Html.Partial("_Search")
+                                <input type="text" class="form-control" id="inputMobileSearch" placeholder="Search ...">
+                                <div class="input-group-text">
+                                    <i class="fa fa-fw fa-search"></i>
+                                </div>
                             </div>
                         </div>
-                        <a class="nav-icon d-none d-lg-inline" href="#" data-bs-toggle="modal" data-bs-target="#templatemo_search">
-                            <i class="fa fa-fw fa-search text-dark mr-2"></i>
-                        </a>
-                        <a href="/Cart/Index">
-                            @Html.Action("GiohangPartial", "Cart", null)
-                        </a>
-                        &emsp;
-                        @if (Session["Account"] != null)
-                        {
-                            var kh = Session["Account"] as SuperStore_WebSite.Models.KHACHHANG;
-                            <a style="color:white">Xin chào : @kh.TENKH</a>
-                            <a href="/Account/Inf"><i class="fa fa-user mr-2"></i>My Account</a>
-                            <a href="/Account/Logout"><i class="fa fa-user mr-2"></i>LogOut</a>
-                        }
-                        else
-                        {
-                            <a href="/Account/Login"><i class="fa fa-user mr-l"></i></a>
-                        }
                     </div>
-                </div>
+                    <a class="nav-icon d-none d-lg-inline" href="#" data-bs-toggle="modal" data-bs-target="#templatemo_search">
+                        <i class="fa fa-fw fa-search text-dark mr-2"></i>
+                    </a>
+                    <a href="/Cart/Index">
+                        @Html.Action("GiohangPartial", "Cart", null)
+                    </a>
+                    &emsp;
 
-            </div>
+                    @if (Session["Account"] != null)
+                    {
+                        var kh = Session["Account"] as SuperStore_WebSite.Models.KHACHHANG;
+
+                        <!-- Dropdown Trigger -->
+                        <a class="dropdown-toggle" id="accountDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: black">
+                            Xin chào : @kh.TENKH
+                        </a>
+
+                        <!-- Dropdown Menu -->
+                        <div class="dropdown-menu" aria-labelledby="accountDropdown">
+                            <a class="dropdown-item" href="/Account/Inf"><i class="fa fa-user mr-2"></i>My Account</a>
+                            <a class="dropdown-item" href="/Account/Logout"><i class="fa fa-user mr-2"></i>LogOut</a>
+                        </div>
+                    }
+                    else
+                    {
+                        <a href="/Account/Login"><i class="fa fa-user mr-l"></i>Login</a>
+                    }
+
+                </div>
+                </div>
         </nav>
         <!-- Close Header -->
         <!-- Modal -->
@@ -117,13 +143,12 @@
                 <div class="w-100 pt-1 mb-5 text-right">
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form action="" method="get" class="modal-content modal-body border-0 p-0">
+                <form action="/Product/Search" method="get" class="modal-content modal-body border-0 p-0">
                     <div class="input-group mb-2">
-                        @*<input type="text" class="form-control" id="inputModalSearch" name="q" placeholder="Search ...">
-                            <button type="submit" class="input-group-text bg-success text-light">
-                                <i class="fa fa-fw fa-search text-white"></i>
-                            </button>*@
-                        @Html.Partial("_Search")
+                        <input type="search" class="form-control" id="search" name="search" placeholder="Search ...">
+                        <button type="submit" class="input-group-text bg-success text-light">
+                            <i class="fa fa-fw fa-search text-white"></i>
+                        </button>
                     </div>
                 </form>
             </div>
@@ -234,7 +259,7 @@
                             </li>
                         </ul>
                     </div>
-                    <div class="col-md-4 pt-5">
+                    @*<div class="col-md-4 pt-5">
                         <h2 class="h2 text-light border-bottom pb-3 border-light">Products</h2>
                         <ul class="list-unstyled text-light footer-link-list">
                             <li><a class="text-decoration-none" href="#">Luxury</a></li>
@@ -245,15 +270,13 @@
                             <li><a class="text-decoration-none" href="#">Gym Accessories</a></li>
                             <li><a class="text-decoration-none" href="#">Sport Shoes</a></li>
                         </ul>
-                    </div>
+                    </div>*@
 
                     <div class="col-md-4 pt-5">
                         <h2 class="h2 text-light border-bottom pb-3 border-light">Further Info</h2>
                         <ul class="list-unstyled text-light footer-link-list">
                             <li><a class="text-decoration-none" href="#">Home</a></li>
-                            <li><a class="text-decoration-none" href="#">About Us</a></li>
-                            <li><a class="text-decoration-none" href="#">Shop Locations</a></li>
-                            <li><a class="text-decoration-none" href="#">FAQs</a></li>
+                            <li><a class="text-decoration-none" href="#">About Us</a></li>                            
                             <li><a class="text-decoration-none" href="#">Contact</a></li>
                         </ul>
                     </div>
@@ -317,21 +340,12 @@
     <script src="~/Content/vendor/animsition/animsition.min.js"></script>
     <script src="~/Content/js/main.js"></script>
 
-    <script>
-        window.onscroll = function () { myFunction() };
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
-        var navbar = document.getElementById("navbar");
-        var sticky = navbar.offsetTop;
-
-        function myFunction() {
-            if (window.pageYOffset >= sticky) {
-                navbar.classList.add("fixed");
-            } else {
-                navbar.classList.remove("fixed");
-            }
-        }
-    </script>
-
+    
     <!-- End Slider Script -->
 
 </body>

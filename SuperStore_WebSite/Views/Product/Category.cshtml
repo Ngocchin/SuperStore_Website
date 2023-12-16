@@ -3,24 +3,93 @@
     ViewBag.Title = "Category";
     Layout = "~/Views/Shared/_ProductPage.cshtml";
 }
+<style>
+
+    .low {
+        background: #e31616;
+        border-radius: 99px;
+        color: #ffffff;
+        font-size: 15px;
+        padding: 2px 20px;
+    }
+    /* Style cho card */
+    .card {
+        border: 1px solid #e1e1e1;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Style cho tiêu đề "Categories" */
+    .card-body h1 {
+        color: #333;
+        font-size: 22px;
+        font-weight: bold;
+    }
+
+    /* Style cho đường kẻ ngang */
+    .card-body hr {
+        border-top: 1px solid #ddd;
+        margin: 20px 0;
+    }
+
+    /* Style cho danh sách accordion */
+    .templatemo-accordion {
+        padding: 0;
+        list-style: none;
+    }
+
+        /* Style cho mục của accordion */
+        .templatemo-accordion li {
+            margin-bottom: 10px;
+        }
+
+    /* Style cho nội dung của accordion */
+    .card-body .card-body {
+        padding: 0;
+    }
+
+    /* Style cho thanh cuộn nice-scroll */
+    .shop__sidebar__categories ul {
+        max-height: 200px;
+        overflow-y: auto;
+        padding-left: 10px;
+    }
+
+        /* Hover effect cho mục danh sách */
+        .shop__sidebar__categories ul li {
+            padding: 10px;
+            transition: background-color 0.3s;
+            cursor: pointer;
+        }
+
+            .shop__sidebar__categories ul li:hover {
+                background-color: #f8f9fa;
+                border-radius: 5px;
+            }
+</style>
 
 <div class="container py-5">
-    <div class="row">
+    <div class="row">        
         <div class="col-lg-3">
-            <h1 class="h2 pb-4">Categories</h1>
-            <ul class="list-unstyled templatemo-accordion">
-                <li class="pb-3">
-                    <div id="collapseOne" class="collapse show" data-parent="#accordionExample">
-                        <div class="card-body">
-                            <div class="shop__sidebar__categories">
-                                <ul class="nice-scroll">
-                                    @Html.Action("Category", "Home")
-                                </ul>
+            <div class="card">
+                <div class="card-body">
+                    <h1 class="h2 pb-4">Categories</h1>
+                    <hr />
+                    <ul class="list-unstyled templatemo-accordion">
+                        <li class="pb-3">
+                            <div id="collapseOne" class="collapse show" data-parent="#accordionExample">
+                                <div class="card-body">
+                                    <div class="shop__sidebar__categories">
+                                        <ul class="nice-scroll">
+                                            @Html.Action("Category", "Home")
+                                        </ul>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                </li>
-            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
         </div>
 
         <div class="col-lg-9">
@@ -33,8 +102,27 @@
                                 <img class="card-img rounded-0 img-fluid" src="~/Resources/img/@p.HINHANH">
                                 <div class="card-img-overlay rounded-0 product-overlay d-flex align-items-center justify-content-center">
                                     <ul class="list-unstyled">
-                                        <li><a class="btn btn-success text-white mt-2" href="@Url.Action("Details","Product", new {@MaSP = p.MASP}, null)"><i class="far fa-eye"></i></a></li>
-                                        <li><a class="btn btn-success text-white mt-2" href="@Url.Action("ThemGioHang", "Cart", new { idSP = p.MASP, strURL = Request.Url.ToString() })"><i class="fas fa-cart-plus"></i></a></li>
+                                        <li>
+                                            <a class="btn btn-success text-white mt-2" href="@Url.Action("Details","Product", new {@MaSP = p.MASP}, null)">
+                                                <i class="far fa-eye"></i>
+                                            </a>
+                                        </li>
+                                        @if (p.SOLUONGTON > 0)
+                                        {
+                                            <li>
+                                                <a class="btn btn-success text-white mt-2" href="@Url.Action("ThemGioHang", "Cart", new { idSP = p.MASP, strURL = Request.Url.ToString() })">
+                                                    <i class="fas fa-cart-plus"></i>
+                                                </a>
+                                            </li>
+                                        }
+                                        else
+                                        {
+                                            <li>
+                                                <a class="btn btn-success text-white mt-2" data-toggle="modal" data-target="#outOfStockModal">
+                                                    <i class="fas fa-cart-plus"></i>
+                                                </a>
+                                            </li>
+                                        }
                                     </ul>
                                 </div>
                             </div>
@@ -43,20 +131,30 @@
                                 <ul class="w-100 list-unstyled d-flex justify-content-between mb-0">
                                     <li>@p.MALOAI</li>
                                     <li class="pt-2">
-                                        <span class="product-color-dot color-dot-red float-left rounded-circle ml-1"></span>
-                                        <span class="product-color-dot color-dot-blue float-left rounded-circle ml-1"></span>
-                                        <span class="product-color-dot color-dot-black float-left rounded-circle ml-1"></span>
-                                        <span class="product-color-dot color-dot-light float-left rounded-circle ml-1"></span>
-                                        <span class="product-color-dot color-dot-green float-left rounded-circle ml-1"></span>
+                                        @if (@p.SOLUONGTON > 0)
+                                        {
+                                            @:Còn hàng
+                                        }
+                                        else
+                                        {
+                                            @:Hết hàng
+                                        }
                                     </li>
                                 </ul>
                                 <ul class="list-unstyled d-flex justify-content-center mb-1">
                                     <li>
-                                        <i class="text-warning fa fa-star"></i>
-                                        <i class="text-warning fa fa-star"></i>
-                                        <i class="text-warning fa fa-star"></i>
-                                        <i class="text-muted fa fa-star"></i>
-                                        <i class="text-muted fa fa-star"></i>
+                                        @if (@p.MAKM != null)
+                                        {
+                                            <img src="~/Resources/best-price.gif" style="height: 35px" /> <span class="low">Đang có khuyến mãi</span>
+                                        }
+                                        else
+                                        {
+                                            <i class="text-warning fa fa-star"></i>
+                                            <i class="text-warning fa fa-star"></i>
+                                            <i class="text-warning fa fa-star"></i>
+                                            <i class="text-warning fa fa-star"></i>
+                                            <i class="text-warning fa fa-star"></i>
+                                        }
                                     </li>
                                 </ul>
                                 <p class="text-center mb-0">@String.Format("{0:0,0 VNĐ}", p.GIABAN)</p>
@@ -81,3 +179,24 @@
         </ul>
     </div>
 </div>
+
+<!-- Modal -->
+<div class="modal fade" id="outOfStockModal" tabindex="-1" role="dialog" aria-labelledby="outOfStockModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="outOfStockModalLabel">Thông báo</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Sản phẩm đã hết hàng.
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+            </div>
+        </div>
+    </div>
+</div>
+

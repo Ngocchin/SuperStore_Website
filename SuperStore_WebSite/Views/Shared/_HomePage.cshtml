@@ -13,9 +13,30 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;200;300;400;500;700;900&display=swap">
     <link href="~/Content/assets/css/fontawesome.min.css" rel="stylesheet" />
     <link href="~/Content/vendor/animsition/animsition.min.css" rel="stylesheet" />
-    <link href="~/Content/css1/theme.css" rel="stylesheet" />
+    <link href="~/Content/assets/css/load.css" rel="stylesheet" />
 
-  
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const Toast = Swal.mixin({
+                toast: true,
+                position: "top-end",
+                showConfirmButton: false,
+                timer: 2000,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                    toast.onmouseenter = Swal.stopTimer;
+                    toast.onmouseleave = Swal.resumeTimer;
+                }
+            });
+            Toast.fire({
+                icon: "success",
+                title: "Finished downloading"
+            });
+        });
+    </script>
+
 </head>
 <body class="animsition">
     <div class="page-wrapper">
@@ -27,7 +48,7 @@
                         <i class="fa fa-envelope mx-2"></i>
                         <a class="navbar-sm-brand text-light text-decoration-none" href="#">ngoctrinh.huit.work@gmail.com</a>
                         <i class="fa fa-phone mx-2"></i>
-                        <a class="navbar-sm-brand text-light text-decoration-none" href="#">038-5252-362</a>                        
+                        <a class="navbar-sm-brand text-light text-decoration-none" href="#">038-5252-362</a>
                     </div>
                     <div>
                         <a class="text-light" href="#" target="_blank" rel="sponsored"><i class="fab fa-facebook-f fa-sm fa-fw me-2"></i></a>
@@ -91,20 +112,29 @@
                             @Html.Action("GiohangPartial", "Cart", null)
                         </a>
                         &ensp;
+
                         @if (Session["Account"] != null)
                         {
                             var kh = Session["Account"] as SuperStore_WebSite.Models.KHACHHANG;
-                            <a style="color:white">Xin chào : @kh.TENKH</a>
-                            <a href="/Account/Inf"><i class="fa fa-user mr-2"></i>My Account</a>
-                            <a href="/Account/Logout"><i class="fa fa-user mr-2"></i>LogOut</a>
+
+                            <!-- Dropdown Trigger -->
+                            <a class="dropdown-toggle" id="accountDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: black">
+                                Xin chào : @kh.TENKH
+                            </a>
+
+                            <!-- Dropdown Menu -->
+                            <div class="dropdown-menu" aria-labelledby="accountDropdown">
+                                <a class="dropdown-item" href="/Account/Inf"><i class="fa fa-user mr-2"></i>My Account</a>
+                                <a class="dropdown-item" href="/Account/Logout"><i class="fa fa-user mr-2"></i>LogOut</a>
+                            </div>
                         }
                         else
                         {
-                            <a href="/Account/Login"><i class="fa fa-user mr-l"></i></a>
+                            <a href="/Account/Login"><i class="fa fa-user mr-l"></i>Login</a>
                         }
+
                     </div>
                 </div>
-
             </div>
         </nav>
         <!-- Close Header -->
@@ -114,9 +144,9 @@
                 <div class="w-100 pt-1 mb-5 text-right">
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form action="" method="get" class="modal-content modal-body border-0 p-0">
+                <form action="/Product/Search" method="get" class="modal-content modal-body border-0 p-0">
                     <div class="input-group mb-2">
-                        <input type="text" class="form-control" id="inputModalSearch" name="q" placeholder="Search ...">
+                        <input type="search" class="form-control" id="search" name="search" placeholder="Search ...">
                         <button type="submit" class="input-group-text bg-success text-light">
                             <i class="fa fa-fw fa-search text-white"></i>
                         </button>
@@ -134,28 +164,28 @@
             </ol>
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                    <div class="container">
+                    <div class="container-fluid">
                         <div class="row p-5">
                             <div class="mx-auto col-md-8 col-lg-6 order-lg-last">
-                                <img class="img-fluid" src="~/Resources/slide1.jpg" alt="">
+                                <img class="d-block w-100" src="~/Resources/slide1.jpg" alt="Slide 1">
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="carousel-item">
-                    <div class="container">
+                    <div class="container-fluid">
                         <div class="row p-5">
                             <div class="mx-auto col-md-8 col-lg-6 order-lg-last">
-                                <img class="img-fluid" src="~/Resources/slide2.jpg" alt="">
+                                <img class="d-block w-100" src="~/Resources/slide2.jpg" alt="Slide 2">
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="carousel-item">
-                    <div class="container">
+                    <div class="container-fluid">
                         <div class="row p-5">
                             <div class="mx-auto col-md-8 col-lg-6 order-lg-last">
-                                <img class="img-fluid" src="~/Resources/slide3.jpg" alt="">
+                                <img class="d-block w-100" src="~/Resources/slide3.jpg" alt="Slide 3">
                             </div>
                         </div>
                     </div>
@@ -168,6 +198,7 @@
                 <i class="fas fa-chevron-right"></i>
             </a>
         </div>
+
         <!-- End Banner Hero -->
         <!-- Start Categories of The Month -->
         <section class="container py-5">
@@ -179,69 +210,34 @@
                     </p>
                 </div>
             </div>
-            <div class="col-lg-9 m-auto tempaltemo-carousel">
-                <div class="row d-flex flex-row">
-                    <!--Controls-->
-                    <div class="col-1 align-self-center">
-                        <a class="h1" href="#multi-item-example" role="button" data-bs-slide="prev">
-                            <i class="text-light fas fa-chevron-left"></i>
-                        </a>
-                    </div>
-                    <!--End Controls-->
-                    <!--Carousel Wrapper-->
-                    <div class="col">
-                        <div class="carousel slide carousel-multi-item pt-2 pt-md-0" id="multi-item-example" data-bs-ride="carousel">
-                            <!--Slides-->
-                            <div class="carousel-inner product-links-wap" role="listbox">
+            <div class="row">
 
-                                <!--First slide-->
-                                <div class="carousel-item active">
-                                    <div class="row">
-                                        <div class="col-3 p-md-10">
-                                            <a href="#"><img class="img-fluid brand-img" src="~/Resources/brand1.png" alt="Brand Logo"></a>
-                                        </div>
-                                        <div class="col-3 p-md-10">
-                                            <a href="#"><img class="img-fluid brand-img" src="~/Resources/brand2.png" alt="Brand Logo"></a>
-                                        </div>
-                                        <div class="col-3 p-md-10">
-                                            <a href="#"><img class="img-fluid brand-img" src="~/Resources/brand3.png" alt="Brand Logo"></a>
-                                        </div>
-                                        <div class="col-3 p-md-10">
-                                            <a href="#"><img class="img-fluid brand-img" src="~/Resources/brand6.png" alt="Brand Logo"></a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!--End First slide-->
-                                <!--Second slide-->
-                                <div class="carousel-item">
-                                    <div class="row">
-                                        <div class="col-3 p-md-10">
-                                            <a href="#"><img class="img-fluid brand-img" src="~/Resources/brand4.png" alt="Brand Logo"></a>
-                                        </div>
-                                        <div class="col-3 p-md-10">
-                                            <a href="#"><img class="img-fluid brand-img" src="~/Resources/brand5.png" alt="Brand Logo"></a>
-                                        </div>
-                                        <div class="col-3 p-md-10">
-                                            <a href="#"><img class="img-fluid brand-img" src="~/Resources/brand6.png" alt="Brand Logo"></a>
-                                        </div>
-                                        <div class="col-3 p-md-10">
-                                            <a href="#"><img class="img-fluid brand-img" src="~/Resources/brand1.png" alt="Brand Logo"></a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!--End Second slide-->
-                            </div>
-                            <!--End Slides-->
-                        </div>
+                <div class="col-md-6 col-lg-3 pb-5">
+                    <div class="h-100 py-5 services-icon-wap shadow">
+                        <div class="h1 text-success text-center"><i class="fa fa-truck fa-lg"></i></div>
+                        <h2 class="h5 mt-4 text-center">Delivery Services</h2>
                     </div>
-                    <!--End Carousel Wrapper-->
-                    <!--Controls-->
-                    <div class="col-1 align-self-center">
-                        <a class="h1" href="#multi-item-example" role="button" data-bs-slide="next">
-                            <i class="text-light fas fa-chevron-right"></i>
-                        </a>
+                </div>
+
+                <div class="col-md-6 col-lg-3 pb-5">
+                    <div class="h-100 py-5 services-icon-wap shadow">
+                        <div class="h1 text-success text-center"><i class="fas fa-exchange-alt"></i></div>
+                        <h2 class="h5 mt-4 text-center">Shipping & Return</h2>
                     </div>
-                    <!--End Controls-->
+                </div>
+
+                <div class="col-md-6 col-lg-3 pb-5">
+                    <div class="h-100 py-5 services-icon-wap shadow">
+                        <div class="h1 text-success text-center"><i class="fa fa-percent"></i></div>
+                        <h2 class="h5 mt-4 text-center">Promotion</h2>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-3 pb-5">
+                    <div class="h-100 py-5 services-icon-wap shadow">
+                        <div class="h1 text-success text-center"><i class="fa fa-user"></i></div>
+                        <h2 class="h5 mt-4 text-center">24 Hours Service</h2>
+                    </div>
                 </div>
             </div>
         </section>
@@ -273,7 +269,7 @@
                             </li>
                         </ul>
                     </div>
-                    <div class="col-md-4 pt-5">
+                    @*<div class="col-md-4 pt-5">
                         <h2 class="h2 text-light border-bottom pb-3 border-light">Products</h2>
                         <ul class="list-unstyled text-light footer-link-list">
                             <li><a class="text-decoration-none" href="#">Luxury</a></li>
@@ -284,15 +280,13 @@
                             <li><a class="text-decoration-none" href="#">Gym Accessories</a></li>
                             <li><a class="text-decoration-none" href="#">Sport Shoes</a></li>
                         </ul>
-                    </div>
+                    </div>*@
 
                     <div class="col-md-4 pt-5">
                         <h2 class="h2 text-light border-bottom pb-3 border-light">Further Info</h2>
                         <ul class="list-unstyled text-light footer-link-list">
                             <li><a class="text-decoration-none" href="#">Home</a></li>
-                            <li><a class="text-decoration-none" href="#">About Us</a></li>
-                            <li><a class="text-decoration-none" href="#">Shop Locations</a></li>
-                            <li><a class="text-decoration-none" href="#">FAQs</a></li>
+                            <li><a class="text-decoration-none" href="#">About Us</a></li>                           
                             <li><a class="text-decoration-none" href="#">Contact</a></li>
                         </ul>
                     </div>
@@ -353,6 +347,9 @@
 
     <script src="~/Content/vendor/animsition/animsition.min.js"></script>
     <script src="~/Content/js/main.js"></script>
+
+   
+   
     <!-- End Script -->
 </body>
 </html>

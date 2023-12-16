@@ -1,160 +1,132 @@
 ﻿@model IEnumerable<SuperStore_WebSite.Models.KHACHHANG>
 
 @{
-    ViewBag.Title = "Index";
-       Layout = "~/Areas/Admin/Views/Shared/_AdminPage2.cshtml";
-    <style>
-        table, th, td {
-            border: 1px solid black;
-            border-collapse: collapse;
-        }
-    </style>
+    ViewBag.Title = "Quản lý khách hàng";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminPage2.cshtml";
 }
 
-<h2>Quản lý khách hàng</h2>
+<style>
+    .search-container {
+        display: flex;
+        align-items: center;
+        margin-bottom: 20px;
+    }
 
-<div class="row m-3 w-100 " style="">
-    <div class="col-2 w-75">
-        
-    </div>
-    <div class="col-5">
-
-    </div>
-    <div class="col-5">
-
-        <a><i>Tìm tên khách hàng</i></a>
-        @using (Html.BeginForm("TimKiem", "QuanLyKhachHang"))
-        {
-            <input name="TuKhoa" style="width: 400px; height: 40px; border-bottom-left-radius: 10px; border-radius: 10px; padding-left: 10px" class="" type="search" id="search" placeholder="Search...    " />
-            <button type="submit" value="tìm kiếm" class="mt-1" style="height: 40px; border-radius: 10px;border:none; border-top-right-radius: 10px;background-color: #5D7B6F" >Tìm</button>
-
+        .search-container input[type=search] {
+            width: 400px;
+            height: 40px;
+            border-bottom-left-radius: 10px;
+            border-radius: 10px;
+            padding-left: 10px;
         }
 
-
-        @*<form>
-                <a><i>Tìm tên sản phẩm</i></a>
-                <input name="searchkey" style="width: 350px; height: 40px; border-bottom-left-radius: 10px; border-radius: 10px; padding-left: 10px" class="" type="search" id="search" placeholder="Search...    " />
-                <button type="submit" name="submit" value="tìm kiếm" class="mt-1 bg-info" style="height: 40px; border-radius: 10px;border:none; border-top-right-radius: 10px;">Tìm</button>
-            </form>*@
-
-
-    </div>
-
-</div>
-
-<p style="font-size: larger;">
-    <b><u>Sắp xếp theo</u></b>
-</p>
-<div class="col-11">
-    <div class="row m-3 w-100 " style="">
-        <div class="col-3">
-            @*<a href="/QuanLySanPham/AdenZ" class="btn btn-primary w-75">A-Z</a>*@
-            @Html.ActionLink("A-Z", "AdenZ", null, new { }, new { @class = "btn btn-primary w-75", style = "background-color: #5D7B6F; color: white; " })
-        </div>
-        <div class="col-3 w-100">
-            @Html.ActionLink("Z-A", "ZdenA", null, new { @class = "btn btn-primary w-75", style = "background-color: #5D7B6F; color: white; " })
-        </div>
-        <div class="col-3">
-            @*@Html.ActionLink("Giá tăng dần", "GiaTang", null, new { @class = "btn btn-primary w-75" })*@
-        </div>
-        <div class="col-3 w-100">
-            @*@Html.ActionLink("Giá giảm dần", "GiaGiam", null, new { @class = "btn btn-primary w-75" })*@
-        </div>
-    </div>
-</div>
-<div class="col-1">
-</div>
-
-<p>
-
-    @*<a href="@Url.Action("Create","QuanLyKhachHang") " class="btn btn-info"> Thêm khách hàng </a>*@
-    @*@Html.ActionLink("Create New", "Create", new { @class = "btn btn-primary" })*@
-
-</p>
-<div class="col-11">
-    <table class="table table-hover">
-        <tr class="  border-left-0" style="font-size: x-large; background-color: #5D7B6F">
-            <th>
-                Họ đệm
-            </th>
-            <th>
-                Tên
-            </th>
-            <th>
-                Số điện thoại
-            </th>
-            <th>
-                Ngày sinh
-            </th>
-            <th>
-                Giới tính
-            </th>
-            <th>
-                Địa chỉ
-            </th>
-
-
-            <th>
-                Email
-            </th>
-            <th>
-                Mật khẩu
-            </th>
-            <th>
-                Tùy chỉnh
-            </th>
-
-        </tr>
-
-        @foreach (var item in Model)
-        {
-
-            // Giả sử item.TenNV là một chuỗi có định dạng "Họ đệm Tên"
-            string tenNV = item.TENKH;
-
-            // Tách chuỗi thành mảng các phần tử, sử dụng khoảng trắng làm điểm phân cách
-            string[] parts = tenNV.Split(' ');
-
-            // Lấy họ đệm và tên
-            string hoDem = parts.Length > 1 ? string.Join(" ", parts.Take(parts.Length - 1)) : "";
-            string ten = parts.Length > 0 ? parts.Last() : "";
-
-            <tr>
-                <td>
-                    @hoDem
-                </td>
-                <td>
-                    @ten
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.SDT)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.NGAYSINH)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.GIOITINH)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.DIACHI)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.EMAIL)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.PASSWORD)
-                </td>
-                <td>
-
-                    @Html.ActionLink("Edit", "Edit", new { id = item.MAKH }, new { @class = "btn btn-warning" }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.MAKH }, new { @class = "btn btn-danger" })
-                </td>
-            </tr>
+        .search-container button {
+            height: 40px;
+            border-radius: 10px;
+            border: none;
+            border-top-right-radius: 10px;
+            background-color: #5D7B6F;
+            color: white;
         }
 
-    </table>
+    .sort-buttons {
+        margin-top: 20px;
+    }
 
-</div>
-<div class="col-1">
+    .table th,
+    .table td {
+        text-align: center;
+    }
 
+    .action-buttons {
+        display: flex;
+        justify-content: center;
+    }
+
+        .action-buttons a {
+            margin-right: 10px;
+        }
+</style>
+
+<div class="container-fluid al">
+    <h2>Quản lý khách hàng</h2>
+    <div class="row m-3">
+        <div class="col-12 col-md-2">
+            @Html.ActionLink(" Thêm khách hàng mới", "Create", null, new { @class = "btn btn-outline-success fa fa-lightbulb-o", style = "font-size: 16px; padding: 10px;" }) &nbsp;
+        </div>
+
+        <div class="col-12 col-md-5"></div>
+        <div class="col-12 col-md-5">
+            <a><i>Tìm tên khách hàng</i></a>
+            @using (Html.BeginForm("TimKiem", "QuanLyKhachHang"))
+            {
+                <div class="input-group">
+                    <input name="TuKhoa" class="form-control" type="search" id="search" placeholder="Search..." />
+                    <div class="input-group-append">
+                        <button type="submit" class="btn btn-check">Tìm</button>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+
+    <div class="col-12 mt-3">
+        <i class="fas fa-sort"></i> Sắp xếp theo
+    </div>
+    <div class="card-body">
+        @using (Html.BeginForm("Sort", "QuanLyKhachHang", FormMethod.Get, new { @class = "form-inline" }))
+        {
+            <div class="input-group">
+                <select name="sortOrder" class="form-control">
+                    <option value="AdenZ">A-Z</option>
+                    <option value="ZdenA">Z-A</option>
+                </select>
+                <div class="input-group-append">
+                    <button type="submit" class="btn btn-primary">Sắp xếp</button>
+                </div>
+            </div>
+        }
+    </div>
+    <div class="table-responsive">
+        <table class="table table-hover" id="myTable">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Họ đệm</th>
+                    <th>Tên</th>
+                    <th>Số điện thoại</th>
+                    <th>Ngày sinh</th>
+                    <th>Giới tính</th>
+                    <th>Địa chỉ</th>
+                    <th>Email</th>
+                    <th>Mật khẩu</th>
+                    <th>Tùy chỉnh</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    string tenNV = item.TENKH;
+                    string[] parts = tenNV.Split(' ');
+                    string hoDem = parts.Length > 1 ? string.Join(" ", parts.Take(parts.Length - 1)) : "";
+                    string ten = parts.Length > 0 ? parts.Last() : "";
+
+                    <tr>
+                        <td>@hoDem</td>
+                        <td>@ten</td>
+                        <td>@Html.DisplayFor(modelItem => item.SDT)</td>
+                        <td>@Html.DisplayFor(modelItem => item.NGAYSINH)</td>
+                        <td>@Html.DisplayFor(modelItem => item.GIOITINH)</td>
+                        <td>@Html.DisplayFor(modelItem => item.DIACHI)</td>
+                        <td>@Html.DisplayFor(modelItem => item.EMAIL)</td>
+                        <td>@Html.DisplayFor(modelItem => item.PASSWORD)</td>
+                        <td class="action-buttons">
+                            @Html.ActionLink("Edit", "Edit", new { id = item.MAKH }, new { @class = "btn btn-warning" })
+                            @Html.ActionLink("Delete", "Delete", new { id = item.MAKH }, new { @class = "btn btn-danger" })
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <div id="pageNavPosition" class="text-right"></div>
+    </div>
 </div>

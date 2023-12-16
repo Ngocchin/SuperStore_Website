@@ -113,6 +113,7 @@
     <Content Include="Content\assets\css\custom.css" />
     <Content Include="Content\assets\css\fontawesome.css" />
     <Content Include="Content\assets\css\fontawesome.min.css" />
+    <Content Include="Content\assets\css\load.css" />
     <Content Include="Content\assets\css\slick-theme.css" />
     <Content Include="Content\assets\css\slick-theme.min.css" />
     <Content Include="Content\assets\css\slick.min.css" />
@@ -333,12 +334,14 @@
       <DependentUpon>QLBH.edmx</DependentUpon>
       <LastGenOutput>QLBH.cs</LastGenOutput>
     </Content>
+    <Content Include="Resources\best-price.gif" />
     <Content Include="Resources\brand1.png" />
     <Content Include="Resources\brand2.png" />
     <Content Include="Resources\brand3.png" />
     <Content Include="Resources\brand4.png" />
     <Content Include="Resources\brand5.png" />
     <Content Include="Resources\brand6.png" />
+    <Content Include="Resources\hoặc mua trực tuyến.mp4" />
     <Content Include="Resources\icon\cart1.png" />
     <Content Include="Resources\img\bepdien1.jpg" />
     <Content Include="Resources\img\bepdien11.jpg" />
@@ -642,21 +645,18 @@
     <Content Include="Views\Product\ShowAll.cshtml" />
     <Content Include="Views\Product\Category.cshtml" />
     <Content Include="Views\Product\Details.cshtml" />
-    <Content Include="Views\Shared\_Search.cshtml" />
     <Content Include="Views\Product\Search.cshtml" />
     <Content Include="Views\Cart\GioHangPartial.cshtml" />
     <Content Include="Views\Cart\Index.cshtml" />
     <Content Include="Views\About\Index.cshtml" />
     <Content Include="Views\Contact\Index.cshtml" />
     <Content Include="Views\Account\Logout.cshtml" />
-    <Content Include="Views\Cart\Order.cshtml" />
     <Content Include="Views\Cart\XacNhanThongTin.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Account\SignUp.cshtml" />
     <Content Include="Views\Cart\OrderFollow.cshtml" />
-    <Content Include="Views\Cart\PayMethod.cshtml" />
-    <Content Include="Views\Cart\Xacnhanthanhtoan.cshtml" />
     <Content Include="Views\Account\Inf.cshtml" />
+    <Content Include="Views\Cart\Order.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

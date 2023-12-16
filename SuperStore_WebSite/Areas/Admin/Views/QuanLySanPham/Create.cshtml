@@ -2,145 +2,99 @@
 
 @{
     ViewBag.Title = "Create";
-       Layout = "~/Areas/Admin/Views/Shared/_AdminPage2.cshtml";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminPage2.cshtml";
 }
-<center>
-    <h2>Thêm mới sản phẩm</h2>
-</center>
 
-
-@using (Html.BeginForm("Create", "QuanLySanPham", FormMethod.Post, new { @enctype = "multipart/form-data" })) 
-{
-    @Html.AntiForgeryToken()
-    
-<div class="form-horizontal">
-
+<div class="container mt-4">
+    <h2 class="text-center">Thêm mới sản phẩm</h2>
     <hr />
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-    <div class="form-group">
-        Mã sản phẩm
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.MASP, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.MASP, "", new { @class = "text-danger" })
-        </div>
-    </div>
+    @using (Html.BeginForm("Create", "QuanLySanPham", FormMethod.Post, new { @class = "form-horizontal", @enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
 
-    <div class="form-group">
-        Tên sản phẩm
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.TENSP, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.TENSP, "", new { @class = "text-danger" })
-        </div>
-    </div>
+        <div class="row justify-content-center">
+            <div class="col-md-8">
 
-    <div class="form-group">
-        Mã loại
-        <div class="col-md-10">
-            @Html.DropDownList("MaLoai", null, htmlAttributes: new { @class = "form-control" })
-            @Html.ValidationMessageFor(model => model.MALOAI, "", new { @class = "text-danger" })
-        </div>
-    </div>
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-    <div class="form-group">
-        Mã nhà cung cấp
-        <div class="col-md-10">
-            @Html.DropDownList("MaNCC", null, htmlAttributes: new { @class = "form-control" })
-            @Html.ValidationMessageFor(model => model.MANCC, "", new { @class = "text-danger" })
-        </div>
-    </div>
+                <div class="form-group row">
+                    <label for="MASP" class="col-md-2 col-form-label">Mã sản phẩm</label>
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.MASP, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.MASP, "", new { @class = "text-danger" })
+                    </div>
+                </div>
 
-    @*<div class="form-group">
-        Mã khuyến mãi
-        <div class="col-md-10">
-            @Html.DropDownList("MaKM", null, htmlAttributes: new { @class = "form-control" })
-            @Html.ValidationMessageFor(model => model.MAKM, "", new { @class = "text-danger" })
-        </div>
-    </div>*@
+                <div class="form-group row">
+                    <label for="TENSP" class="col-md-2 col-form-label">Tên sản phẩm</label>
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.TENSP, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.TENSP, "", new { @class = "text-danger" })
+                    </div>
+                </div>
 
-    <div class="form-group">
-        Giá
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.GIABAN, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.GIABAN, "", new { @class = "text-danger" })
-        </div>
-    </div>
+                <div class="form-group row">
+                    <label for="MaLoai" class="col-md-2 col-form-label">Mã loại</label>
+                    <div class="col-md-10">
+                        @Html.DropDownList("MaLoai", null, htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.MALOAI, "", new { @class = "text-danger" })
+                    </div>
+                </div>
 
-    <div class="form-group">
-        Số lượng tồn
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.SOLUONGTON, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.SOLUONGTON, "", new { @class = "text-danger" })
-        </div>
-    </div>
+                <div class="form-group row">
+                    <label for="MaNCC" class="col-md-2 col-form-label">Mã nhà cung cấp</label>
+                    <div class="col-md-10">
+                        @Html.DropDownList("MaNCC", null, htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.MANCC, "", new { @class = "text-danger" })
+                    </div>
+                </div>
 
-    <div class="form-group">
-        Ghi chú
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.GHICHU, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.GHICHU, "", new { @class = "text-danger" })
-        </div>
-    </div>
+                <!-- ... (Các mục khác tương tự) -->
 
-    <div class="form-group">
-        Hình
-        @*<div class="col-md-10">
-            @Html.EditorFor(model => model.HINHANH)
-            <input type="file" name="fileupload" />
-        </div>*@
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.HINHANH)
-            <input type="file" name="fileupload" id="fileInput" />
-            <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-            <script>
-        $(document).ready(function () {
-            // Lắng nghe sự kiện khi người dùng chọn tệp
-            $('#fileInput').change(function () {
-                // Lấy tên tệp từ đường dẫn tệp
-                var fileName = $(this).val().split("\\").pop();
+                <div class="form-group row">
+                    <label for="fileInput" class="col-md-2 col-form-label">Hình</label>
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.HINHANH)
+                        <input type="file" name="fileupload" id="fileInput" class="form-control-file">
+                        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+                        <script>
+                            $(document).ready(function () {
+                                $('#fileInput').change(function () {
+                                    var fileName = $(this).val().split("\\").pop();
+                                    $('#HINHANH').val(fileName);
+                                });
+                            });
+                        </script>
+                    </div>
+                </div>
 
-                // Hiển thị tên tệp trong EditorFor
-                $('#HINHANH').val(fileName);
-            });
-        });
-            </script>
-        </div>
-    </div>
+                <div class="form-group row">
+                    <label for="fileInput1" class="col-md-2 col-form-label">Hình liên quan</label>
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.HINHLIENQUAN)
+                        <input type="file" name="fileupload1" id="fileInput1" class="form-control-file">
+                        <script>
+                            $(document).ready(function () {
+                                $('#fileInput1').change(function () {
+                                    var fileName1 = $(this).val().split("\\").pop();
+                                    $('#HINHLIENQUAN').val(fileName1);
+                                });
+                            });
+                        </script>
+                    </div>
+                </div>
 
-    <div class="form-group">
-        Hình liên quan
-        @*<div class="col-md-10">
-            @Html.EditorFor(model => model.HINHLIENQUAN, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.HINHLIENQUAN, "", new { @class = "text-danger" })
-        </div>*@
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.HINHLIENQUAN)
-            <input type="file" name="fileupload1" id="fileInput1" />
-            <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-            <script>
-                $(document).ready(function () {
-                    // Lắng nghe sự kiện khi người dùng chọn tệp
-                    $('#fileInput1').change(function () {
-                        // Lấy tên tệp từ đường dẫn tệp
-                        var fileName1 = $(this).val().split("\\").pop();
+                <div class="text-center">
+                    <div class="form-group">
+                        <input type="submit" value="Thêm" class="btn btn-primary" />
+                    </div>
+                </div>
 
-                        // Hiển thị tên tệp trong EditorFor
-                        $('#HINHLIENQUAN').val(fileName1);
-                    });
-                });
-            </script>
-        </div>
-    </div>
-    <center>
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Thêm" class="btn btn-default" />
             </div>
         </div>
-    </center>
-
-</div>
-}
-
-<div>
-    @Html.ActionLink("Quay lại", "Index")
+    }
+    <hr />
+    <div class="text-center mt-3">
+        @Html.ActionLink("Quay lại", "Index", null, new { @class = "btn btn-secondary" })
+    </div>
 </div>

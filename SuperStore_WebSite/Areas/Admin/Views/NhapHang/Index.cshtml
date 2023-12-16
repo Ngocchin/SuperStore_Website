@@ -1,44 +1,99 @@
 ﻿@model IEnumerable<SuperStore_WebSite.Models.PHIEUNHAP>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Quản lý phiếu nhập";
     Layout = "~/Areas/Admin/Views/Shared/_AdminPage2.cshtml";
 }
 
-<p>
-    @Html.ActionLink("Create New", "Create") 
-</p>
-
-@using (Html.BeginForm("Index", "NhapHang", FormMethod.Get))
-{
-    <p>
-        <label for="NhaCungCapId">Chọn Nhà Cung Cấp:</label>
-        @Html.DropDownList("MANCC", ViewBag.NhaCungCapList as SelectList, "Chọn nhà cung cấp", new { @class = "form-control" })
-        <div class="col-2 w-100">
-            @Html.ActionLink("Lọc", "Index", null, new { @class = "btn btn-primary w-75", style = "background-color: #5D7B6F; color: white;", name = "MANCC" })
-        </div>
-        @*<input type="submit" value="Lọc" class="btn btn-primary" />*@
-    </p>
-}
-
-<table class="table">
-    <tr>
-        <th>Mã Phiếu Nhập</th>
-        <th>Tên Nhà Cung Cấp</th> 
-        <th>Tên Nhân viên</th>
-    </tr>
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>@item.MAPHNHAP</td>
-            <td>@item.NHACUNGCAP.TENNCC</td>
-            <td>@item.NHANVIEN.TENNV</td>   
-            <td>
-                @Html.ActionLink("Details", "Details", new { id = item.MAPHNHAP }) |
-            </td>
-            <td>
-                @Html.ActionLink("Thêm chi tiết phiếu nhập", "CreateCTPN", new { id = item.MAPHNHAP })
-            </td>
-        </tr>
+<style>
+    .search-container {
+        display: flex;
+        align-items: center;
+        margin-bottom: 20px;
     }
-</table>
+
+        .search-container input[type=search] {
+            width: 400px;
+            height: 40px;
+            border-bottom-left-radius: 10px;
+            border-radius: 10px;
+            padding-left: 10px;
+        }
+
+        .search-container button {
+            height: 40px;
+            border-radius: 10px;
+            border: none;
+            border-top-right-radius: 10px;
+            background-color: #5D7B6F;
+            color: white;
+        }
+
+    .sort-buttons {
+        margin-top: 20px;
+    }
+
+    .table th,
+    .table td {
+        text-align: center;
+    }
+
+    .action-buttons {
+        display: flex;
+        justify-content: center;
+    }
+
+        .action-buttons a {
+            margin-right: 10px;
+        }
+</style>
+
+<div class="container-fluid al">
+    <h2>Quản lý phiếu nhập</h2>
+
+    @using (Html.BeginForm("Index", "NhapHang", FormMethod.Get))
+    {
+        <div class="row m-3">
+            <div class="col-12 col-md-2">
+                    @Html.ActionLink(" Create New", "Create", null, new { @class = "btn btn-outline-success fa fa-lightbulb-o", style = "font-size: 16px; padding: 10px"})
+                </div>
+
+            @*<div class="col-12 col-md-5">
+                    <label for="NhaCungCapId">Chọn Nhà Cung Cấp:</label>
+                    @Html.DropDownList("MANCC", ViewBag.NhaCungCapList as SelectList, "Chọn nhà cung cấp", new { @class = "form-control" })
+                    <div class="col-2 w-100">
+                        <button type="submit" class="btn btn-primary" style="background-color: #5D7B6F; color: white;">Lọc</button>
+                    </div>
+                </div>*@
+        </div>
+    }
+
+    <div class="table-responsive">
+        <table class="table table-hover" id="myTable">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Mã Phiếu Nhập</th>
+                    <th>Tên Nhà Cung Cấp</th>
+                    <th>Tên Nhân viên</th>
+                    <th>Tùy chỉnh</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.MAPHNHAP</td>
+                        <td>@item.NHACUNGCAP.TENNCC</td>
+                        <td>@item.NHANVIEN.TENNV</td>
+                        <td class="action-buttons">
+                            @Html.ActionLink(" Details", "Details", new { id = item.MAPHNHAP }, new { @class = "btn btn-info fa fa-info-circle" })
+                            @Html.ActionLink(" Thêm chi tiết phiếu nhập", "CreateCTPN", new { id = item.MAPHNHAP }, new { @class = "btn btn-warning fa fa-plus" })
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <div id="pageNavPosition" class="text-right"></div>
+    </div>
+</div>
+

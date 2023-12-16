@@ -22,6 +22,30 @@ namespace SuperStore_WebSite.Areas.Admin.Controllers
             var tbl_SanPham = db.SANPHAMs.Include(t => t.LOAI).Include(t => t.NHACUNGCAP);
             return View(tbl_SanPham.ToList());
         }
+
+        public ActionResult Sort(string sortOrder)
+        {
+            var tbl_SanPham = db.SANPHAMs.Include(t => t.LOAI).Include(t => t.NHACUNGCAP);
+
+            switch (sortOrder)
+            {
+                case "AdenZ":
+                    return View("Index", tbl_SanPham.OrderBy(t => t.TENSP).ToList());
+                case "ZdenA":
+                    return View("Index", tbl_SanPham.OrderByDescending(t => t.TENSP).ToList());
+                case "GiaTang":
+                    return View("Index", tbl_SanPham.OrderBy(t => t.GIABAN).ToList());
+                case "GiaGiam":
+                    return View("Index", tbl_SanPham.OrderByDescending(t => t.GIABAN).ToList());
+                case "KM":
+                    return View("Index", tbl_SanPham.Where(t => t.MAKM != null).ToList());
+                case "NonKM":
+                    return View("Index", tbl_SanPham.Where(t => t.MAKM == null).ToList());
+                default:
+                    return View("Index", tbl_SanPham.ToList());
+            }
+        }
+
         public ActionResult KM()
         {
             var tbl_SanPham = db.SANPHAMs.Include(t => t.LOAI).Include(t => t.NHACUNGCAP);
@@ -76,26 +100,16 @@ namespace SuperStore_WebSite.Areas.Admin.Controllers
             return View();
         }
 
-        // POST: QuanLySanPham/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "MASP,TENSP,MALOAI,MANCC,MAKM,GIABAN,SOLUONGTON,GHICHU,HINHANH,HINHLIENQUAN")] SANPHAM tbl_SanPham, HttpPostedFileBase fileupload, HttpPostedFileBase fileupload1)
         {
-            if (ModelState.IsValid)     
+            if (ModelState.IsValid)
             {
-                //var fileName = Path.GetFileName(fileupload.FileName);
-                //var path = Path.Combine(Server.MapPath("/img"), fileName);
-                //fileupload.SaveAs(path);
-
-                //var fileName1 = Path.GetFileName(fileupload1.FileName);
-                //var path1 = Path.Combine(Server.MapPath("/img"), fileName1);
-                //fileupload1.SaveAs(path1);
-
-
                 db.SANPHAMs.Add(tbl_SanPham);
                 db.SaveChanges();
+
+                ViewBag.ShowSuccessToast = true;
                 return RedirectToAction("Index");
             }
 

@@ -1,124 +1,135 @@
 ﻿@model IEnumerable<SuperStore_WebSite.Models.HOADON>
 
 @{
-    ViewBag.Title = "Index";
-       Layout = "~/Areas/Admin/Views/Shared/_AdminPage2.cshtml";
-    <style>
-        table, th, td {
-            border: 1px solid black;
-            border-collapse: collapse;
-        }
-    </style>
-
-
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
+    ViewBag.Title = "Quản lý hóa đơn";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminPage2.cshtml";
 }
 
-@{ int dem = 0;}
-<h2>Quản lý hóa đơn</h2>
-<div class="row m-3 w-100 " style="">
-    <div class="col-2 w-75">
-        
-    </div>
-    <div class="col-5">
+<style>
+    .search-container {
+        display: flex;
+        align-items: center;
+        margin-bottom: 20px;
+    }
 
-    </div>
-    <div class="col-5">
-        <p></p>
-    </div>
-
-</div>
-
-<p style="font-size: larger;">
-    <b><u>Sắp xếp theo</u></b>
-</p>
-<div class="col-11">
-    <div class="row m-3 w-100 " style="">
-        <div class="col-2">
-            @Html.ActionLink("Đơn chưa xác nhận", "DonCXN", null, new { }, new { @class = "btn btn-primary w-75", style = "background-color: #5D7B6F; color: white; " })
-        </div>
-        <div class="col-2 w-100">
-            @Html.ActionLink("Đơn đã xác nhận", "DonDXN", null, new { @class = "btn btn-primary w-75", style = "background-color: #5D7B6F; color: white; " })
-        </div>
-        <div class="col-2">
-            @Html.ActionLink("Đơn quá hạn trả", "DonQH", null, new { @class = "btn btn-primary w-75", style = "background-color: #5D7B6F; color: white; " })
-        </div>
-        <div class="col-2 w-100">
-            @Html.ActionLink("Giá giảm dần", "GiaGiam", null, new { @class = "btn btn-primary w-75", style = "background-color: #5D7B6F; color: white; " })
-        </div>
-        <div class="col-2">
-            @Html.ActionLink("Đơn mới nhất", "SXMN", null, new { @class = "btn btn-primary w-75", style = "background-color: #5D7B6F; color: white; " })
-        </div>
-        <div class="col-2 w-100">
-            @Html.ActionLink("Đơn cũ nhất", "SXCN", null, new { @class = "btn btn-primary w-75", style = "background-color: #5D7B6F; color: white; " })
-        </div>
-    </div>
-</div>
-<div class="col-1">
-</div>
-
-<p>
-</p>
-<div class="col-11">
-    <table class="table">
-        <tr class="  border-left-0" style="font-size: x-large; background-color: #5D7B6F">
-            <th>
-                Ngày lập
-            </th>
-            <th>
-                Tình trạng
-            </th>
-            <th>
-                Thành tiền
-            </th>
-            <th>
-                Tên khách hàng
-            </th>
-            <th>
-                Nhân viên xác nhận
-            </th>
-            <th>
-                Xác nhận
-            </th>
-        </tr>
-
-        @foreach (var item in Model)
-        {
-            dem++;
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.NGAYLAP)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.TINHTRANG)
-                </td>
-                <td>
-                    @String.Format("{0:0,0 VNĐ}", @item.TONGTIEN)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.KHACHHANG.TENKH)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.NHANVIEN.TENNV)
-                </td>                
-            <td>
-
-                @if (item.TINHTRANG != "Đã giao")
-                {
-                    <center>
-                        @Html.ActionLink("Xác nhận đơn hàng", "CapnhatHD", new { id = item.MAHD }, new { @class = "btn btn-info" })
-                    </center>
-                }
-            </td>
-            </tr>
+        .search-container input[type=search] {
+            width: 400px;
+            height: 40px;
+            border-bottom-left-radius: 10px;
+            border-radius: 10px;
+            padding-left: 10px;
         }
 
+        .search-container button {
+            height: 40px;
+            border-radius: 10px;
+            border: none;
+            border-top-right-radius: 10px;
+            background-color: #5D7B6F;
+            color: white;
+        }
+
+    .sort-buttons {
+        margin-top: 20px;
+    }
+
+    .table th,
+    .table td {
+        text-align: center;
+    }
+
+    .action-buttons {
+        display: flex;
+        justify-content: center;
+    }
+
+        .action-buttons a {
+            margin-right: 10px;
+        }
+</style>
+
+<div class="container-fluid al">
+    <h2>Quản lý hóa đơn</h2>
+    <div class="col-12 mt-3">
+        <i class="fas fa-sort"></i> Sắp xếp theo
+    </div>
+    <div class="card-body">
+        @using (Html.BeginForm("Sort", "QuanLyHoaDon", FormMethod.Get, new { @class = "form-inline" }))
+        {
+            <div class="input-group">
+                <select name="sortOrder" class="form-control">
+                    <option value="DonCXN">Đơn đã xác nhận</option>
+                    <option value="DonDXN">Đơn chưa xác nhận</option>
+                    <option value="SXMN">ba chấm</option>
+                    <option value="SXCN">ba chấm luôn</option>
+                </select>
+                <div class="input-group-append">
+                    <button type="submit" class="btn btn-primary">Sắp xếp</button>
+                </div>
+            </div>
+        }
+    </div>
+
+    <table class="table table-bordered table-hover " id="myTable">
+        <thead class="thead-dark">
+            <tr>
+                <th>
+                    Ngày lập
+                </th>
+                <th>
+                    Tình trạng
+                </th>
+                <th>
+                    Thành tiền
+                </th>
+                <th>
+                    Tên khách hàng
+                </th>
+                <th>
+                    Nhân viên xác nhận
+                </th>
+                <th>
+                    Duyệt hóa đơn
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NGAYLAP)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TINHTRANG)
+                    </td>
+                    <td>
+                        @String.Format("{0:0,0 VNĐ}", @item.TONGTIEN)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.KHACHHANG.TENKH)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NHANVIEN.TENNV)
+                    </td>
+                    <td>
+                        @if (item.TINHTRANG != "Đã giao")
+                        {
+                            <center>
+                                @Html.ActionLink("Xác nhận đơn hàng", "CapnhatHD", new { id = item.MAHD }, new { @class = "btn btn-info" })
+                            </center>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
     </table>
-</div>
-<div class="col-1">
+
+    <div id="pageNavPosition" class="text-right"></div>
+
+    <div class="col-1"></div>
+
+    <b>Tổng số đơn hàng: @Model.Count()</b>
 
 </div>
-
-
-<b>Tổng số đơn hàng: @dem </b>

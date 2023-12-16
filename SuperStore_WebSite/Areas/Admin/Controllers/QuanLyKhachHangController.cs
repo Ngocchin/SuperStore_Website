@@ -1,4 +1,4 @@
-﻿    using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -18,6 +18,21 @@ namespace SuperStore_WebSite.Areas.Admin.Controllers
         public ActionResult Index()
         {
             return View(db.KHACHHANGs.ToList());
+        }
+
+        public ActionResult Sort(string sortOrder)
+        {
+            var tbl_khach = db.KHACHHANGs.ToList();
+
+            switch (sortOrder)
+            {
+                case "AdenZ":
+                    return View("Index", tbl_khach.OrderBy(t => t.TENKH).ToList());
+                case "ZdenA":
+                    return View("Index", tbl_khach.OrderByDescending(t => t.TENKH).ToList());               
+                default:
+                    return View("Index", tbl_khach.ToList());
+            }
         }
         public ActionResult AdenZ()
         {
