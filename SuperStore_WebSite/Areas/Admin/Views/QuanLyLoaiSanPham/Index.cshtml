@@ -30,7 +30,7 @@
     }
 </style>
 <div class="container-fluid al">
-    <h2>Quản lý loại sản phẩm</h2>
+    <h2 class="text-center">Quản lý loại sản phẩm</h2>
     <div class="row m-3">
         <div class="col-12 col-md-2">
             @Html.ActionLink(" Thêm loại sản phẩm mới", "Create", null, new { @class = "btn btn-outline-success fa fa-lightbulb-o", style = "font-size: 16px; padding: 10px;" })
@@ -40,6 +40,9 @@
         <table class="table table-bordered table-hover">
             <thead class="thead-dark">
                 <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.MALOAI)
+                    </th>
                     <th>
                         @Html.DisplayNameFor(model => model.TENLOAI)
                     </th>
@@ -51,11 +54,14 @@
                 {
                     <tr>
                         <td>
+                            @Html.DisplayFor(modelItem => item.MALOAI)
+                        </td>
+                        <td>
                             @Html.DisplayFor(modelItem => item.TENLOAI)
                         </td>
-                        <td class="action-links">
-                            @Html.ActionLink("Edit", "Edit", new { id = item.MALOAI }, new { @class = "btn btn-warning" }) |                           
-                            @Html.ActionLink("Delete", "Delete", new { id = item.MALOAI }, new { @class = "btn btn-danger delete-link" })
+                        <td>
+                            @Html.ActionLink(" Edit", "Edit", new { id = item.MALOAI }, new { @class = "btn btn-warning fa fa-info-circle" })
+                            @Html.ActionLink(" Delete", "Delete", new { id = item.MALOAI }, new { @class = "btn btn-danger fa fa-ban" })                            
                         </td>
                     </tr>
                 }

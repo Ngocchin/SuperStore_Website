@@ -3,7 +3,8 @@
 @{
     ViewBag.Title = "Quản lý sản phẩm";
     Layout = "~/Areas/Admin/Views/Shared/_AdminPage2.cshtml";
-    <style>
+}
+<style>
     table {
         width: 100%;
         border-collapse: collapse;
@@ -30,30 +31,29 @@
         cursor: pointer;
         margin-right: 10px;
     }
-    
-    </style>
-}
+</style>
+
 
 <div class="container-fluid al">
-    <h2>Quản lý sản phẩm</h2>
-    <div class="row m-3">       
+    <h2 class="text-center">Quản lý sản phẩm</h2>
+    <div class="row m-3">
         <div class="col-12 col-md-2">
             @Html.ActionLink(" Thêm sản phẩm mới", "Create", null, new { @class = "btn btn-outline-success fa fa-lightbulb-o", style = "font-size: 16px; padding: 10px;" }) &nbsp;
         </div>
 
-            <div class="col-12 col-md-5"></div>
-            <div class="col-12 col-md-5">
-                <a><i>Tìm tên sản phẩm</i></a>
-                @using (Html.BeginForm("TimKiem", "QuanLySanPham"))
-                {
-                    <div class="input-group">
-                        <input name="TuKhoa" class="form-control" type="search" id="search" placeholder="Search..." />
-                        <div class="input-group-append">
-                            <button type="submit" class="btn btn-custom">Tìm</button>
-                        </div>
+        <div class="col-12 col-md-5"></div>
+        <div class="col-12 col-md-5">
+            <a><i>Tìm tên sản phẩm</i></a>
+            @using (Html.BeginForm("TimKiem", "QuanLySanPham"))
+            {
+                <div class="input-group">
+                    <input name="TuKhoa" class="form-control" type="search" id="search" placeholder="Search..." />
+                    <div class="input-group-append">
+                        <button type="submit" class="btn btn-custom">Tìm</button>
                     </div>
-                }
-            </div>
+                </div>
+            }
+        </div>
     </div>
 
 
@@ -125,16 +125,42 @@
                         <img class="img-thumbnail" style="max-height: 50px; max-width: 50px" src="~/Resources/img/@item.HINHLIENQUAN" />
                     </td>
                     <td>
-                        @Html.ActionLink("Sửa", "Edit", new { id = item.MASP }, new { @class = "btn btn-warning btn-sm" })
-                        @Html.ActionLink("Xóa", "Delete", new { id = item.MASP }, new { @class = "btn btn-danger btn-sm" })
+                        @Html.ActionLink(" Edit", "Edit", new { id = item.MASP }, new { @class = "btn btn-warning fa fa-info-circle" })
+                        @using (Html.BeginForm("Delete", "QuanLySanPham", new { id = item.MASP }, FormMethod.Post))
+                        {
+                            @Html.AntiForgeryToken()
+                            <div class="form-actions no-color">
+                                <button type="button" class="btn btn-danger fa fa-ban" onclick="confirmDelete()"> Delete</button>                             
+                            </div>
+                        }
                     </td>
                 </tr>
             }
         </tbody>
     </table>
 
-
     <div id="pageNavPosition" class="text-right"></div>
-</div>  
+</div>
 
-
+@section scripts
+{
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script>
+        function confirmDelete() {
+            Swal.fire({
+                title: 'Bạn có chắc muốn xóa?',
+                text: 'Bạn không thể hoàn tác nếu đã xóa!',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'OK!'
+            }).then((result) => {
+                if (result.isConfirmed) {                    
+                    // Submit the form
+                    $('form').submit();
+                }
+            });
+        }
+    </script>
+}

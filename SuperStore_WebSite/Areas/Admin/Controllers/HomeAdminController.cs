@@ -16,19 +16,28 @@ namespace SuperStore_WebSite.Areas.Admin.Controllers
         // GET: Admin/HomeAdmin
         public ActionResult Index()
         {
-            var tbl_HoaDon = db.HOADONs.Include(t => t.KHACHHANG).Include(t => t.NHANVIEN);         
+            var tbl_HoaDon = db.HOADONs.Include(t => t.KHACHHANG).Include(t => t.NHANVIEN);
+            var nhanVienList = db.NHANVIENs.ToList();
+            int count = nhanVienList.Count;
+            var khachList = db.KHACHHANGs.ToList();
+            int kh = khachList.Count;
             ViewBag.tt = tong();
             ViewData["TongTienHD"] = tong();
             ViewData["Tongcxn"] = chuaxn();
             ViewData["Tongdxn"] = daxn();
+            ViewData["Tonghuy"] = dahuy(); 
+            ViewBag.TongNhanVien = count;
+            ViewBag.TongKhach = kh;
             return View(tbl_HoaDon.ToList());
         }
+
         public double tong()
         {
             int tthd = 0;
-            List<HOADON> lsHD = db.HOADONs.ToList();
+            List<HOADON> lsHD = db.HOADONs.Where(t => t.TINHTRANG != "Đã Hủy").ToList();
             if (lsHD != null)
             {
+
                 tthd = (int)lsHD.Sum(s => s.TONGTIEN);
             }
             return tthd;
@@ -60,6 +69,20 @@ namespace SuperStore_WebSite.Areas.Admin.Controllers
                 }
             }
             return dg;
+
+        }
+        public int dahuy()
+        {
+            int dahuy = 0;
+            List<HOADON> lsHD = db.HOADONs.ToList();
+            if (lsHD != null)
+            {
+                if (lsHD.Any(s => s.TINHTRANG == "Đã hủy"))
+                {
+                    dahuy = lsHD.Where(s => s.TINHTRANG == "Đã hủy").Count();
+                }
+            }
+            return dahuy;
 
         }
     }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -54,7 +55,6 @@ namespace SuperStore_WebSite.Areas.Admin.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-
             return View(lOAI);
         }
 
@@ -91,7 +91,7 @@ namespace SuperStore_WebSite.Areas.Admin.Controllers
 
         // GET: QuanLyLoaiSanPham/Delete/5
         public ActionResult Delete(string id)
-        {
+            {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -109,9 +109,30 @@ namespace SuperStore_WebSite.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(string id)
         {
-            LOAI lOAI = db.LOAIs.Find(id);
-            db.LOAIs.Remove(lOAI);
-            db.SaveChanges();
+            try
+            {
+                LOAI loai = db.LOAIs.Find(id);
+
+                if (loai == null)
+                {
+                    return HttpNotFound();
+                }
+                db.LOAIs.Remove(loai);
+                db.SaveChanges();
+
+                return RedirectToAction("Index");
+            }
+            catch (DbUpdateException ex)
+
+            {
+                var innerException = ex.InnerException;
+                while (innerException != null)
+                {
+                    // In ra thông tin chi tiết của lỗi
+                    Console.WriteLine(innerException.Message);
+                    innerException = innerException.InnerException;
+                }
+            }
             return RedirectToAction("Index");
         }
 

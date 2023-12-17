@@ -3,78 +3,84 @@
 @{
     ViewBag.Title = "Index";
     Layout = "~/Areas/Admin/Views/Shared/_AdminPage2.cshtml";
-    <style>
-        table, th, td {
-            border: 1px solid black;
-            border-collapse: collapse;
-        }
-    </style>
+
 }
 
+<style>
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 20px;
+    }
 
+    th, td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+    }
 
-<h2>Thống kê đơn hàng</h2>
+    th {
+        background-color: #f2f2f2;
+    }
 
-<div class="row m-3 w-100 " style="">
-    <div class="col-2 w-75">
-        @Html.ActionLink("Thêm sản phẩm mới", "Create", null, new { @class = "btn btn-primary" })
-    </div>
-    <div class="col-5">
+    .btn-custom {
+        background-color: #5D7B6F;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        padding: 8px 16px;
+        text-decoration: none;
+        cursor: pointer;
+        margin-right: 10px;
+    }
+</style>
 
-    </div>
-    <div class="col-5">
-
-        <a><i>Tìm tên sản phẩm</i></a>
-        @using (Html.BeginForm("TimKiem", "QuanLySanPham"))
-        {
-            <input name="TuKhoa" style="width: 400px; height: 40px; border-bottom-left-radius: 10px; border-radius: 10px; padding-left: 10px" class="" type="search" id="search" placeholder="Search...    " />
-            <button type="submit" value="tìm kiếm" class="mt-1 bg-info" style="height: 40px; border-radius: 10px;border:none; border-top-right-radius: 10px;">Tìm</button>
-
-        }
-
-
-        @*<form>
-                <a><i>Tìm tên sản phẩm</i></a>
-                <input name="searchkey" style="width: 350px; height: 40px; border-bottom-left-radius: 10px; border-radius: 10px; padding-left: 10px" class="" type="search" id="search" placeholder="Search...    " />
-                <button type="submit" name="submit" value="tìm kiếm" class="mt-1 bg-info" style="height: 40px; border-radius: 10px;border:none; border-top-right-radius: 10px;">Tìm</button>
-            </form>*@
-
-
-    </div>
-
-</div>
-
-<p style="font-size: larger;">
-    <b><u>Sắp xếp theo</u></b>
-</p>
-<div class="col-11">
-    <div class="row m-3 w-100 " style="">
-        <div class="col-3">
-            @*<a href="/QuanLySanPham/AdenZ" class="btn btn-primary w-75">A-Z</a>*@
-            @Html.ActionLink("Đơn hàng ", "AdenZ", null, new { }, new { @class = "btn btn-primary w-75" })
-        </div>
-        <div class="col-3 w-100">
-            @Html.ActionLink("Z-A", "ZdenA", null, new { @class = "btn btn-primary w-75" })
-        </div>
-        <div class="col-3">
-            @Html.ActionLink("Giá tăng dần", "GiaTang", null, new { @class = "btn btn-primary w-75" })
-        </div>
-        <div class="col-3 w-100">
-            @Html.ActionLink("Giá giảm dần", "GiaGiam", null, new { @class = "btn btn-primary w-75" })
-        </div>
+<div class="container-fluid al">
+    <h2>Thống kê đơn hàng</h2>
+    <div class="col-12 mt-3">
+        <label for="thangDropdown">Chọn tháng:</label>
+        <select id="thangDropdown">
+            <option value="1">Tháng 1</option>
+            <option value="2">Tháng 2</option>
+            <option value="3">Tháng 3</option>
+            <option value="4">Tháng 4</option>
+            <option value="5">Tháng 5</option>
+            <option value="6">Tháng 6</option>
+            <option value="7">Tháng 7</option>
+            <option value="8">Tháng 8</option>
+            <option value="9">Tháng 9</option>
+            <option value="10">Tháng 10</option>
+            <option value="11">Tháng 11</option>
+            <option value="12">Tháng 12</option>
+        </select>
+        <button type="button" onclick="loc()">Lọc</button>
     </div>
 </div>
-<div class="col-1">
-</div>
 
+<br />
+
+<script>
+    function loc() {
+        // Lấy giá trị tháng được chọn
+        var dropdown = document.getElementById('thangDropdown');
+        var thangDuocChon = dropdown.value;
+
+        // Chuyển đến trang Index của controller và truyền tháng được chọn
+        window.location.href = 'ThongKeDonHang/Index?thang=' + thangDuocChon;
+    }
+</script>
+</div>
 
 @{
     double tong = 0;
+    int tongcxn = 0;
+    int tongdxn = 0;
+    int tongdh = 0;
 }
-
-<div class="col-11">
-    <table class="table table-hover">
-        <tr class="bg-info  border-left-0" style="font-size:x-large">
+<br />
+<table class="table table-bordered table-hover " id="myTable">
+    <thead class="thead-dark">
+        <tr>
             <th>
                 Ngày lập
             </th>
@@ -87,9 +93,9 @@
             <th>
                 Tên khách hàng
             </th>
-
         </tr>
-
+    </thead>
+    <tbody>
         @foreach (var item in Model)
         {
             <tr>
@@ -98,49 +104,70 @@
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.TINHTRANG)
-
+                    @{ if (item.TINHTRANG == "Chưa xác nhận")
+                        {
+                            tongcxn++;
+                        }
+                        else if (item.TINHTRANG == "Đã giao")
+                        {
+                            tongdxn++;
+                        }
+                        else
+                        {
+                            tongdh++;
+                        }
+                    }
                 </td>
                 <td>
-                    @String.Format("{0:0,0 VNĐ}", @item.TONGTIEN)
+                    @Html.DisplayFor(modelItem => item.TONGTIEN)
+
+                    @{if (item.TINHTRANG == "Đã giao")
+                        {
+                            tong = tong + int.Parse(item.TONGTIEN.ToString());
+                        }
+                    }
+
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.KHACHHANG.TENKH)
                 </td>
-
-
             </tr>
         }
-
-    </table>
-</div>
+    </tbody>
+</table>
+<div id="pageNavPosition" class="text-right"></div>
 <div class="col-1">
 
 </div>
 <p>
-    <a>Tổng doanh thu: </a>
-    <a id="VNĐ">@ViewData["TongTienHD"]</a>
+    <a>Doanh thu:  </a>
+
+    <a>@String.Format("{0:0,0 VNĐ}", @tong)</a>
 </p>
 <p>
     <a>Số đơn hàng chưa xác nhận:  </a>
-    <a>@ViewData["Tongcxn"]</a>
+
+    <a>@tongcxn</a>
 
 </p>
 <p>
     <a>Số đơn hàng đã giao:  </a>
-    <a>@ViewData["Tongdxn"]</a>
+
+    <a>@tongdxn</a>
 </p>
 <p>
     <a>Số đơn hàng đã hủy:  </a>
+    <a>@tongdh</a>
 </p>
-
+    </div>
 
 <script>
-  document.addEventListener("DOMContentLoaded", function() {
-    var tongTienHDElement = document.getElementById("VNĐ");
-    var tongTienHDValue = parseFloat(tongTienHDElement.innerText.replace(/\./g, '').replace(',', '.'));
+    document.addEventListener("DOMContentLoaded", function () {
+        var tongTienHDElement = document.getElementById("VNĐ");
+        var tongTienHDValue = parseFloat(tongTienHDElement.innerText.replace(/\./g, '').replace(',', '.'));
 
-    // Định dạng số thành VNĐ và gán lại giá trị vào phần tử
-    tongTienHDElement.innerText = tongTienHDValue.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' });
-  });
+        // Định dạng số thành VNĐ và gán lại giá trị vào phần tử
+        tongTienHDElement.innerText = tongTienHDValue.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' });
+    });
 </script>
 

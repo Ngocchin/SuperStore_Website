@@ -124,53 +124,6 @@
         });
     </script>
 
-    <!--<-->@*div class="form-structor">
-            @using (Html.BeginForm("SignUp", "Account", FormMethod.Post, new { @enctype = "multipart/form-data" }))
-            {
-
-                @Html.AntiForgeryToken()
-                <div class="signup">
-                    <h2 class="form-title" id="signup"><span>or</span>Sign up</h2>
-                    <div class="form-holder">
-                        <input type="text" class="input" placeholder="Name" />
-                        @Html.TextBoxFor(temp => temp.EMAIL, new { Type = "text", Name = "EMAIL", @class = "input", placeholder = "Email" })
-                        @Html.TextBoxFor(temp => temp.PASSWORD, new { Type = "password", Name = "PASSWORD", @class = "input", placeholder = "Password" })
-                        <input type="password" class="input" name="repass" placeholder="Enter the password" />
-                        <button class="submit-btn">Sign up</button>
-                    </div>
-                </div>
-            }
-            @using (Html.BeginForm("Login", "Account", FormMethod.Post, new { @enctype = "multipart/form-data" }))
-            {
-                @Html.AntiForgeryToken()
-                <div class="login slide-up">
-                    <div class="center">
-                        <h2 class="form-title" id="login"><span>or</span>Log in</h2>
-                        <div class="form-holder">
-                            @Html.TextBoxFor(temp => temp.EMAIL, new { Type = "text", required = "true", Name = "EMAIL", @class = "input", placeholder = "Email" })
-                            @Html.TextBoxFor(temp => temp.PASSWORD, new { Type = "password", required = "true", Name = "PASSWORD", @class = "input", placeholder = "Password" })
-                        </div>
-                        <button class="submit-btn">Log in</button>
-                    </div>
-                </div>
-            }
-        </div>*@ 
-    @*<form class="login-form">
-            <p class="login-text">
-                <span class="fa-stack fa-lg">
-                    <i class="fa fa-circle fa-stack-2x"></i>
-                    <i class="fa fa-lock fa-stack-1x"></i>
-                </span>
-            </p>
-            <input type="email" class="login-username" autofocus="true" required="true" placeholder="Email" />
-            <input type="password" class="login-password" required="true" placeholder="Password" />
-            <input type="submit" name="Login" value="Login" class="login-submit" />
-        </form>
-        <a href="#" class="login-forgot-pass">forgot password?</a>
-        <div class="underlay-photo"></div>
-        <div class="underlay-black"></div>*@
-
-    @*<script src="~/Content/Account.js"></script>*@
 </body>
 </html>
 

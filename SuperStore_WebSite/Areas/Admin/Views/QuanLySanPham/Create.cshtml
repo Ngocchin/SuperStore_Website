@@ -20,7 +20,7 @@
                 <div class="form-group row">
                     <label for="MASP" class="col-md-2 col-form-label">Mã sản phẩm</label>
                     <div class="col-md-10">
-                        @Html.EditorFor(model => model.MASP, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.TextBoxFor(model => model.MASP, new { htmlAttributes = new { @class = "form-control" }, required = "true" })
                         @Html.ValidationMessageFor(model => model.MASP, "", new { @class = "text-danger" })
                     </div>
                 </div>
@@ -28,7 +28,7 @@
                 <div class="form-group row">
                     <label for="TENSP" class="col-md-2 col-form-label">Tên sản phẩm</label>
                     <div class="col-md-10">
-                        @Html.EditorFor(model => model.TENSP, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.TextBoxFor(model => model.TENSP, new { htmlAttributes = new { @class = "form-control" }, required = "true" })
                         @Html.ValidationMessageFor(model => model.TENSP, "", new { @class = "text-danger" })
                     </div>
                 </div>
@@ -55,7 +55,7 @@
                     <label for="fileInput" class="col-md-2 col-form-label">Hình</label>
                     <div class="col-md-10">
                         @Html.EditorFor(model => model.HINHANH)
-                        <input type="file" name="fileupload" id="fileInput" class="form-control-file">
+                        <input type="file" name="fileupload" id="fileInput" class="form-control-file", required ="true">
                         <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
                         <script>
                             $(document).ready(function () {
@@ -72,7 +72,7 @@
                     <label for="fileInput1" class="col-md-2 col-form-label">Hình liên quan</label>
                     <div class="col-md-10">
                         @Html.EditorFor(model => model.HINHLIENQUAN)
-                        <input type="file" name="fileupload1" id="fileInput1" class="form-control-file">
+                        <input type="file" name="fileupload1" id="fileInput1" class="form-control-file", required ="true">
                         <script>
                             $(document).ready(function () {
                                 $('#fileInput1').change(function () {
@@ -85,9 +85,7 @@
                 </div>
 
                 <div class="text-center">
-                    <div class="form-group">
-                        <input type="submit" value="Thêm" class="btn btn-primary" />
-                    </div>
+                    <input type="submit" value="Thêm" class="btn btn-primary" />
                 </div>
 
             </div>

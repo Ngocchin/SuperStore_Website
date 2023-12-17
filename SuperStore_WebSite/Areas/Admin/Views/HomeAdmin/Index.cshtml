@@ -17,10 +17,11 @@
                 ['Tình trạng đơn hàng', 'Số lượng'],
                 ['Đơn đã giao', @ViewData["Tongdxn"]],
                 ['Đơn chưa xác nhận', @ViewData["Tongcxn"]],
+                ['Đã hủy', @ViewData["Tonghuy"]],
             ]);
 
             var options = {
-                title: 'Hóa đơn'
+                title: 'Tỉ lệ đơn hàng'
             };
 
             var chart = new google.visualization.PieChart(document.getElementById('piechart'));
@@ -28,32 +29,104 @@
             chart.draw(data, options);
         }
     </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    @{
+        double tong = 0;
+        int tongcxn = 0;
+        int tongdxn = 0;
+        int tongdh = 0;
+    }
+
+    @foreach (var item in Model)
+    {
+        <td>
+
+            @{ if (item.TINHTRANG == "Chưa xác nhận")
+                {
+                    tongcxn++;
+                }
+                else if (item.TINHTRANG == "Đã giao")
+                {
+                    tongdxn++;
+                }
+                else
+                {
+                    tongdh++;
+                }
+            }
+        </td>
+        <td>
+            @{if (item.TINHTRANG == "Đã giao")
+                {
+                    tong = tong + int.Parse(item.TONGTIEN.ToString());
+                }
+            }        
+        </td>
+    }
+    <script>
+    document.addEventListener("DOMContentLoaded", function () {
+        var ctx = document.getElementById('myChart').getContext('2d');
+
+        var labels = ['Chưa xác nhận', 'Đã giao', 'Đã hủy'];
+        var data = [ @tongcxn, @tongdxn, @tongdh];
+
+        var myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Số lượng đơn hàng',
+                    data: data,
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.5)',
+                        'rgba(54, 162, 235, 0.5)',
+                        'rgba(255, 206, 86, 0.5)',
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    });
+    </script>
 </head>
 <body>
-    @{ int dem = 0;}
     <h2>Thông tin chung</h2>
     <script>
         swal("Xin Chào Admin", "Chúc Bạn 1 Ngày Tốt Lành Nhé", "");
     </script>
     <div class="row m-t-25">
         <div class="col-sm-6 col-lg-3">
-                <div class="overview-item overview-item--c1">
-                    <div class="overview__inner">
-                        <div class="overview-box clearfix">
-                            <div class="icon">
-                                <i class="zmdi zmdi-account-o"></i>
-                            </div>
-                            <div class="text">
-                                <h2></h2>
-                                <span>members online</span>
-                            </div>
+            <div class="overview-item overview-item--c1">
+                <div class="overview__inner">
+                    <div class="overview-box clearfix">
+                        <div class="icon">
+                            <i class="zmdi zmdi-account-o"></i>
                         </div>
-                        <div class="overview-chart">
-                            <canvas id="widgetChart1"></canvas>
+                        <div class="text">
+                            <h2>@ViewBag.TongNhanVien</h2>
+                            <span>Số lượng nhân viên</span>
                         </div>
                     </div>
+                    @*<div class="overview-chart">
+                        <canvas id="widgetChart1"></canvas>
+                    </div>*@
                 </div>
             </div>
+        </div>
         <div class="col-sm-6 col-lg-3">
             <div class="overview-item overview-item--c2">
                 <div class="overview__inner">
@@ -62,61 +135,61 @@
                             <i class="zmdi zmdi-shopping-cart"></i>
                         </div>
                         <div class="text">
-                            <h2>@dem</h2>
+                            <h2>@tongdxn</h2>
                             <span>Tổng số đơn hàng</span>
                         </div>
                     </div>
-                    <div class="overview-chart">
+                    @*<div class="overview-chart">
                         <canvas id="widgetChart2"></canvas>
-                    </div>
+                    </div>*@
                 </div>
             </div>
         </div>
         <div class="col-sm-6 col-lg-3">
-                <div class="overview-item overview-item--c3">
-                    <div class="overview__inner">
-                        <div class="overview-box clearfix">
-                            <div class="icon">
-                                <i class="zmdi zmdi-calendar-note"></i>
-                            </div>
-                            <div class="text">
-                                <h2>1,086</h2>
-                                <span>this week</span>
-                            </div>
+            <div class="overview-item overview-item--c3">
+                <div class="overview__inner">
+                    <div class="overview-box clearfix">
+                        <div class="icon">
+                            <i class="zmdi zmdi-calendar-note"></i>
                         </div>
-                        <div class="overview-chart">
-                            <canvas id="widgetChart3"></canvas>
+                        <div class="text">
+                            <h2>@ViewBag.TongKhach</h2>
+                            <span>Số lượng tài khoản khách</span>
                         </div>
                     </div>
+                    @*<div class="overview-chart">
+                        <canvas id="widgetChart3"></canvas>
+                    </div>*@
                 </div>
             </div>
+        </div>
         <div class="col-sm-6 col-lg-3">
-                <div class="overview-item overview-item--c4">
-                    <div class="overview__inner">
-                        <div class="overview-box clearfix">
-                            <div class="icon">
-                                <i class="zmdi zmdi-money"></i>
-                            </div>
-                            <div class="text">
-                                <h2>$1,060,386</h2>
-                                <span>total earnings</span>
-                            </div>
+            <div class="overview-item overview-item--c4">
+                <div class="overview__inner">
+                    <div class="overview-box clearfix">
+                        <div class="icon">
+                            <i class="zmdi zmdi-money"></i>
                         </div>
-                        <div class="overview-chart">
-                            <canvas id="widgetChart4"></canvas>
+                        <div class="text">
+                            <h2>@String.Format("{0:0,0}", @tong)</h2>
+                            <span> Tổng doanh thu cửa hàng</span>
                         </div>
                     </div>
+                    @*<div class="overview-chart">
+                        <canvas id="widgetChart4"></canvas>
+                    </div>*@
                 </div>
             </div>
+        </div>
     </div>
     <div class="col-lg-6">
-            <div class="au-card m-b-30">
-                <div class="au-card-inner">
-                    <h3 class="title-2 m-b-40">Bar chart</h3>
-                    <canvas id="barChart"></canvas>
-                </div>
+        <div class="au-card m-b-30">
+            <div class="au-card-inner">
+                <h3 class="title-2 m-b-40">Tình trạng đơn hàng</h3>
+                <canvas id="myChart" width="400" height="200"></canvas>
             </div>
         </div>
+    </div>
     <div class="col-lg-6">
         <div class="au-card m-b-30">
             <div class="au-card-inner">

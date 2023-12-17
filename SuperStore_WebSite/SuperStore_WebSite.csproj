@@ -560,7 +560,6 @@
     <Content Include="Areas\Admin\Views\QuanLyKhuyenMai\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\QuanLyKhuyenMai\Index.cshtml" />
     <Content Include="Areas\Admin\Views\QuanLyLoaiSanPham\Create.cshtml" />
-    <Content Include="Areas\Admin\Views\QuanLyLoaiSanPham\Delete.cshtml" />
     <Content Include="Areas\Admin\Views\QuanLyLoaiSanPham\Details.cshtml" />
     <Content Include="Areas\Admin\Views\QuanLyLoaiSanPham\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\QuanLyLoaiSanPham\Index.cshtml" />
@@ -579,7 +578,6 @@
     <Content Include="Areas\Admin\Views\QuanLyNhanVien\ZdenA.cshtml" />
     <Content Include="Areas\Admin\Views\QuanLySanPham\AdenZ.cshtml" />
     <Content Include="Areas\Admin\Views\QuanLySanPham\Create.cshtml" />
-    <Content Include="Areas\Admin\Views\QuanLySanPham\Delete.cshtml" />
     <Content Include="Areas\Admin\Views\QuanLySanPham\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\QuanLySanPham\GiaGiam.cshtml" />
     <Content Include="Areas\Admin\Views\QuanLySanPham\GiaTang.cshtml" />

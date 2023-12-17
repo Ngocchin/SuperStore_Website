@@ -157,28 +157,42 @@ namespace SuperStore_WebSite.Areas.Admin.Controllers
         }
 
         // GET: QuanLySanPham/Delete/5
+        // GET: Product/Delete/5
         public ActionResult Delete(string id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            SANPHAM tbl_SanPham = db.SANPHAMs.Find(id);
-            if (tbl_SanPham == null)
+
+            SANPHAM product = db.SANPHAMs.Find(id);
+
+            if (product == null)
             {
                 return HttpNotFound();
             }
-            return View(tbl_SanPham);
+
+            return View(product);
         }
 
-        // POST: QuanLySanPham/Delete/5
+        // POST: Product/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(string id)
         {
-            SANPHAM tbl_SanPham = db.SANPHAMs.Find(id);
-            db.SANPHAMs.Remove(tbl_SanPham);
+            SANPHAM product = db.SANPHAMs.Find(id);
+
+            if (product == null)
+            {
+                return HttpNotFound();
+            }
+
+            // Gửi thông báo trước khi xóa
+            TempData["Message"] = $"Sản phẩm '{product.TENSP}' đã được xóa thành công.";
+
+            db.SANPHAMs.Remove(product);
             db.SaveChanges();
+
             return RedirectToAction("Index");
         }
 

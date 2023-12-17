@@ -117,8 +117,25 @@
                         @if (item.TINHTRANG != "Đã giao")
                         {
                             <center>
-                                @Html.ActionLink("Xác nhận đơn hàng", "CapnhatHD", new { id = item.MAHD }, new { @class = "btn btn-info" })
+                                @Html.ActionLink(" Xác nhận đơn hàng", "CapnhatHD", new { id = item.MAHD }, new { @class = "btn btn-info fa fa-check" })
                             </center>
+                        }
+                        else
+                        {
+                            if (item.TINHTRANG == "Đã giao")
+                            {
+                                DateTime ngayHienTai = DateTime.Now;
+                                DateTime ngayLap = item.NGAYLAP.Value; // Giả sử item.NGAYLAP có giá trị
+
+                                // Lấy hiệu của hai ngày
+                                TimeSpan hieuNgay = ngayHienTai.Date - ngayLap.Date;
+                                int soNgayChenhLech = hieuNgay.Days;
+                                if (soNgayChenhLech < 8)
+                                {
+                                    @Html.ActionLink(" Hủy đơn hàng", "HuyHD", new { id = item.MAHD }, new { @class = "btn btn-warning fa fa-ban" })
+                                }
+                            }
+
                         }
                     </td>
                 </tr>
@@ -129,7 +146,7 @@
     <div id="pageNavPosition" class="text-right"></div>
 
     <div class="col-1"></div>
-
+   
     <b>Tổng số đơn hàng: @Model.Count()</b>
 
 </div>

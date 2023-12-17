@@ -24,9 +24,12 @@
                     </div>
                 </div>
                 <div class="text-center">
-                    <div class="form-group">
-                        <input type="submit" value="Save" class="btn btn-primary" />
-                    </div>
+                    @using (Html.BeginForm("Edit", "QuanLyLoaiSanPham", FormMethod.Post))
+                    {
+                        <div class="form-group">
+                            <input type="submit" value="Save" class="btn btn-primary" onclick="confirmInsert()" />
+                        </div>
+                    }
                 </div>
 
             </div>
@@ -37,3 +40,21 @@
         @Html.ActionLink("Quay lại", "Index", null, new { @class = "btn btn-secondary" })
     </div>
 </div>
+
+@section scripts
+{
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script>
+        function confirmInsert() {
+            Swal.fire({
+                title: "Sửa thành công!",
+                icon: "success",
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Submit the form
+                    $('form').submit();
+                }
+            });
+        }
+    </script>
+}
