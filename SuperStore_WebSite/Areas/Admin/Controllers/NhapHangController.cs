@@ -26,7 +26,7 @@ namespace SuperStore_WebSite.Areas.Admin.Controllers
         public ActionResult Create()
         {
             PHIEUNHAP pn = new PHIEUNHAP();          
-            ViewBag.MANCC = new SelectList(db.NHACUNGCAPs, "MANCC", "TENNCC");
+            ViewBag.MANCC = new SelectList(db.NHACUNGCAPs, "MANCC", "TENNCC");            
             return View(pn);
         }        
         [HttpPost]
@@ -56,11 +56,12 @@ namespace SuperStore_WebSite.Areas.Admin.Controllers
                 return View(PHIEUNHAP);
             }          
         }
-        public ActionResult CreateCTPN()
+        public ActionResult CreateCTPN(string id, string mancc)
         {
+            ViewBag.id = id;
             CTPHIEUNHAP pn = new CTPHIEUNHAP();
             ViewBag.CTPN = new SelectList(db.PHIEUNHAPs, "MAPHNHAP", "MAPHNHAP");
-            ViewBag.SP = new SelectList(db.SANPHAMs, "MASP", "TENSP");
+            ViewBag.SP = new SelectList(db.SANPHAMs.Where(t => t.MANCC == mancc), "MASP", "TENSP");
             return View(pn);
         }
         [HttpPost]

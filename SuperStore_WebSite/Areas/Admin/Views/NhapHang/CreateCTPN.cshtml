@@ -15,13 +15,19 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
                 <div class="form-group">
+                    @Html.LabelFor(model => model.MAPHNHAP, "Phiếu nhập")
+                    <input type="text" id="myInput" value="@ViewBag.id" />
+                </div>
+
+                @*<div class="form-group">
                     @Html.LabelFor(model => model.MAPHNHAP, "Phiếu nhập")
                     @Html.DropDownListFor(model => model.MAPHNHAP, ViewBag.CTPN as SelectList, "-- Chọn mã phiếu nhâp --", new { @class = "form-control" })
                     @Html.ValidationMessageFor(model => model.MAPHNHAP, "", new { @class = "text-danger" })
-                </div>
+                </div>*@
                 <div class="form-group">
-                    @Html.LabelFor(model => model.MASP, "Phiếu nhập")
+                    @Html.LabelFor(model => model.MASP, "Sản phẩm")
                     @Html.DropDownListFor(model => model.MASP, ViewBag.SP as SelectList, "-- Chọn sản phẩm --", new { @class = "form-control" })
                     @Html.ValidationMessageFor(model => model.MASP, "", new { @class = "text-danger" })
                 </div>
