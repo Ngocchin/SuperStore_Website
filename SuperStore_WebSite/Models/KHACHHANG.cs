@@ -11,7 +11,9 @@ namespace SuperStore_WebSite.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel;
     using System.ComponentModel.DataAnnotations;
+    using System.Runtime.CompilerServices;
 
     public partial class KHACHHANG
     {
@@ -20,18 +22,22 @@ namespace SuperStore_WebSite.Models
         {
             this.HOADONs = new HashSet<HOADON>();
         }
-    
+
         public string MAKH { get; set; }
-        public string TENKH { get; set; }
+       
+        public string TENKH { get; set; }      
         public string SDT { get; set; }
+        
         public Nullable<System.DateTime> NGAYSINH { get; set; }
+        
         public string GIOITINH { get; set; }
+        
         public string DIACHI { get; set; }
 
         [Required(ErrorMessage = "Vui lòng nhập email.")]
         [EmailAddress(ErrorMessage = "Địa chỉ email không hợp lệ.")]
         public string EMAIL { get; set; }
-        [Required(ErrorMessage = "Vui lòng nhập mật khẩu.")]
+        [Required(ErrorMessage = "Vui lòng nhập mật khẩu.")]        
         public string PASSWORD { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

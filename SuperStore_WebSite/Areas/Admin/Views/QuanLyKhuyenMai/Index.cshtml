@@ -47,7 +47,8 @@
                     <th>
                         Giảm giá
                     </th>
-                    <th>Chức năng</th>
+                    <th></th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
@@ -67,8 +68,14 @@
                             @Html.DisplayFor(modelItem => item.GIAGIAM)
                         </td>
                         <td>
-                            @Html.ActionLink("Edit", "Edit", new { id = item.MAKM }, new { @class = "btn btn-warning btn-sm" }) |                           
-                            @Html.ActionLink("Delete", "Delete", new { id = item.MAKM }, new { @class = "btn btn-danger btn-sm delete-link" })
+                            @Html.ActionLink(" Edit", "Edit", "QuanLyKhuyenMai", new { id = item.MAKM }, new { @class = "btn btn-warning btn-sm" })
+                        </td>
+                        <td>
+                            @using (Html.BeginForm("Delete", "QuanLyKhuyenMai", new { id = item.MAKM }, FormMethod.Post))
+                            {
+                                @Html.AntiForgeryToken()
+                                <button type="submit" class="btn btn-danger fa fa-ban"> Delete</button>
+                            }
                         </td>
                     </tr>
                 }

@@ -96,7 +96,8 @@
                     <th>Ngày sinh</th>
                     <th>Giới tính</th>
                     <th>Địa chỉ</th>
-                    <th>Tùy chỉnh</th>
+                    <th></th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
@@ -109,8 +110,14 @@
                         <td>@Html.DisplayFor(modelItem => item.GIOITINH)</td>
                         <td>@Html.DisplayFor(modelItem => item.DIACHI)</td>
                         <td class="action-buttons">
-                            @Html.ActionLink(" Edit", "Edit", new { id = item.MANCC }, new { @class = "btn btn-warning fa fa-info-circle" })                           
-                            @Html.ActionLink(" Delete", "Delete", new { id = item.MANCC }, new { @class = "btn btn-danger fa fa-ban" })
+                            @Html.ActionLink(" Edit", "Edit", new { id = item.MANCC }, new { @class = "btn btn-warning fa fa-info-circle" })
+                        </td>
+                        <td>
+                            @using (Html.BeginForm("Delete", "QuanLyNhaCungCap", new { id = item.MANCC }, FormMethod.Post))
+                            {
+                                @Html.AntiForgeryToken()
+                                <button type="submit" class="btn btn-danger fa fa-ban"> Delete</button>
+                            }
                         </td>
                     </tr>
                 }

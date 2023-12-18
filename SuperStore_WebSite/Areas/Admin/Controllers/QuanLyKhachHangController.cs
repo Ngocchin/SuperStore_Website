@@ -79,6 +79,8 @@ namespace SuperStore_WebSite.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
+                var makh = db.KHACHHANGs.Count() + 1;
+                tbl_KhachHang.MAKH = "KH" + makh.ToString("000");
                 db.KHACHHANGs.Add(tbl_KhachHang);
                 db.SaveChanges();
                 return RedirectToAction("Index");

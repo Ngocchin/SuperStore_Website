@@ -548,23 +548,19 @@
     <Content Include="Areas\Admin\Views\QuanLyHoaDon\SXMN.cshtml" />
     <Content Include="Areas\Admin\Views\QuanLyKhachHang\AdenZ.cshtml" />
     <Content Include="Areas\Admin\Views\QuanLyKhachHang\Create.cshtml" />
-    <Content Include="Areas\Admin\Views\QuanLyKhachHang\Delete.cshtml" />
     <Content Include="Areas\Admin\Views\QuanLyKhachHang\Details.cshtml" />
     <Content Include="Areas\Admin\Views\QuanLyKhachHang\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\QuanLyKhachHang\Index.cshtml" />
     <Content Include="Areas\Admin\Views\QuanLyKhachHang\TimKiem.cshtml" />
     <Content Include="Areas\Admin\Views\QuanLyKhachHang\ZdenA.cshtml" />
     <Content Include="Areas\Admin\Views\QuanLyKhuyenMai\Create.cshtml" />
-    <Content Include="Areas\Admin\Views\QuanLyKhuyenMai\Delete.cshtml" />
     <Content Include="Areas\Admin\Views\QuanLyKhuyenMai\Details.cshtml" />
     <Content Include="Areas\Admin\Views\QuanLyKhuyenMai\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\QuanLyKhuyenMai\Index.cshtml" />
     <Content Include="Areas\Admin\Views\QuanLyLoaiSanPham\Create.cshtml" />
-    <Content Include="Areas\Admin\Views\QuanLyLoaiSanPham\Details.cshtml" />
     <Content Include="Areas\Admin\Views\QuanLyLoaiSanPham\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\QuanLyLoaiSanPham\Index.cshtml" />
     <Content Include="Areas\Admin\Views\QuanLyNhaCungCap\Create.cshtml" />
-    <Content Include="Areas\Admin\Views\QuanLyNhaCungCap\Delete.cshtml" />
     <Content Include="Areas\Admin\Views\QuanLyNhaCungCap\Details.cshtml" />
     <Content Include="Areas\Admin\Views\QuanLyNhaCungCap\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\QuanLyNhaCungCap\Index.cshtml" />
@@ -653,8 +649,8 @@
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Account\SignUp.cshtml" />
     <Content Include="Views\Cart\OrderFollow.cshtml" />
-    <Content Include="Views\Account\Inf.cshtml" />
     <Content Include="Views\Cart\Order.cshtml" />
+    <Content Include="Views\Account\Inf.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

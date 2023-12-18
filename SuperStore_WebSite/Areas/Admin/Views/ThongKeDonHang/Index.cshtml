@@ -3,73 +3,97 @@
 @{
     ViewBag.Title = "Index";
     Layout = "~/Areas/Admin/Views/Shared/_AdminPage2.cshtml";
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        .btn-custom {
+            background-color: #5D7B6F;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 8px 16px;
+            text-decoration: none;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+    </style>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 }
 
-<style>
-    table {
-        width: 100%;
-        border-collapse: collapse;
-        margin-bottom: 20px;
-    }
+<h2>Thống kê đơn hàng</h2>
 
-    th, td {
-        border: 1px solid #ddd;
-        padding: 8px;
-        text-align: left;
-    }
+<div class="row m-3 w-100 " style="">
 
-    th {
-        background-color: #f2f2f2;
-    }
+    <input type="date" id="selectedDate">
+    <button onclick="submitDate()">Submit</button>
 
-    .btn-custom {
-        background-color: #5D7B6F;
-        color: white;
-        border: none;
-        border-radius: 5px;
-        padding: 8px 16px;
-        text-decoration: none;
-        cursor: pointer;
-        margin-right: 10px;
-    }
-</style>
 
-<div class="container-fluid al">
-    <h2>Thống kê đơn hàng</h2>
-    <div class="col-12 mt-3">
-        <label for="thangDropdown">Chọn tháng:</label>
-        <select id="thangDropdown">
-            <option value="1">Tháng 1</option>
-            <option value="2">Tháng 2</option>
-            <option value="3">Tháng 3</option>
-            <option value="4">Tháng 4</option>
-            <option value="5">Tháng 5</option>
-            <option value="6">Tháng 6</option>
-            <option value="7">Tháng 7</option>
-            <option value="8">Tháng 8</option>
-            <option value="9">Tháng 9</option>
-            <option value="10">Tháng 10</option>
-            <option value="11">Tháng 11</option>
-            <option value="12">Tháng 12</option>
-        </select>
-        <button type="button" onclick="loc()">Lọc</button>
-    </div>
+
+
+    <div class="col-5">
+        <form>
+            <label for="thangDropdown">Chọn tháng:</label>
+            <select id="thangDropdown">
+                <option value="1">Tháng 1</option>
+                <option value="2">Tháng 2</option>
+                <option value="3">Tháng 3</option>
+                <option value="4">Tháng 4</option>
+                <option value="5">Tháng 5</option>
+                <option value="6">Tháng 6</option>
+                <option value="7">Tháng 7</option>
+                <option value="8">Tháng 8</option>
+                <option value="9">Tháng 9</option>
+                <option value="10">Tháng 10</option>
+                <option value="11">Tháng 11</option>
+                <option value="12">Tháng 12</option>
+            </select>
+
+            <button type="button" onclick="loc()">Lọc</button>
+        </form>
+
+        <script>
+            function loc() {
+                // Lấy giá trị tháng được chọn
+                var dropdown = document.getElementById('thangDropdown');
+                var thangDuocChon = dropdown.value;
+
+                // Chuyển đến trang Index của controller và truyền tháng được chọn
+                /*window.location.href = 'ThongKeDonHang/Index?thang=' + thangDuocChon;*/
+                window.location.href = '/Admin/ThongKeDonHang/Index?thang=' + thangDuocChon;
+            }
+
+            function submitDate() {
+                // Lấy giá trị ngày từ phần tử input
+                var selectedDate = document.getElementById("selectedDate").value;
+
+                // Chuyển đổi định dạng ngày thành ngày/tháng/năm
+                var dateParts = selectedDate.split("-");
+                var formattedDate = dateParts[0] + "-" + dateParts[1] + "-" + dateParts[2];
+
+                // Truyền giá trị ngày vào controller index (thay thế "TEN_CONTROLLER" bằng tên thực tế của controller index của bạn)
+                window.location.href = "/Admin/ThongKeDonHang/Index?date=" + formattedDate;
+            }
+        </script>
+    </div>    
 </div>
 
-<br />
-
-<script>
-    function loc() {
-        // Lấy giá trị tháng được chọn
-        var dropdown = document.getElementById('thangDropdown');
-        var thangDuocChon = dropdown.value;
-
-        // Chuyển đến trang Index của controller và truyền tháng được chọn
-        window.location.href = 'ThongKeDonHang/Index?thang=' + thangDuocChon;
-    }
-</script>
-</div>
 
 @{
     double tong = 0;
@@ -77,10 +101,10 @@
     int tongdxn = 0;
     int tongdh = 0;
 }
-<br />
-<table class="table table-bordered table-hover " id="myTable">
-    <thead class="thead-dark">
-        <tr>
+
+<div class="col-11">
+    <table class="table table-hover">
+        <tr class="bg-info  border-left-0" style="font-size:x-large">
             <th>
                 Ngày lập
             </th>
@@ -93,9 +117,10 @@
             <th>
                 Tên khách hàng
             </th>
+
         </tr>
-    </thead>
-    <tbody>
+
+
         @foreach (var item in Model)
         {
             <tr>
@@ -115,8 +140,8 @@
                         else
                         {
                             tongdh++;
-                        }
-                    }
+                        }}
+
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.TONGTIEN)
@@ -129,20 +154,24 @@
 
                 </td>
                 <td>
+
+
+
                     @Html.DisplayFor(modelItem => item.KHACHHANG.TENKH)
                 </td>
+
+
             </tr>
         }
-    </tbody>
-</table>
-<div id="pageNavPosition" class="text-right"></div>
+    </table>
+</div>
 <div class="col-1">
 
 </div>
 <p>
     <a>Doanh thu:  </a>
 
-    <a>@String.Format("{0:0,0 VNĐ}", @tong)</a>
+    <a>@tong</a>
 </p>
 <p>
     <a>Số đơn hàng chưa xác nhận:  </a>
@@ -159,7 +188,7 @@
     <a>Số đơn hàng đã hủy:  </a>
     <a>@tongdh</a>
 </p>
-    </div>
+
 
 <script>
     document.addEventListener("DOMContentLoaded", function () {
@@ -170,4 +199,3 @@
         tongTienHDElement.innerText = tongTienHDValue.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' });
     });
 </script>
-

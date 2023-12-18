@@ -46,7 +46,8 @@
                     <th>
                         @Html.DisplayNameFor(model => model.TENLOAI)
                     </th>
-                    <th>Chức năng</th>
+                    <th></th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
@@ -61,7 +62,13 @@
                         </td>
                         <td>
                             @Html.ActionLink(" Edit", "Edit", new { id = item.MALOAI }, new { @class = "btn btn-warning fa fa-info-circle" })
-                            @Html.ActionLink(" Delete", "Delete", new { id = item.MALOAI }, new { @class = "btn btn-danger fa fa-ban" })                            
+                        </td>
+                        <td>
+                            @using (Html.BeginForm("Delete", "QuanLyLoaiSanPham", new { id = item.MALOAI }, FormMethod.Post))
+                            {
+                                @Html.AntiForgeryToken()
+                                <button type="submit" class="btn btn-danger fa fa-ban"> Delete</button>
+                            }                           
                         </td>
                     </tr>
                 }

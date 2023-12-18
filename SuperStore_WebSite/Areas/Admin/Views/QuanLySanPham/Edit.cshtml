@@ -94,10 +94,23 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    Hình liên quan
+                    Hình
                     <div class="col-md-10">
-                        @Html.EditorFor(model => model.HINHLIENQUAN, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.HINHLIENQUAN, "", new { @class = "text-danger" })
+                        @Html.EditorFor(model => model.HINHLIENQUAN)
+                        <input type="file" name="fileupload" id="fileInput1" />
+                        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+                        <script>
+                            $(document).ready(function () {
+                                // Lắng nghe sự kiện khi người dùng chọn tệp
+                                $('#fileInput1').change(function () {
+                                    // Lấy tên tệp từ đường dẫn tệp
+                                    var fileName = $(this).val().split("\\").pop();
+
+                                    // Hiển thị tên tệp trong EditorFor
+                                    $('#HINHLIENQUAN').val(fileName);
+                                });
+                            });
+                        </script>
                     </div>
                 </div>
                 <div class="text-center">

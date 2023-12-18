@@ -114,7 +114,7 @@
                         @Html.DisplayFor(modelItem => item.NHANVIEN.TENNV)
                     </td>
                     <td>
-                        @if (item.TINHTRANG != "Đã giao")
+                        @if (item.TINHTRANG == "Chưa xác nhận")
                         {
                             <center>
                                 @Html.ActionLink(" Xác nhận đơn hàng", "CapnhatHD", new { id = item.MAHD }, new { @class = "btn btn-info fa fa-check" })

@@ -81,6 +81,8 @@ namespace SuperStore_WebSite.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
+                var manv = db.NHANVIENs.Count() + 1;
+                tbl_NhanVien.MANV = "NV" + manv.ToString("000");
                 db.NHANVIENs.Add(tbl_NhanVien);
                 db.SaveChanges();
                 return RedirectToAction("Index");

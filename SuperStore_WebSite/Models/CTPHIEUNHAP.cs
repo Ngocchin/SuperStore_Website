@@ -16,16 +16,17 @@ namespace SuperStore_WebSite.Models
     public partial class CTPHIEUNHAP
     {
         public string MAPHNHAP { get; set; }
+
         public string MASP { get; set; }
 
-        [Required(ErrorMessage = "Vui lòng nhập số lượng.")]
         public Nullable<int> SOLUONG { get; set; }
 
-        [Required(ErrorMessage = "Vui lòng nhập giá nhâpj.")]
         public Nullable<double> GIANHAP { get; set; }
+
         public Nullable<double> TONGTIEN { get; set; }
-    
+
         public virtual PHIEUNHAP PHIEUNHAP { get; set; }
         public virtual SANPHAM SANPHAM { get; set; }
     }
 }
+

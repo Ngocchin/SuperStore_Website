@@ -94,7 +94,32 @@ namespace SuperStore_WebSite.Areas.Admin.Controllers
                 // You can return a view or perform other actions as needed
                 return View("InvoiceNotFound");
             }
-        }           
+        }
+        public ActionResult HuyHD(string id, string manv)
+        {
+            // Find the invoice with the specified 'ma'
+            HOADON hd = db.HOADONs.Find(id);
+            NHANVIEN nv = (NHANVIEN)Session["Account"];
+            hd.MANV = nv.MANV;
+            if (hd != null)
+            {
+                // Update
+                hd.TINHTRANG = "Đã hủy";
+                hd.NGAYLAP = DateTime.Now;
+
+                // Save the changes to the database
+                db.SaveChanges();
+
+                // Redirect to the 'Index' action
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                // Handle the case when the invoice with the specified 'ma' is not found
+                // You can return a view or perform other actions as needed
+                return View("InvoiceNotFound");
+            }
+        }
 
         public ActionResult Details(string id)
         {
@@ -127,6 +152,8 @@ namespace SuperStore_WebSite.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
+                var mahd = db.HOADONs.Count() + 1;
+                HOADONs.MAHD = "HD" + mahd.ToString("000");
                 db.HOADONs.Add(HOADONs);
                 db.SaveChanges();
                 return RedirectToAction("Index");

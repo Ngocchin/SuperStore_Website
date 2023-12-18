@@ -51,6 +51,8 @@ namespace SuperStore_WebSite.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
+                //var maloai = db.LOAIs.Count() + 1;
+                //lOAI.MALOAI = "L" + maloai.ToString("000");
                 db.LOAIs.Add(lOAI);
                 db.SaveChanges();
                 return RedirectToAction("Index");

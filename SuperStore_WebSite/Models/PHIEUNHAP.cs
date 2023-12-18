@@ -12,6 +12,7 @@ namespace SuperStore_WebSite.Models
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+    using System.Runtime.CompilerServices;
 
     public partial class PHIEUNHAP
     {
@@ -19,16 +20,18 @@ namespace SuperStore_WebSite.Models
         public PHIEUNHAP()
         {
             this.CTPHIEUNHAPs = new HashSet<CTPHIEUNHAP>();
-        }
-    
-        public string MAPHNHAP { get; set; }
-        public string MANV { get; set; }
-        public string MANCC { get; set; }        
-        public Nullable<System.DateTime> NGAYLAPPHIEU { get; set; }
-    
+        }        
+        public string MAPHNHAP { get; set; }        
+        public string MANV { get; set; }        
+        public string MANCC { get; set; }
+        public Nullable<System.DateTime> NGAYLAPPHIEU { get; set; }       
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+
         public virtual ICollection<CTPHIEUNHAP> CTPHIEUNHAPs { get; set; }
         public virtual NHACUNGCAP NHACUNGCAP { get; set; }
         public virtual NHANVIEN NHANVIEN { get; set; }
+       
     }
+
 }

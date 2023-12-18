@@ -51,9 +51,9 @@
 <div class="container-fluid al">
     <h2>Quản lý khách hàng</h2>
     <div class="row m-3">
-        <div class="col-12 col-md-2">
+        @*<div class="col-12 col-md-2">
             @Html.ActionLink(" Thêm khách hàng mới", "Create", null, new { @class = "btn btn-outline-success fa fa-lightbulb-o", style = "font-size: 16px; padding: 10px;" }) &nbsp;
-        </div>
+        </div>*@
 
         <div class="col-12 col-md-5"></div>
         <div class="col-12 col-md-5">
@@ -99,7 +99,8 @@
                     <th>Địa chỉ</th>
                     <th>Email</th>
                     <th>Mật khẩu</th>
-                    <th>Tùy chỉnh</th>
+                    <th></th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
@@ -121,8 +122,14 @@
                         <td>@Html.DisplayFor(modelItem => item.PASSWORD)</td>
                         <td class="action-buttons">
                             @Html.ActionLink(" Edit", "Edit", new { id = item.MAKH }, new { @class = "btn btn-warning fa fa-info-circle" })
-                            @Html.ActionLink(" Delete", "Delete", new { id = item.MAKH }, new { @class = "btn btn-danger fa fa-ban" })
                         </td>
+                        <td>
+                            @using (Html.BeginForm("Delete", "QuanLyKhachHang", new { id = item.MAKH }, FormMethod.Post))
+                            {
+                                @Html.AntiForgeryToken()
+                                <button type="submit" class="btn btn-danger fa fa-ban"> Delete</button>
+                            }
+                        </td>                   
                     </tr>
                 }
             </tbody>

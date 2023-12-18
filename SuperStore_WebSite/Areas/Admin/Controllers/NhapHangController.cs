@@ -15,29 +15,25 @@ namespace SuperStore_WebSite.Areas.Admin.Controllers
         // GET: Admin/NhapHang
         public ActionResult Index()
         {
-            List<NHACUNGCAP> nhaCungCapList = db.NHACUNGCAPs.ToList();
-            SelectList nhaCungCapSelectList = new SelectList(nhaCungCapList, "MANCC", "TENNCC");
-            ViewBag.NhaCungCapList = nhaCungCapSelectList;
-
             return View(db.PHIEUNHAPs.ToList());
         } 
         public ActionResult Create()
         {
-            PHIEUNHAP pn = new PHIEUNHAP();
-            ViewBag.MANV = new SelectList(db.NHANVIENs, "MANV", "TENNV");
+            PHIEUNHAP pn = new PHIEUNHAP();          
             ViewBag.MANCC = new SelectList(db.NHACUNGCAPs, "MANCC", "TENNCC");
             return View(pn);
         }        
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "MAPHNHAP,MANV,MANCC,NGAYLAPPHIEU")] PHIEUNHAP PHIEUNHAP, string id)
+        public ActionResult Create([Bind(Include = "MAPHNHAP,MANV,MANCC,NGAYLAPPHIEU")] PHIEUNHAP PHIEUNHAP)
         {
-            if (ModelState.IsValid)
-            {               
-                NHANVIEN nv = (NHANVIEN)Session["Account"];                
+            if (ModelState.IsValid) 
+            {
+                NHANVIEN nv = (NHANVIEN)Session["Account"];
                 int maph = db.PHIEUNHAPs.Count() + 1;
                 PHIEUNHAP.MAPHNHAP = "PN" + maph.ToString("000");
-                PHIEUNHAP.MANV = nv.MANV;           
+                PHIEUNHAP.MANV = nv.MANV;
+                PHIEUNHAP.NGAYLAPPHIEU = DateTime.Now.Date;
                 db.PHIEUNHAPs.Add(PHIEUNHAP);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -47,12 +43,12 @@ namespace SuperStore_WebSite.Areas.Admin.Controllers
                 foreach (var modelState in ModelState.Values)
                 {
                     foreach (var error in modelState.Errors)
-                    {                        
+                    {
                         Console.WriteLine(error.ErrorMessage);
                     }
-                }                
+                }
                 return View(PHIEUNHAP);
-            }            
+            }          
         }
         public ActionResult CreateCTPN()
         {
@@ -84,7 +80,7 @@ namespace SuperStore_WebSite.Areas.Admin.Controllers
                         {
                             return View();
                         }
-                    }                    
+                    }                   
                     db.SaveChanges();
                     return RedirectToAction("Index");
                 }

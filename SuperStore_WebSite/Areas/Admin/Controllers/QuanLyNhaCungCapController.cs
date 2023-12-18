@@ -50,6 +50,8 @@ namespace SuperStore_WebSite.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
+                var mancc = db.NHACUNGCAPs.Count() + 1;
+                nHACUNGCAP.MANCC = "NCC" + mancc.ToString("000");
                 db.NHACUNGCAPs.Add(nHACUNGCAP);
                 db.SaveChanges();
                 return RedirectToAction("Index");

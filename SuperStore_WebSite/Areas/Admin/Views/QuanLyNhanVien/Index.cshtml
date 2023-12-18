@@ -98,7 +98,8 @@
                     <th>Địa chỉ</th>
                     <th>Chức vụ</th>
                     <th>Mật khẩu</th>
-                    <th>Tùy chỉnh</th>
+                    <th></th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
@@ -119,7 +120,13 @@
                         <td>@Html.DisplayFor(modelItem => item.PASSWORD)</td>
                         <td class="action-buttons">
                             @Html.ActionLink(" Edit", "Edit", new { id = item.MANV }, new { @class = "btn btn-warning fa fa-info-circle" })
-                            @Html.ActionLink(" Delete", "Delete", new { id = item.MANV }, new { @class = "btn btn-danger fa fa-ban" })
+                        </td>
+                        <td>
+                            @using (Html.BeginForm("Delete", "QuanLyNhanVien", new { id = item.MANV }, FormMethod.Post))
+                            {
+                                @Html.AntiForgeryToken()
+                                <button type="submit" class="btn btn-danger fa fa-ban"> Delete</button>
+                            }
                         </td>
                     </tr>
                 }

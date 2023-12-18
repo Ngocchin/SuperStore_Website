@@ -208,9 +208,16 @@
                             </a>
                         </li>
                         <li>
-                            <a href="~/Admin/QuanLyNhanVien">
-                                <i class="far fa-check-square"></i>Quản lý nhân viên
+                            @if (Session["Account"] != null)
+                            {
+                                var nv = Session["Account"] as SuperStore_WebSite.Models.NHANVIEN;
+                                if (nv.CHUCVU == "Quản lý")
+                                {
+                                <a href="~/Admin/QuanLyNhanVien">
+                                <i class="far fa-check-square"></i>Quản lý nhân viên                               
                             </a>
+                                }
+                            }
                         </li>
                         <li>
                             <a href="~/Admin/QuanLyHoaDon">

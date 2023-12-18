@@ -16,25 +16,16 @@
             <div class="col-md-8">
 
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-
                 <div class="form-group row">
-                    <label for="MASP" class="col-md-2 col-form-label">Mã sản phẩm</label>
+                    @Html.LabelFor(model => model.TENSP, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
-                        @Html.TextBoxFor(model => model.MASP, new { htmlAttributes = new { @class = "form-control" }, required = "true" })
-                        @Html.ValidationMessageFor(model => model.MASP, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-
-                <div class="form-group row">
-                    <label for="TENSP" class="col-md-2 col-form-label">Tên sản phẩm</label>
-                    <div class="col-md-10">
-                        @Html.TextBoxFor(model => model.TENSP, new { htmlAttributes = new { @class = "form-control" }, required = "true" })
+                        @Html.EditorFor(model => model.TENSP, new { htmlAttributes = new { @class = "form-control" } })
                         @Html.ValidationMessageFor(model => model.TENSP, "", new { @class = "text-danger" })
                     </div>
                 </div>
 
                 <div class="form-group row">
-                    <label for="MaLoai" class="col-md-2 col-form-label">Mã loại</label>
+                    @Html.LabelFor(model => model.MALOAI, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
                         @Html.DropDownList("MaLoai", null, htmlAttributes: new { @class = "form-control" })
                         @Html.ValidationMessageFor(model => model.MALOAI, "", new { @class = "text-danger" })
@@ -42,50 +33,45 @@
                 </div>
 
                 <div class="form-group row">
-                    <label for="MaNCC" class="col-md-2 col-form-label">Mã nhà cung cấp</label>
+                    @Html.LabelFor(model => model.MANCC, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
                         @Html.DropDownList("MaNCC", null, htmlAttributes: new { @class = "form-control" })
                         @Html.ValidationMessageFor(model => model.MANCC, "", new { @class = "text-danger" })
                     </div>
                 </div>
-
-                <!-- ... (Các mục khác tương tự) -->
-
                 <div class="form-group row">
-                    <label for="fileInput" class="col-md-2 col-form-label">Hình</label>
+                    @Html.LabelFor(model => model.GIABAN, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
-                        @Html.EditorFor(model => model.HINHANH)
-                        <input type="file" name="fileupload" id="fileInput" class="form-control-file", required ="true">
-                        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-                        <script>
-                            $(document).ready(function () {
-                                $('#fileInput').change(function () {
-                                    var fileName = $(this).val().split("\\").pop();
-                                    $('#HINHANH').val(fileName);
-                                });
-                            });
-                        </script>
+                        @Html.EditorFor(model => model.GIABAN, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.GIABAN, "", new { @class = "text-danger" })
                     </div>
                 </div>
-
                 <div class="form-group row">
-                    <label for="fileInput1" class="col-md-2 col-form-label">Hình liên quan</label>
+                    @Html.LabelFor(model => model.GHICHU, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
-                        @Html.EditorFor(model => model.HINHLIENQUAN)
-                        <input type="file" name="fileupload1" id="fileInput1" class="form-control-file", required ="true">
-                        <script>
-                            $(document).ready(function () {
-                                $('#fileInput1').change(function () {
-                                    var fileName1 = $(this).val().split("\\").pop();
-                                    $('#HINHLIENQUAN').val(fileName1);
-                                });
-                            });
-                        </script>
+                        @Html.EditorFor(model => model.GHICHU, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.GHICHU, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group row">
+                    @Html.LabelFor(model => model.HINHANH, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        <input type="file" name="file1" />
+                        @Html.ValidationMessageFor(model => model.HINHANH, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group row">
+                    @Html.LabelFor(model => model.HINHLIENQUAN, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        <input type="file" name="file2" />
+                        @Html.ValidationMessageFor(model => model.HINHLIENQUAN, "", new { @class = "text-danger" })
                     </div>
                 </div>
 
                 <div class="text-center">
-                    <input type="submit" value="Thêm" class="btn btn-primary" />
+                    <div class="form-group">
+                        <input type="submit" value="Submit" class="btn btn-primary" />
+                    </div>
                 </div>
 
             </div>

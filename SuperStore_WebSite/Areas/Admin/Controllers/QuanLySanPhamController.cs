@@ -9,6 +9,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.UI.WebControls;
 using SuperStore_WebSite.Models;
+using static System.Net.WebRequestMethods;
 
 namespace SuperStore_WebSite.Areas.Admin.Controllers
 {
@@ -102,10 +103,29 @@ namespace SuperStore_WebSite.Areas.Admin.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "MASP,TENSP,MALOAI,MANCC,MAKM,GIABAN,SOLUONGTON,GHICHU,HINHANH,HINHLIENQUAN")] SANPHAM tbl_SanPham, HttpPostedFileBase fileupload, HttpPostedFileBase fileupload1)
+        public ActionResult Create([Bind(Include = "MASP,TENSP,MALOAI,MANCC,MAKM,GIABAN,SOLUONGTON,GHICHU,HINHANH,HINHLIENQUAN")] SANPHAM tbl_SanPham, HttpPostedFileBase file1, HttpPostedFileBase file2)
         {
+
             if (ModelState.IsValid)
             {
+                if (file1 != null && file1.ContentLength > 0)
+                {
+                    string fileName1 = Path.GetFileName(file1.FileName);
+                    string filePath1 = Path.Combine(Server.MapPath("~/Resources/img"), fileName1);
+                    file1.SaveAs(filePath1);
+
+                    tbl_SanPham.HINHANH = fileName1;
+                }
+
+                if (file2 != null && file2.ContentLength > 0)
+                {
+                    string fileName2 = Path.GetFileName(file2.FileName);
+                    string filePath2 = Path.Combine(Server.MapPath("~/Resources/img"), fileName2);
+                    file2.SaveAs(filePath2);
+                    tbl_SanPham.HINHLIENQUAN = fileName2;
+                }
+                var masp = db.SANPHAMs.Count() + 1;
+                tbl_SanPham.MASP = "SP" + masp.ToString("000");
                 db.SANPHAMs.Add(tbl_SanPham);
                 db.SaveChanges();
 
@@ -142,11 +162,10 @@ namespace SuperStore_WebSite.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "MASP,TENSP,MALOAI,MANCC,MAKM,GIABAN,SOLUONGTON,GHICHU,HINHANH,HINHLIENQUAN")] SANPHAM tbl_SanPham)
+        public ActionResult Edit([Bind(Include = "MASP,TENSP,MALOAI,MANCC,MAKM,GIABAN,SOLUONGTON,GHICHU,HINHANH,HINHLIENQUAN")] SANPHAM tbl_SanPham )
         {
             if (ModelState.IsValid)
             {
-                db.Entry(tbl_SanPham).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }

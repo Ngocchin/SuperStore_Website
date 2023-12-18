@@ -15,29 +15,28 @@ namespace SuperStore_WebSite.Areas.Admin.Controllers
         private QL_BANHANGDIENTUEntities1 db = new QL_BANHANGDIENTUEntities1();
 
         // GET: ThongKeDonHang
-        public ActionResult Index(int? thang)
+        public ActionResult Index(int? thang, string date)
         {
-            if (thang == null)
+            var tbl_HoaDon = db.HOADONs.Include(t => t.KHACHHANG).Include(t => t.NHANVIEN);
+            if (thang != null)
             {
-                var tbl_HoaDon = db.HOADONs.Include(t => t.KHACHHANG).Include(t => t.NHANVIEN);
-                ViewBag.tt = tong();
-                ViewData["TongTienHD"] = tong();
-                ViewData["Tongcxn"] = chuaxn();
-                ViewData["Tongdxn"] = daxn();
-                ViewData["Tonghuy"] = dahuy();
-                return View(tbl_HoaDon.ToList());
+                tbl_HoaDon = db.HOADONs.Include(t => t.KHACHHANG).Include(t => t.NHANVIEN).Where(t => t.NGAYLAP.Value.Month == thang);
             }
             else
             {
-                var tbl_HoaDon = db.HOADONs.Include(t => t.KHACHHANG).Include(t => t.NHANVIEN).Where(t => t.NGAYLAP.Value.Month == thang);
-                ViewBag.tt = tong();
-                ViewData["TongTienHD"] = tong();
-                ViewData["Tongcxn"] = chuaxn();
-                ViewData["Tongdxn"] = daxn();
-                ViewData["Tonghuy"] = dahuy();
-                return View(tbl_HoaDon.ToList());
+                if (date != null)
+                {
+                    tbl_HoaDon = db.HOADONs.Include(t => t.KHACHHANG).Include(t => t.NHANVIEN).Where(t => t.NGAYLAP.Value.ToString() == date);
+
+                }
             }
 
+            ViewBag.tt = tong();
+            ViewData["TongTienHD"] = tong();
+            ViewData["Tongcxn"] = chuaxn();
+            ViewData["Tongdxn"] = daxn();
+            ViewData["Tonghuy"] = dahuy();
+            return View(tbl_HoaDon.ToList());
         }
 
 
