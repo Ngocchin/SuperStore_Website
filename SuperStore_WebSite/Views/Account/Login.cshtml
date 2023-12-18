@@ -54,6 +54,20 @@
                         <input type="text" class="input" required="true" name="SDT" placeholder="SDT" />
                     </div>
                     <div class="input-field">
+                        <i class="fas fa-user"></i>
+                        <input type="text" class="input" required="true" name="DIACHI" placeholder="Diachi" />
+                    </div>
+                    <div class="col-md-8 order-md-1">
+                        <div class="custom-control custom-radio">
+                            <input name="GIOITINH" type="radio" class="input" value="Nam" checked required>
+                            <label class="custom-control-label" for="payment_cash">Nam</label>
+                        </div>
+                        <div class="custom-control custom-radio">
+                            <input name="GIOITINH" type="radio" class="input" value="Nữ" checked required>
+                            <label class="custom-control-label" for="payment_cash">Nữ</label>
+                        </div>
+                    </div>                   
+                    <div class="input-field">
                         <i class="fas fa-envelope"></i>
                         @Html.TextBoxFor(temp => temp.EMAIL, new { Type = "text", required = "true", Name = "EMAIL", @class = "input", placeholder = "Email" })
                     </div>
@@ -65,22 +79,7 @@
                         <i class="fas fa-user"></i>
                         <input type="password" class="input" , required="true" , name="repass" placeholder="Enter the password" />
                     </div>
-                    <input type="submit" class="btn" value="Sign up" />
-                    <p class="social-text">Or Sign up with social platforms</p>
-                    <div class="social-media">
-                        <a href="#" class="social-icon">
-                            <i class="fab fa-facebook-f"></i>
-                        </a>
-                        <a href="#" class="social-icon">
-                            <i class="fab fa-twitter"></i>
-                        </a>
-                        <a href="#" class="social-icon">
-                            <i class="fab fa-google"></i>
-                        </a>
-                        <a href="#" class="social-icon">
-                            <i class="fab fa-linkedin-in"></i>
-                        </a>
-                    </div>
+                    <input type="submit" class="btn" value="Sign up" />                    
                 </form>
             </div>
         </div>

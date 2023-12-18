@@ -1,6 +1,7 @@
 ﻿using SuperStore_WebSite.Models;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.Eventing.Reader;
 using System.Linq;
 using System.Net;
 using System.Text.RegularExpressions;
@@ -15,6 +16,11 @@ namespace SuperStore_WebSite.Areas.Admin.Controllers
         // GET: Admin/NhapHang
         public ActionResult Index()
         {
+            if (Session["AlertMessage"] != null)
+            {
+                ViewBag.AlertMessage = Session["AlertMessage"].ToString();                
+                Session.Remove("AlertMessage");
+            }
             return View(db.PHIEUNHAPs.ToList());
         } 
         public ActionResult Create()
@@ -64,30 +70,47 @@ namespace SuperStore_WebSite.Areas.Admin.Controllers
             if (ModelState.IsValid)
             {
                 PHIEUNHAP pn = db.PHIEUNHAPs.Find(id);
+                SANPHAM sp = db.SANPHAMs.Find(CTPHIEUNHAP.MASP);
                 CTPHIEUNHAP.TONGTIEN = CTPHIEUNHAP.GIANHAP * CTPHIEUNHAP.SOLUONG;
-                pn.CTPHIEUNHAPs.Add(CTPHIEUNHAP);
-                if (pn != null)
+                if (CTPHIEUNHAP.GIANHAP < sp.GIABAN)
                 {
-                    foreach (var chiTietPN in pn.CTPHIEUNHAPs)
+                    pn.CTPHIEUNHAPs.Add(CTPHIEUNHAP);
+                    if (pn != null)
                     {
-                        SANPHAM sp = db.SANPHAMs.Find(chiTietPN.MASP);
+                        foreach (var chiTietPN in pn.CTPHIEUNHAPs)
+                        {
+                            sp = db.SANPHAMs.Find(chiTietPN.MASP);
 
-                        if (sp != null)
-                        {
-                            sp.SOLUONGTON += chiTietPN.SOLUONG;
+                            if (sp != null)
+                            {
+                                if(sp.SOLUONGTON == null)
+                                {
+                                    sp.SOLUONGTON = chiTietPN.SOLUONG;
+                                } 
+                                else
+                                {
+                                    sp.SOLUONGTON += chiTietPN.SOLUONG;
+                                }                                    
+                            }
+                            else
+                            {
+                                return View();
+                            }
+
                         }
-                        else
-                        {
-                            return View();
-                        }
-                    }                   
-                    db.SaveChanges();
-                    return RedirectToAction("Index");
+                        db.SaveChanges();
+                        return RedirectToAction("Index");
+                    }
+                    else
+                    {
+                        return HttpNotFound();
+                    }
                 }
                 else
                 {
-                    return HttpNotFound();
-                }
+                    Session["AlertMessage"] = "Giá nhập phải nhỏ hơn giá bán.";
+                    return RedirectToAction("Index");
+                }    
             }
             else
             {

@@ -15,7 +15,7 @@ namespace SuperStore_WebSite.Controllers
         {
             var model = db.SANPHAMs.Where(p => p.MAKM != null).Take(6).OrderBy(p => p.MASP);
             ViewBag.Tasks = model;
-
+                    
             //var model2 = db.SANPHAMs.Take(6).OrderByDescending(p => p.MASP);
             //ViewBag.Tasks2 = model2;
 

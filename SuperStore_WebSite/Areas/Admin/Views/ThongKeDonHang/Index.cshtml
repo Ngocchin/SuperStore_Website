@@ -154,9 +154,6 @@
 
                 </td>
                 <td>
-
-
-
                     @Html.DisplayFor(modelItem => item.KHACHHANG.TENKH)
                 </td>
 
@@ -165,29 +162,19 @@
         }
     </table>
 </div>
-<div class="col-1">
 
+<div class="row col-10">
+    <a>Doanh thu: @tong </a>
 </div>
-<p>
-    <a>Doanh thu:  </a>
-
-    <a>@tong</a>
-</p>
-<p>
-    <a>Số đơn hàng chưa xác nhận:  </a>
-
-    <a>@tongcxn</a>
-
-</p>
-<p>
-    <a>Số đơn hàng đã giao:  </a>
-
-    <a>@tongdxn</a>
-</p>
-<p>
-    <a>Số đơn hàng đã hủy:  </a>
-    <a>@tongdh</a>
-</p>
+<div class="row col-10">
+    <a>Số đơn hàng chưa xác nhận: @tongcxn  </a>
+</div>
+<div class="row col-10">
+    <a>Số đơn hàng đã giao: @tongdxn  </a>
+</div>
+<div class="row col-10">
+    <a>Số đơn hàng đã hủy: @tongdh </a>
+</div>
 
 
 <script>

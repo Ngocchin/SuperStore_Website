@@ -29,7 +29,7 @@
                         <thead>
                             <tr>
                                 <th scope="col">Đơn Hàng</th>
-                                <th scope="col">Ngày Đặt Hàng</th>
+                                @*<th scope="col">Ngày Đặt Hàng</th>*@
                                 <th scope="col">Tổng tiền</th>
                                 <th scope="col">Trạng Thái</th>
                             </tr>
@@ -38,9 +38,9 @@
 
                             <tr>
                                 <td>@order.MAHD</td>
-                                <td>@order.NGAYLAP.Value.ToString("dd/MM/yyyy")</td>
+                                @*<td>@order.NGAYLAP.Value.ToString("dd/MM/yyyy")</td>*@
                                 <td>@String.Format("{0:0,0 VNĐ}", order.TONGTIEN)</td>
-                                <td>@order.TINHTRANG</td>
+                                <td>@order.TINHTRANG (@order.NGAYLAP.Value.ToString("dd/MM/yyyy"))</td>
                             </tr>
 
                         </tbody>

@@ -166,6 +166,7 @@ namespace SuperStore_WebSite.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
+                db.Entry(tbl_SanPham).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -205,10 +206,7 @@ namespace SuperStore_WebSite.Areas.Admin.Controllers
             {
                 return HttpNotFound();
             }
-
-            // Gửi thông báo trước khi xóa
-            TempData["Message"] = $"Sản phẩm '{product.TENSP}' đã được xóa thành công.";
-
+           
             db.SANPHAMs.Remove(product);
             db.SaveChanges();
 
