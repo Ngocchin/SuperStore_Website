@@ -38,6 +38,7 @@ namespace SuperStore_WebSite.Controllers
             }
             return tt;
         }
+        
 
         public List<Giohang> LayGioHang()
         {
@@ -69,6 +70,11 @@ namespace SuperStore_WebSite.Controllers
                 sp.SL++;
                 return Redirect(strURL);
             }
+        }
+        public ActionResult Buy(string idSP, string strURL)
+        {
+            ThemGioHang(idSP, strURL);
+            return RedirectToAction("Xacnhanthongtin", "Cart");
         }
         public ActionResult CapNhatGioHang(string id, int sl)
         {

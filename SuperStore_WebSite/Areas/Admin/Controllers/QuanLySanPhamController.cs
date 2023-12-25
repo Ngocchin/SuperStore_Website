@@ -17,7 +17,7 @@ namespace SuperStore_WebSite.Areas.Admin.Controllers
     {
         private QL_BANHANGDIENTUEntities1 db = new QL_BANHANGDIENTUEntities1();
 
-        // GET: QuanLySanPham
+       
         public ActionResult Index()
         {
             var tbl_SanPham = db.SANPHAMs.Include(t => t.LOAI).Include(t => t.NHACUNGCAP);
@@ -89,10 +89,7 @@ namespace SuperStore_WebSite.Areas.Admin.Controllers
             var tbl_SanPham = db.SANPHAMs.Include(t => t.LOAI).Include(t => t.NHACUNGCAP);
             return View(tbl_SanPham.OrderByDescending(t => t.GIABAN).ToList());
         }
-        // GET: QuanLySanPham/Details/5
-
-
-        // GET: QuanLySanPham/Create
+     
         public ActionResult Create()
         {
             ViewBag.MaLoai = new SelectList(db.LOAIs, "MaLoai", "TenLoai");
@@ -139,7 +136,7 @@ namespace SuperStore_WebSite.Areas.Admin.Controllers
             return View(tbl_SanPham);
         }
 
-        // GET: QuanLySanPham/Edit/5
+       
         public ActionResult Edit(string id)
         {
             if (id == null)
@@ -157,9 +154,7 @@ namespace SuperStore_WebSite.Areas.Admin.Controllers
             return View(tbl_SanPham);
         }
 
-        // POST: QuanLySanPham/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+       
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "MASP,TENSP,MALOAI,MANCC,MAKM,GIABAN,SOLUONGTON,GHICHU,HINHANH,HINHLIENQUAN")] SANPHAM tbl_SanPham )
@@ -176,8 +171,7 @@ namespace SuperStore_WebSite.Areas.Admin.Controllers
             return View(tbl_SanPham);
         }
 
-        // GET: QuanLySanPham/Delete/5
-        // GET: Product/Delete/5
+      
         public ActionResult Delete(string id)
         {
             if (id == null)
@@ -195,7 +189,7 @@ namespace SuperStore_WebSite.Areas.Admin.Controllers
             return View(product);
         }
 
-        // POST: Product/Delete/5
+        
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(string id)

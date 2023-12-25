@@ -14,13 +14,13 @@ namespace SuperStore_WebSite.Areas.Admin.Controllers
     {
         private QL_BANHANGDIENTUEntities1 db = new QL_BANHANGDIENTUEntities1();
 
-        // GET: QuanLyNhaCungCap
+       
         public ActionResult Index()
         {
             return View(db.NHACUNGCAPs.ToList());
         }
 
-        // GET: QuanLyNhaCungCap/Details/5
+      
         public ActionResult Details(string id)
         {
             if (id == null)
@@ -35,15 +35,13 @@ namespace SuperStore_WebSite.Areas.Admin.Controllers
             return View(nHACUNGCAP);
         }
 
-        // GET: QuanLyNhaCungCap/Create
+        
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: QuanLyNhaCungCap/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+     
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "MANCC,TENNCC,SDT,NGAYSINH,GIOITINH,DIACHI")] NHACUNGCAP nHACUNGCAP)
@@ -60,7 +58,7 @@ namespace SuperStore_WebSite.Areas.Admin.Controllers
             return View(nHACUNGCAP);
         }
 
-        // GET: QuanLyNhaCungCap/Edit/5
+      
         public ActionResult Edit(string id)
         {
             if (id == null)
@@ -75,9 +73,7 @@ namespace SuperStore_WebSite.Areas.Admin.Controllers
             return View(nHACUNGCAP);
         }
 
-        // POST: QuanLyNhaCungCap/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "MANCC,TENNCC,SDT,NGAYSINH,GIOITINH,DIACHI")] NHACUNGCAP nHACUNGCAP)
@@ -91,7 +87,7 @@ namespace SuperStore_WebSite.Areas.Admin.Controllers
             return View(nHACUNGCAP);
         }
 
-        // GET: QuanLyNhaCungCap/Delete/5
+        
         public ActionResult Delete(string id)
         {
             if (id == null)
@@ -106,7 +102,7 @@ namespace SuperStore_WebSite.Areas.Admin.Controllers
             return View(nHACUNGCAP);
         }
 
-        // POST: QuanLyNhaCungCap/Delete/5
+        
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(string id)

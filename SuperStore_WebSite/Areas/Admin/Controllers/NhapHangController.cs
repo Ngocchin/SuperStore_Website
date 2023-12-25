@@ -13,7 +13,7 @@ namespace SuperStore_WebSite.Areas.Admin.Controllers
     public class NhapHangController : Controller
     {
         QL_BANHANGDIENTUEntities1 db = new QL_BANHANGDIENTUEntities1();
-        // GET: Admin/NhapHang
+       
         public ActionResult Index()
         {
             if (Session["AlertMessage"] != null)
@@ -109,7 +109,7 @@ namespace SuperStore_WebSite.Areas.Admin.Controllers
                 }
                 else
                 {
-                    Session["AlertMessage"] = "Giá nhập phải nhỏ hơn giá bán.";
+                    Session["AlertMessage"] = " Giá nhập phải nhỏ hơn giá bán.";
                     return RedirectToAction("Index");
                 }    
             }

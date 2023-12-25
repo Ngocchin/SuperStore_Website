@@ -13,7 +13,6 @@ namespace SuperStore_WebSite.Areas.Admin.Controllers
     public class HomeAdminController : Controller
     {
         QL_BANHANGDIENTUEntities1 db = new QL_BANHANGDIENTUEntities1();
-        // GET: Admin/HomeAdmin
         public ActionResult Index()
         {
             var tbl_HoaDon = db.HOADONs.Include(t => t.KHACHHANG).Include(t => t.NHANVIEN);

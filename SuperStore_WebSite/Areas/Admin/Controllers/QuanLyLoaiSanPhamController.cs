@@ -15,13 +15,11 @@ namespace SuperStore_WebSite.Areas.Admin.Controllers
     {
         private QL_BANHANGDIENTUEntities1 db = new QL_BANHANGDIENTUEntities1();
 
-        // GET: QuanLyLoaiSanPham
         public ActionResult Index()
         {
             return View(db.LOAIs.ToList());
         }
 
-        // GET: QuanLyLoaiSanPham/Details/5
         public ActionResult Details(string id)
         {
             if (id == null)
@@ -36,15 +34,12 @@ namespace SuperStore_WebSite.Areas.Admin.Controllers
             return View(lOAI);
         }
 
-        // GET: QuanLyLoaiSanPham/Create
+
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: QuanLyLoaiSanPham/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "MALOAI,TENLOAI")] LOAI lOAI)
@@ -60,7 +55,6 @@ namespace SuperStore_WebSite.Areas.Admin.Controllers
             return View(lOAI);
         }
 
-        // GET: QuanLyLoaiSanPham/Edit/5
         public ActionResult Edit(string id)
         {
             if (id == null)
@@ -75,9 +69,7 @@ namespace SuperStore_WebSite.Areas.Admin.Controllers
             return View(lOAI);
         }
 
-        // POST: QuanLyLoaiSanPham/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "MALOAI,TENLOAI")] LOAI lOAI)
@@ -91,7 +83,6 @@ namespace SuperStore_WebSite.Areas.Admin.Controllers
             return View(lOAI);
         }
 
-        // GET: QuanLyLoaiSanPham/Delete/5
         public ActionResult Delete(string id)
             {
             if (id == null)
@@ -106,7 +97,6 @@ namespace SuperStore_WebSite.Areas.Admin.Controllers
             return View(lOAI);
         }
 
-        // POST: QuanLyLoaiSanPham/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(string id)

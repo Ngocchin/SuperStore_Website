@@ -14,7 +14,6 @@ namespace SuperStore_WebSite.Areas.Admin.Controllers
     {
         private QL_BANHANGDIENTUEntities1 db = new QL_BANHANGDIENTUEntities1();
 
-        // GET: ThongKeDonHang
         public ActionResult Index(int? thang, string date)
         {
             var tbl_HoaDon = db.HOADONs.Include(t => t.KHACHHANG).Include(t => t.NHANVIEN);
@@ -97,7 +96,7 @@ namespace SuperStore_WebSite.Areas.Admin.Controllers
 
         }
 
-        // GET: ThongKeDonHang/Details/5
+       
         public ActionResult Details(string id)
         {
             if (id == null)
@@ -112,7 +111,7 @@ namespace SuperStore_WebSite.Areas.Admin.Controllers
             return View(tbl_HoaDon);
         }
 
-        // GET: ThongKeDonHang/Create
+        
         public ActionResult Create()
         {
             ViewBag.MaKH = new SelectList(db.KHACHHANGs, "MaKH", "TenKH");
@@ -120,9 +119,6 @@ namespace SuperStore_WebSite.Areas.Admin.Controllers
             return View();
         }
 
-        // POST: ThongKeDonHang/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "MaHoaDon,NgayLap,MaKH,MaNV,Tinhtrang,TongTien")] HOADON tbl_HoaDon)
@@ -139,7 +135,6 @@ namespace SuperStore_WebSite.Areas.Admin.Controllers
             return View(tbl_HoaDon);
         }
 
-        // GET: ThongKeDonHang/Edit/5
         public ActionResult Edit(string id)
         {
             if (id == null)
@@ -156,9 +151,7 @@ namespace SuperStore_WebSite.Areas.Admin.Controllers
             return View(tbl_HoaDon);
         }
 
-        // POST: ThongKeDonHang/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+       
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "MaHoaDon,NgayLap,MaKH,MaNV,Tinhtrang,TongTien")] HOADON tbl_HoaDon)
@@ -174,7 +167,6 @@ namespace SuperStore_WebSite.Areas.Admin.Controllers
             return View(tbl_HoaDon);
         }
 
-        // GET: ThongKeDonHang/Delete/5
         public ActionResult Delete(string id)
         {
             if (id == null)
@@ -189,7 +181,7 @@ namespace SuperStore_WebSite.Areas.Admin.Controllers
             return View(tbl_HoaDon);
         }
 
-        // POST: ThongKeDonHang/Delete/5
+       
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(string id)

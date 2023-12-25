@@ -168,7 +168,7 @@
                             </div>
                             <div class="row pb-3">
                                 <div class="col d-grid">
-                                    <button type="submit" class="btn btn-success btn-lg" name="submit" value="buy">Buy</button>
+                                    <a href="@Url.Action("Buy", "Cart", new { idSP = @Model.MASP, strURL = Request.Url.ToString() })" <a type="submit" class="btn btn-success btn-lg" name="submit" value="buy">Buy</a>
                                 </div>
                                 <div class="col d-grid">
                                         @if (Model.SOLUONGTON > 0)

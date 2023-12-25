@@ -14,7 +14,7 @@ namespace SuperStore_WebSite.Areas.Admin.Controllers
     {
         private QL_BANHANGDIENTUEntities1 db = new QL_BANHANGDIENTUEntities1();
 
-        // GET: QuanLyHoaDon
+     
         public ActionResult Index()
         {
             return View(db.HOADONs.ToList());
@@ -58,13 +58,13 @@ namespace SuperStore_WebSite.Areas.Admin.Controllers
 
         public ActionResult CapnhatHD(string id, string manv)
         {
-            // Find the invoice with the specified 'ma'
+           
             HOADON hd = db.HOADONs.Find(id);
             NHANVIEN nv = (NHANVIEN)Session["Account"];
 
             if (hd != null)
             {
-                // Update the status of the invoice             
+                  
                 hd.TINHTRANG = "Đã giao";
                 hd.MANV = nv.MANV;
 
@@ -82,41 +82,31 @@ namespace SuperStore_WebSite.Areas.Admin.Controllers
                     }
                 }
 
-                // Save the changes to the database
                 db.SaveChanges();
 
-                // Redirect to the 'Index' action
                 return RedirectToAction("Index");
             }
             else
             {
-                // Handle the case when the invoice with the specified 'ma' is not found
-                // You can return a view or perform other actions as needed
                 return View("InvoiceNotFound");
             }
         }
         public ActionResult HuyHD(string id, string manv)
         {
-            // Find the invoice with the specified 'ma'
+            
             HOADON hd = db.HOADONs.Find(id);
             NHANVIEN nv = (NHANVIEN)Session["Account"];
             hd.MANV = nv.MANV;
             if (hd != null)
             {
-                // Update
+                
                 hd.TINHTRANG = "Đã hủy";
                 hd.NGAYLAP = DateTime.Now;
-
-                // Save the changes to the database
                 db.SaveChanges();
-
-                // Redirect to the 'Index' action
                 return RedirectToAction("Index");
             }
             else
             {
-                // Handle the case when the invoice with the specified 'ma' is not found
-                // You can return a view or perform other actions as needed
                 return View("InvoiceNotFound");
             }
         }
@@ -135,7 +125,7 @@ namespace SuperStore_WebSite.Areas.Admin.Controllers
             return View(HOADONs);
         }
 
-        // GET: QuanLyHoaDon/Create
+        
         public ActionResult Create()
         {
             ViewBag.MaKH = new SelectList(db.KHACHHANGs, "MaKH", "TenKH");
@@ -143,9 +133,7 @@ namespace SuperStore_WebSite.Areas.Admin.Controllers
             return View();
         }
 
-        // POST: QuanLyHoaDon/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+       
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "MaHoaDon,NgayLap,MaKH,MaNV,Tinhtrang,TongTen")] HOADON HOADONs)
@@ -164,7 +152,7 @@ namespace SuperStore_WebSite.Areas.Admin.Controllers
             return View(HOADONs);
         }
 
-        // GET: QuanLyHoaDon/Edit/5
+        
         public ActionResult Edit(string id)
         {
             if (id == null)
@@ -181,9 +169,7 @@ namespace SuperStore_WebSite.Areas.Admin.Controllers
             return View(HOADONs);
         }
 
-        // POST: QuanLyHoaDon/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "MaHoaDon,NgayLap,MaKH,MaNV,Tinhtrang,TongTen")] HOADON HOADONs)
@@ -199,7 +185,7 @@ namespace SuperStore_WebSite.Areas.Admin.Controllers
             return View(HOADONs);
         }
 
-        // GET: QuanLyHoaDon/Delete/5
+       
         public ActionResult Delete(string id)
         {
             if (id == null)
@@ -214,7 +200,7 @@ namespace SuperStore_WebSite.Areas.Admin.Controllers
             return View(HOADONs);
         }
 
-        // POST: QuanLyHoaDon/Delete/5
+       
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(string id)

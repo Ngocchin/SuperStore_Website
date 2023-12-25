@@ -121,19 +121,18 @@
                         <a class="dropdown-toggle" id="accountDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: black">
                             Xin chào : @kh.TENKH
                         </a>
+                        <!-- Dropdown Menu -->                       
+                            <div class="dropdown-menu" aria-labelledby="accountDropdown">                                
+                                <a class="dropdown-item" href="/Account/Inf"><i class="fa fa-user mr-2"></i>My Account</a>                            
+                                <a class="dropdown-item" href="/Account/Logout"><i class="fa fa-user mr-2"></i>LogOut</a>
+                            </div>
+                        }
+                        else
+                        {
+                            <a href="/Account/Login"><i class="fa fa-user mr-l"></i>Login</a>
+                        }
 
-                        <!-- Dropdown Menu -->
-                        <div class="dropdown-menu" aria-labelledby="accountDropdown">
-                            <a class="dropdown-item" href="/Account/Inf"><i class="fa fa-user mr-2"></i>My Account</a>
-                            <a class="dropdown-item" href="/Account/Logout"><i class="fa fa-user mr-2"></i>LogOut</a>
-                        </div>
-                    }
-                    else
-                    {
-                        <a href="/Account/Login"><i class="fa fa-user mr-l"></i>Login</a>
-                    }
-
-                </div>
+                    </div>
                 </div>
         </nav>
         <!-- Close Header -->
