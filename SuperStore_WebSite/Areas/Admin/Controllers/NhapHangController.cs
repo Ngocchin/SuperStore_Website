@@ -56,12 +56,12 @@ namespace SuperStore_WebSite.Areas.Admin.Controllers
                 return View(PHIEUNHAP);
             }          
         }
-        public ActionResult CreateCTPN(string id, string mancc)
+        public ActionResult CreateCTPN(string id, string masp)
         {
             ViewBag.id = id;
             CTPHIEUNHAP pn = new CTPHIEUNHAP();
             ViewBag.CTPN = new SelectList(db.PHIEUNHAPs, "MAPHNHAP", "MAPHNHAP");
-            ViewBag.SP = new SelectList(db.SANPHAMs.Where(t => t.MANCC == mancc), "MASP", "TENSP");
+            ViewBag.SP = new SelectList(db.SANPHAMs, "MASP", "TENSP");
             return View(pn);
         }
         [HttpPost]
